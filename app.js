@@ -4,7 +4,7 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
-//const routes = require('./routes'); --> Still need to learn about routes
+const routes = require('./routes/webIndex');
 
 //EXPRESS setup
 const app = express();
@@ -26,3 +26,8 @@ db.once('open', () => console.log('Connected to Database'));
 app.listen(3000, () => {
   console.log('Server on port 3000');
 });
+
+//Import routes
+app.use('/', routes);
+const userRoute = require('./routes/webIndex');
+app.use('/', userRoute);
