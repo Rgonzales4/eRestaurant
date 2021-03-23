@@ -1,24 +1,23 @@
-const { text } = require('express');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-  username: {
-    type: text,
+  email: {
+    type: String,
     required: true,
   },
   firstName: {
-    type: text,
+    type: String,
     required: true,
   },
   lastName: {
-    type: text,
+    type: String,
     required: true,
   },
   password: {
-    type: text,
+    type: String,
     required: true,
   },
 });
 
-module.export = mongoose.model('Users', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

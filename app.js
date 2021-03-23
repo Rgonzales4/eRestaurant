@@ -7,10 +7,12 @@ const ejsMate = require('ejs-mate');
 
 const menuRouter = require('./routes/menu');
 const aboutRouter = require('./routes/about');
+const loginRouter = require('./routes/login');
+const registerRouter = require('./routes/registration');
 
 //EXPRESS setup
 const app = express();
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
@@ -31,11 +33,12 @@ app.listen(3000, () => {
 
 //Import routes
 app.use('/menu', menuRouter);
-
 app.use('/about', aboutRouter);
+app.use('/login', loginRouter);
+app.use('/registration', registerRouter);
 
 app.use('/', (req, res) => {
   res.render('home');
 });
 
-//app.use('/', userRoute);
+//Logging In Functions
