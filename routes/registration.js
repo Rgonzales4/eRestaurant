@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   console.log('Registration page opened');
-  res.render('registration');
+  res.render('registration', { message: '' });
 });
 
 const User = require('./../models/users');
@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
   const user = new User({ email, password, firstName, lastName });
   try {
     await user.save();
-    res.redirect('/');
+    res.render('registration', { message: 'Successfully Registered' });
   } catch (e) {
     console.log(e);
     res.sendStatus(200);

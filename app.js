@@ -37,7 +37,14 @@ app.use('/about', aboutRouter);
 app.use('/login', loginRouter);
 app.use('/registration', registerRouter);
 
+const User = require('./models/users');
+
 app.use('/', (req, res) => {
+  // if (!req.locals.user) {
+  //   const sentUser = new User();
+  // } else {
+  //   const sentUser = req.locals.user;
+  // }
   res.render('home');
 });
 
