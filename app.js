@@ -4,7 +4,9 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
-const routes = require('./routes/webIndex');
+
+const menuRouter = require('./routes/menu');
+const aboutRouter = require('./routes/about');
 
 //EXPRESS setup
 const app = express();
@@ -28,6 +30,12 @@ app.listen(3000, () => {
 });
 
 //Import routes
-app.use('/', routes);
-const userRoute = require('./routes/webIndex');
-app.use('/', userRoute);
+app.use('/menu', menuRouter);
+
+app.use('/about', aboutRouter);
+
+app.use('/', (req, res) => {
+  res.render('home');
+});
+
+//app.use('/', userRoute);
