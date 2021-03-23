@@ -4,11 +4,15 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
-//const routes = require('./routes'); --> Still need to learn about routes
+
+const menuRouter = require('./routes/menu');
+const aboutRouter = require('./routes/about');
+const loginRouter = require('./routes/login');
+const registerRouter = require('./routes/registration');
 
 //EXPRESS setup
 const app = express();
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
@@ -26,3 +30,22 @@ db.once('open', () => console.log('Connected to Database'));
 app.listen(3000, () => {
   console.log('Server on port 3000');
 });
+
+//Import routes
+app.use('/menu', menuRouter);
+app.use('/about', aboutRouter);
+app.use('/login', loginRouter);
+app.use('/registration', registerRouter);
+
+const User = require('./models/users');
+
+app.use('/', (req, res) => {
+  // if (!req.locals.user) {
+  //   const sentUser = new User();
+  // } else {
+  //   const sentUser = req.locals.user;
+  // }
+  res.render('home');
+});
+
+//Logging In Functions
