@@ -8,12 +8,6 @@
     <title>Login</title>
   </head>
 
-  <style>
-    #loginBtn {
-      display: none;
-    }
-  </style>
-
   <body>
     <form action="/login" method="post" style="margin: 20px">
       <div class="col-3">
@@ -44,10 +38,15 @@
             Please enter password
           </div>
         </div>
-        <div style="padding: 10px">
-          <button type="submit">Login</button>
+        <div style="padding-top: 20px">
+          <button class="btn btn-outline-success me-2" type="submit">
+            Login
+          </button>
         </div>
         <label name="Warning" value=""></label>
+        <span style="color: red">
+          <% if (messages.error) { %> <%= messages.error%> <% } %>
+        </span>
         <div>
           <a href="/registration"> Don't have an account? Sign up now</a>
         </div>
