@@ -1,6 +1,9 @@
+require('dotenv/config');
+
 const express = require('express');
 const { db } = require('./../models/users');
 const router = express.Router();
+const bcrypt = require('bcrypt');
 
 router.get('/', (req, res) => {
   console.log('Registration page opened');
@@ -10,9 +13,16 @@ router.get('/', (req, res) => {
 const User = require('./../models/users');
 
 router.post('/', async (req, res) => {
-  //console.log(req.body);
-  const { email, password, firstName, lastName } = req.body;
-  const newUser = new User({ email, password, firstName, lastName });
+  //const { email, password, firstName, lastName } = req.body;
+  const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  const newUser = new User({
+    id: Date.now().toString(),
+    email: req.body.email,
+    //password: req.body.password,
+    password: hashedPassword,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+  });
 
   let user = await User.findOne({ email: req.body.email });
   if (user) {
