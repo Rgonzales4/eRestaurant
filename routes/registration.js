@@ -28,64 +28,6 @@ router.post('/', async (req, res) => {
     });
   }
 
-  // await db.collection('users').findOne({ email: req.body.email }, function (doc, err) {
-  //   if (doc) {
-  //     try {
-  //       await user.save();
-  //       res.render('registration', {
-  //         successMessage: 'Successfully Registered',
-  //         failMessage: '',
-  //       });
-  //     } catch (e) {
-  //       console.log(e);
-  //       res.sendStatus(200);
-  //     }
-  //   } else {
-  //     console.log('User already exists');
-  //     res.render('registration', {
-  //       failMessage: 'User is already registered under this email',
-  //       successMessage: '',
-  //     });
-  //   }
-  //});
-
-  // const cursor = db.collection('users').find();
-  // const resultArray = [];
-  // cursor.forEach(function (doc, err) {
-  //   try {
-  //     resultArray.push(doc);
-  //     console.log(resultArray);
-  //   } catch (err) {
-  //     console.log(err);
-  //     res.sendStatus(200);
-  //   }
-  // });
-  // console.log(
-  //   !!resultArray.find((user) => {
-  //     return email === req.body.email;
-  //   })
-  // );
-  // if (!!resultArray.find(user.email)) {
-  //   console.log('user not found');
-  // }
-
-  // await db.collection('users').find(user, function (err, doc) {
-  //   console.log(doc);
-  //   if (!doc) {
-  //     console.log('working');
-  //     res.render('registration', {
-  //       successMessage: 'Successfully registered',
-  //       failMessage: '',
-  //     });
-  //   } else {
-  //     console.log('user already registered');
-  //     res.render('registration', {
-  //       failMessage: 'User already registered under that email',
-  //       successMessage: '',
-  //     });
-  //   }
-  // });
-
   // ALMOST WORKING CODE!!!
   // const cursor = db.collection('users').find();
   // const resultArray = [];
