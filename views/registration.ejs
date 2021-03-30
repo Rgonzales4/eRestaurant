@@ -8,12 +8,6 @@
     <title>Registration</title>
   </head>
 
-  <style>
-    #loginBtn {
-      display: none;
-    }
-  </style>
-
   <body>
 
     <form action="/registration" method="post" style="margin: 20px">
@@ -68,11 +62,12 @@
           </div>
         </div>
 
-        <div style="padding: 10px">
-          <button type="submit">Register</button>
+        <div style="padding-top: 10px">
+          <button class="btn btn-outline-success me-2" type="submit">Register</button>
         </div>
-        <div style="color: green;">
-          <%= message%>
+        <div>
+          <span style="color: green;"><%= successMessage%></span>
+          <span style="color: red;"><%= failMessage%></span>
         </div>
   </body>
 </html>
