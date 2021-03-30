@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   if (user) {
     res.render('registration', {
-      failMessage: 'User is already registered under this email',
+      failMessage: 'This email has already been registered by another User',
       successMessage: '',
     });
   } else {
@@ -52,7 +52,6 @@ router.post('/', async (req, res) => {
   //         failMessage: '',
   //       });
   //     }
-
   //   } catch (err) {
   //     console.log(err);
   //     res.sendStatus(200);
