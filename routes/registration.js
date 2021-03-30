@@ -5,9 +5,9 @@ const { db } = require('./../models/users');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
-router.get('/', (req, res) => {
+router.get('/', checkNotAuthenticated, (req, res) => {
   console.log('Registration page opened');
-  res.render('registration', { successMessage: '', failMessage: '' });
+  res.render('registration', { successMessage: '', failMessage: '', req: req });
 });
 
 const User = require('./../models/users');
@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
   //const { email, password, firstName, lastName } = req.body;
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   const newUser = new User({
-    id: Date.now().toString(),
+    userId: Date.now().toString(),
     email: req.body.email,
     //password: req.body.password,
     password: hashedPassword,
@@ -27,14 +27,16 @@ router.post('/', async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   if (user) {
     res.render('registration', {
-      failMessage: 'This email has already been registered by another User',
+      failMessage: 'Email has already been registered',
       successMessage: '',
+      req: req,
     });
   } else {
     await newUser.save();
     res.render('registration', {
       successMessage: 'Successfully Registered',
       failMessage: '',
+      req: req,
     });
   }
 
@@ -80,5 +82,12 @@ router.post('/', async (req, res) => {
   //       res.sendStatus(200);
   //     }
 });
+
+function checkNotAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    res.redirect('/');
+  }
+  next();
+}
 
 module.exports = router;

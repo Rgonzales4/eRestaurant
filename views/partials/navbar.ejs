@@ -35,22 +35,26 @@
         <li class="nav-item">
           <a class="nav-link" href="/about">About Us</a>
         </li>
+        <% if (!req.user) {%>
+          
+          <% } else {%>
+          
+          <% } %>
       </div>
       </ul>
-      <a id="loginBtn" class="btn btn-outline-danger me-2" type="button" href="/login">
-        Login / Sign Up
-      </a>
+      <% if (!req.user) {%>
+        <a id="loginBtn" class="btn btn-outline-danger me-2" type="button" href="/login">
+          Login / Sign Up
+        </a>
+        <% } else {%>
+        <label style="padding-right: 10px;"> Welcome, <%= req.user.firstName%> </label>
+        <form action="/logout?_method=DELETE" method="POST">
+          <button class="btn btn-outline-danger me-2" type="submit">Log Out</button>
+        </form>
+        <% } %>
       <label class="me-auto" style="padding-right: 10px;">
         
       </label>
     </div>
   </div>
 </nav>
-
-<script>
-  function checkUser(){
-    //Function to hide the login btn when User has already logged in
-  }
-
-  window.onload = checkUser;
-</script>

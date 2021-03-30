@@ -1,23 +1,22 @@
 const express = require('express');
-const User = require('./../models/users');
 const router = express.Router();
 
 // Passport Setup
 const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcrypt');
 const passport = require('passport');
-// const flash = require('express-flash');
-// const session = require('express-session');
+const flash = require('express-flash');
 
 const initialisePassport = require('./passport-config');
 initialisePassport(passport);
 
+express().use(flash());
+
 router.get('/', checkNotAuthenticated, (req, res) => {
   console.log('Login page opened');
-  res.render('login', { loginMessage: '' });
+  res.render('login', { loginMessage: '', req: req });
 });
 
-// WORKING SOLUTION w/o Passport
+// WORKING SOLUTION w/o Passport --> Need to import User model again for this to work
 // router.post('/', async (req, res) => {
 //   let user = await User.findOne({
 //     email: req.body.email,
@@ -35,7 +34,7 @@ router.post(
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login',
-    //failureFlash: true,
+    failureFlash: true,
   })
 );
 

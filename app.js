@@ -6,9 +6,9 @@ const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 
 const passport = require('passport');
-const bcrypt = require('bcrypt');
 const flash = require('express-flash');
 const session = require('express-session');
+const methodOverride = require('method-override');
 
 const menuRouter = require('./routes/menu');
 const aboutRouter = require('./routes/about');
@@ -42,6 +42,7 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride('_method'));
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
@@ -57,9 +58,10 @@ function checkNotAuthenticated(req, res, next) {
   next();
 }
 
-//Listening
-app.listen(3000, () => {
-  console.log('Server on port 3000');
+//Logging Out
+app.delete('/logout', (req, res) => {
+  req.logOut();
+  res.redirect('/');
 });
 
 //Import routes
@@ -71,7 +73,10 @@ app.use('/registration', registerRouter);
 const User = require('./models/users');
 
 app.use('/', (req, res) => {
-  res.render('home');
+  res.render('home', { req: req });
 });
 
-//Logging In Functions
+//Listening
+app.listen(3000, () => {
+  console.log('Server on port 3000');
+});
