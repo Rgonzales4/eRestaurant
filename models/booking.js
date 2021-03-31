@@ -13,8 +13,9 @@ const BookingSchema = new Schema({
     default: null,
   },
   Time:{
-    type: Date.now(),
+    type: Date,
     required: true,
+    default: Date.now,
   }
 });
 

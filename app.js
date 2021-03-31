@@ -47,7 +47,7 @@ app.use('/', (req, res) => {
   // } else {
   //   const sentUser = req.locals.user;
   // }
-  res.render('home');
+  res.render('home', {req: req});
 });
 
 //Logging In Functions
