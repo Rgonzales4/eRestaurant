@@ -1,7 +1,6 @@
 require('dotenv/config');
 
 const express = require('express');
-const { db } = require('./../models/users');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
@@ -22,6 +21,7 @@ router.post('/', async (req, res) => {
     password: hashedPassword,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
+    isAdmin: false,
   });
 
   let user = await User.findOne({ email: req.body.email });
