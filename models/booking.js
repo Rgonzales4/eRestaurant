@@ -8,12 +8,12 @@ const BookingSchema = new Schema({
     required: true,
   },
   BookingUser: {
-    type: User.email,
+    type: String,
     required: true,
     default: null,
   },
   Time:{
-    type: String,
+    type: Date.now(),
     required: true,
   }
 });

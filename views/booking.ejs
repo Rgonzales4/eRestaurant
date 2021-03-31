@@ -11,16 +11,16 @@
     <div class="container">
     <h1 class="mb-4">Welcome To The Booking Page</h1>
     <div><button href = "/createBooking" class="btn btn-outline-success me-2">Create Booking</button>
-        <button href = "/RemoveBooking" class="btn btn-outline-success me-2">Remove Booking</button>
+        <button href = "/removeBooking" class="btn btn-outline-success me-2">Remove Booking</button>
     </div>
-   <% booking.forEach(booking => { %>
+  <!-- <% booking.forEach(booking => { %> 
     <div class="card mt-2">
         <div class="card-body">
-            <h4 class="card-title"><%= booking.Time %></h4>
-            <div class="card-title"><%= booking.BookingUser %></div>
+            <h4 class="card-title"><%= Booking.Time %></h4>
+            <div class="card-title"><%= Booking.BookingUser %></div>
         </div>
     </div>
-    <% }) %>
+    <% }) %> -->
     <button href="/">Home</button>
 </div>
 </body>
