@@ -9,12 +9,12 @@ router.get('/', (req, res) => {
 
 router.get('/createBooking', (req, res) => {
   console.log('create booking opened');
-  res.render('booking/createBooking', {req : req});
+  res.render('createBooking', {req : req});
 })
 
 router.get('/removeBooking', (req, res) => {
   console.log('remove booking opened');
-  res.render('booking/removeBooking', {req : req});
+  res.render('removeBooking', {req : req});
 })
 
 module.exports = router;
