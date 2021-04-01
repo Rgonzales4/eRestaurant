@@ -9,7 +9,6 @@ const BookingSchema = new Schema({
   },
   bookingUser: {
     type: String,
-    required: true,
     default: null,
   },
   bookingNumber: {
@@ -19,7 +18,6 @@ const BookingSchema = new Schema({
   time:{
     type: Date,
     required: true,
-    default: Date.now,
   },
   allergyDescription: {
     type: String,
