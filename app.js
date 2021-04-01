@@ -5,11 +5,13 @@ const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 
+const Booking = require('./models/booking');
+
 const menuRouter = require('./routes/menu');
 const aboutRouter = require('./routes/about');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/registration');
-const bookingRouter = require('./routes/booking');
+const bookingRouter = require('./routes/bookings');
 
 //EXPRESS setup
 const app = express();
@@ -37,7 +39,7 @@ app.use('/menu', menuRouter);
 app.use('/about', aboutRouter);
 app.use('/login', loginRouter);
 app.use('/registration', registerRouter);
-app.use('/booking', bookingRouter);
+app.use('/bookings', bookingRouter);
 
 const User = require('./models/users');
 
@@ -54,6 +56,7 @@ app.use('/', (req, res) => {
 
 
 //Booking Functions
-app.get('/', (req, res) =>{
-  res.render('booking', {booking : booking})
+app.get('/bookings', async (req, res) =>{
+  const bookings = await Booking.find()
+  res.render('booking', {bookings : bookings})
 })

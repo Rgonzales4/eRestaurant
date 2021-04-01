@@ -1,11 +1,11 @@
 const express = require('express');
-const Booking = require('./../models/booking');
-const User = require('./../models/users')
+const Booking = require('../models/booking');
+const User = require('../models/users')
 const router = express.Router();
 
 router.get('/', (req, res) => {
   console.log('Booking page opened');
-  res.render('booking', { req: req });
+  res.render('booking', { req: req, booking : new Booking()});
 });
 
 router.get('/createBooking', (req, res) => {
@@ -19,7 +19,6 @@ router.post('/', async (req, res) => {
     time: req.body.bookingDate,
     bookingNumber: req.body.bookingNumber,
     allergyDescription: req.body.allergyDescription,
-    bookingUser: req.user.userId
   })
 let confirmBooking = await Booking.findOne({bookingID: req.body.bookingID})
 if(confirmBooking){
@@ -36,6 +35,7 @@ router.get('/removeBooking', (req, res) => {
   console.log('remove booking opened');
   res.render('removeBooking', {req : req});
 })
+
 
 module.exports = router;
 
