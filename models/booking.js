@@ -3,19 +3,27 @@ const users = require('./users');
 const Schema = mongoose.Schema;
 
 const BookingSchema = new Schema({
-  BookingID: {
+  bookingID: {
     type: Number,
     required: true,
   },
-  BookingUser: {
+  bookingUser: {
     type: String,
     required: true,
     default: null,
   },
-  Time:{
+  bookingNumber: {
+    type: Number,
+    required: true,
+  },
+  time:{
     type: Date,
     required: true,
     default: Date.now,
+  },
+  allergyDescription: {
+    type: String,
+    default: "N/A",
   }
 });
 

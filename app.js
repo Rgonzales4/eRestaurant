@@ -51,3 +51,9 @@ app.use('/', (req, res) => {
 });
 
 //Logging In Functions
+
+
+//Booking Functions
+app.get('/', (req, res) =>{
+  res.render('booking', {booking : booking})
+})

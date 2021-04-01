@@ -9,7 +9,22 @@ router.get('/', (req, res) => {
 
 router.get('/createBooking', (req, res) => {
   console.log('create booking opened');
-  res.render('createBooking', {req : req});
+  res.render('createBooking', { article: new Article() });
+})
+
+router.post('/booking', async (req, res) => {
+  const booking = new Booking({
+    bookingID = req.body.bookingID,
+    bookingDate = req.body.bookingDate,
+    bookingNumber = req.body.bookingNumber,
+    allergyDescription = req.body.allergyDescription
+  })
+try{
+  await booking.save()
+}
+catch(e) {
+  res.render('booking/createBooking', { booking : booking })
+}
 })
 
 router.get('/removeBooking', (req, res) => {
