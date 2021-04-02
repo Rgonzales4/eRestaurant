@@ -14,11 +14,12 @@ router.get('/createBooking', (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  let booking = new Booking({
+let booking = new Booking({
     bookingID: req.body.bookingID,
     time: req.body.bookingDate,
     bookingNumber: req.body.bookingNumber,
     allergyDescription: req.body.allergyDescription,
+    bookingUser: req.params.email,
   })
 let confirmBooking = await Booking.findOne({bookingID: req.body.bookingID})
 if(confirmBooking){
