@@ -12,6 +12,7 @@ const aboutRouter = require('./routes/about');
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/registration');
 const bookingRouter = require('./routes/bookings');
+const databaseRouter = require('./routes/database');
 
 //EXPRESS setup
 const app = express();
@@ -40,6 +41,7 @@ app.use('/about', aboutRouter);
 app.use('/login', loginRouter);
 app.use('/registration', registerRouter);
 app.use('/bookings', bookingRouter);
+app.use('/database', databaseRouter);
 
 const User = require('./models/users');
 
