@@ -19,17 +19,7 @@
       value="<%- req.user.email%>">
     </label>
     </div>
-    <%}
-    else{%>
-      <div>
-        <label
-          for="bookingUser"
-          name="bookingUser"
-          value=fail@fail.fail>
-        </label>
-      </div><%
-    }
-    %>
+    <%}   %>
     
     <form action="/bookings" method="POST" style="margin: 20px">
       <%- include('partials/_booking_form_fields') %>

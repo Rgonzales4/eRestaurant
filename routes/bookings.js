@@ -3,13 +3,13 @@ const Booking = require('../models/booking');
 const User = require('../models/users')
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', checkAuthenticated, async (req, res) => {
   console.log('Booking page opened');
   const booking = await Booking.find().sort({bookingID : 'asc'});
   res.render('booking', {req : req, booking : booking});
 });
 
-router.get('/createBooking', (req, res) => {
+router.get('/createBooking', checkAuthenticated, (req, res) => {
   console.log('create booking opened');
   res.render('createBooking', { req : req, booking : new Booking() });
 })
@@ -43,6 +43,12 @@ router.get('/removeBooking', (req, res) => {
   res.render('removeBooking', {req : req});
 })
 
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
+}
 
 module.exports = router;
 
