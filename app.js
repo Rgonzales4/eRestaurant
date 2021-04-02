@@ -4,12 +4,10 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
-const passport = require('passport')
+const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
-const methodOverride = require('method-override')
-
-const Booking = require('./models/booking');
+const methodOverride = require('method-override');
 
 const menuRouter = require('./routes/menu');
 const aboutRouter = require('./routes/about');
@@ -17,6 +15,8 @@ const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/registration');
 const bookingRouter = require('./routes/bookings');
 const databaseRouter = require('./routes/database');
+
+const Booking = require('./models/booking');
 
 //EXPRESS setup
 const app = express();
@@ -75,22 +75,15 @@ app.use('/registration', registerRouter);
 app.use('/bookings', bookingRouter);
 app.use('/database', databaseRouter);
 
-const User = require('./models/users');
-
 app.use('/', (req, res) => {
-  // if (!req.locals.user) {
-  //   const sentUser = new User();
-  // } else {
-  //   const sentUser = req.locals.user;
-  // }
-  res.render('home', {req: req});
+  res.render('home', { req: req });
 });
 
 //Booking Functions
-app.get('/', async (req, res) =>{
-  const booking = await Booking.find()
-  res.render('booking', {booking : booking})
-})
+app.get('/', async (req, res) => {
+  const booking = await Booking.find();
+  res.render('booking', { booking: booking });
+});
 
 //Listening
 app.listen(3000, () => {
