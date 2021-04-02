@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('partials/navbar') %>
+    <title>Create Booking</title>
+  </head>
+
+  <body>
+    <div class="container">
+    <h1 class="mb-2">Create Booking</h1>
+    <% if (!req.user) {%>
+    <div>
+      <label
+      for="bookingUser"
+      name="bookingUser"
+      value="<%- req.user.email%>">
+    </label>
+    </div>
+    <%} %>
+    
+    <form action="/bookings" method="POST" style="margin: 20px">
+      <%- include('partials/_booking_form_fields') %>
+      </form>
+      <div>
+        <span style="color: green;"></span>
+        <span style="color: red;">
+      </div>
+    </div>
+  </body>
+</html>
