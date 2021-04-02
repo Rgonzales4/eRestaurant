@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/', async (req, res) => {
   console.log('Booking page opened');
-  const booking = await Booking.find();
+  const booking = await Booking.find().sort({bookingID : 'asc'});
   res.render('booking', {req : req, booking : booking});
 });
 
@@ -22,8 +22,7 @@ let booking = new Booking({
     bookingNumber: req.body.bookingNumber,
     allergyDescription: req.body.allergyDescription,
     bookingUser: user.email,
-  })  
-console.log(req.body)
+})  
 let confirmBooking = await Booking.findOne({bookingID: req.body.bookingID})
 if(confirmBooking){
   res.render('createBooking', {req: req, booking : booking})
