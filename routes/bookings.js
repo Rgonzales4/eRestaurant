@@ -14,15 +14,16 @@ router.get('/createBooking', (req, res) => {
   res.render('createBooking', { req : req, booking : new Booking() });
 })
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res) =>{
 
 let booking = new Booking({
-    bookingID: req.body.bookingID,
-    time: req.body.bookingDate,
-    bookingNumber: req.body.bookingNumber,
-    allergyDescription: req.body.allergyDescription,
-    bookingUser: req.user.email,
-})  
+  bookingID: req.body.bookingID,
+  time: req.body.bookingDate,
+  bookingNumber: req.body.bookingNumber,
+  allergyDescription: req.body.allergyDescription,
+  bookingUser: req.user.email,
+})
+
 let confirmBooking = await Booking.findOne({bookingID: req.body.bookingID})
 if(confirmBooking){
   res.render('createBooking', {req: req, booking : booking})
@@ -33,6 +34,9 @@ else{
   console.log("booking saved to databases")
   res.render('createBooking', {req: req, booking : booking} )
 }})
+
+
+
 
 router.get('/removeBooking', (req, res) => {
   console.log('remove booking opened');
