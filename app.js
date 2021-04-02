@@ -80,10 +80,6 @@ app.use('/', (req, res) => {
 });
 
 //Booking Functions
-app.get('/', async (req, res) => {
-  const booking = await Booking.find();
-  res.render('booking', { booking: booking });
-});
 
 //Listening
 app.listen(3000, () => {

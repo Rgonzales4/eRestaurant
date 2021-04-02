@@ -14,12 +14,12 @@
         <a href = "bookings/removeBooking" type="button" class="btn btn-outline-success me-2">Remove Booking</a>
     </div>
     <h2 class="mb-2">Here are your current bookings:</h2>
-    <% Array.prototype.forEach.call(booking, booking => { %> 
+    <% Array.from(booking).forEach(b => { %> 
         <div class="card mt-2">
             <div class="card-body">
-                <h4 class="card-title"><%= booking.ID %></h4>
-                <h5 class="card-title"><%= booking.Time %></h5>
-                <div class="card-title"><%= booking.allergyDescription %></div>
+                <h4 class="card-title"><%= b.bookingID %></h4>
+                <div class="card-title"><%= b.time.toLocaleDateString() %></div>
+                <div class="card-title"><%= b.allergyDescription %></div>
             </div>
         </div>
         <% }) %>

@@ -3,9 +3,10 @@ const Booking = require('../models/booking');
 const User = require('../models/users')
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   console.log('Booking page opened');
-  res.render('booking', { req: req, booking : new Booking()});
+  const booking = await Booking.find();
+  res.render('booking', {req : req, booking : booking});
 });
 
 router.get('/createBooking', (req, res) => {
@@ -14,13 +15,15 @@ router.get('/createBooking', (req, res) => {
 })
 
 router.post('/', async (req, res) => {
+let user = User.findOne({email: req.body.email})
 let booking = new Booking({
     bookingID: req.body.bookingID,
     time: req.body.bookingDate,
     bookingNumber: req.body.bookingNumber,
     allergyDescription: req.body.allergyDescription,
-    bookingUser: req.params.email,
-  })
+    bookingUser: user.email,
+  })  
+console.log(req.body)
 let confirmBooking = await Booking.findOne({bookingID: req.body.bookingID})
 if(confirmBooking){
   res.render('createBooking', {req: req, booking : booking})
