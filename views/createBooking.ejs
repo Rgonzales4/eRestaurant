@@ -11,6 +11,16 @@
   <body>
     <div class="container">
     <h1 class="mb-2">Create Booking</h1>
+    <% if (!req.user) {%>
+    <div>
+      <label
+      for="bookingUser"
+      name="bookingUser"
+      value="<%- req.user.email%>">
+    </label>
+    </div>
+    <%} %>
+    
     <form action="/bookings" method="POST" style="margin: 20px">
       <%- include('partials/_booking_form_fields') %>
       </form>
