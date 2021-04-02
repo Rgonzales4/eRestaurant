@@ -4,9 +4,9 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
+const passport = require('passport')
 const flash = require('express-flash');
 const session = require('express-session');
-const passport = require('passport')
 const methodOverride = require('method-override')
 
 const Booking = require('./models/booking');
@@ -33,30 +33,6 @@ mongoose.connect(process.env.DB_Connection, {
 });
 const db = mongoose.connection;
 db.once('open', () => console.log('Connected to Database'));
-
-//Listening
-app.listen(3000, () => {
-  console.log('Server on port 3000');
-});
-
-//Import routes
-app.use('/menu', menuRouter);
-app.use('/about', aboutRouter);
-app.use('/login', loginRouter);
-app.use('/registration', registerRouter);
-app.use('/bookings', bookingRouter);
-app.use('/database', databaseRouter);
-
-const User = require('./models/users');
-
-app.use('/', (req, res) => {
-  // if (!req.locals.user) {
-  //   const sentUser = new User();
-  // } else {
-  //   const sentUser = req.locals.user;
-  // }
-  res.render('home', {req: req});
-});
 
 //Flash & Session
 app.use(flash());
@@ -91,9 +67,32 @@ app.delete('/logout', (req, res) => {
   res.redirect('/');
 });
 
+//Import routes
+app.use('/menu', menuRouter);
+app.use('/about', aboutRouter);
+app.use('/login', loginRouter);
+app.use('/registration', registerRouter);
+app.use('/bookings', bookingRouter);
+app.use('/database', databaseRouter);
+
+const User = require('./models/users');
+
+app.use('/', (req, res) => {
+  // if (!req.locals.user) {
+  //   const sentUser = new User();
+  // } else {
+  //   const sentUser = req.locals.user;
+  // }
+  res.render('home', {req: req});
+});
 
 //Booking Functions
 app.get('/', async (req, res) =>{
   const booking = await Booking.find()
   res.render('booking', {booking : booking})
 })
+
+//Listening
+app.listen(3000, () => {
+  console.log('Server on port 3000');
+});
