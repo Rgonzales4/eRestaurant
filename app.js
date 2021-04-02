@@ -4,6 +4,10 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
+const flash = require('express-flash');
+const session = require('express-session');
+const passport = require('passport')
+const methodOverride = require('method-override')
 
 const Booking = require('./models/booking');
 
@@ -54,7 +58,38 @@ app.use('/', (req, res) => {
   res.render('home', {req: req});
 });
 
-//Logging In Functions
+//Flash & Session
+app.use(flash());
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(methodOverride('_method'));
+
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
+}
+
+function checkNotAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    res.redirect('/');
+  }
+  next();
+}
+
+//Logging Out
+app.delete('/logout', (req, res) => {
+  req.logOut();
+  res.redirect('/');
+});
 
 
 //Booking Functions
