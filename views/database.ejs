@@ -11,41 +11,49 @@
     <h1 style="padding: 10px">Database accessed</h1>
 
     <div class="container">
-      <h2 style="padding: 10px">Customers:</h2>
-      <% Users.forEach(Users => { %>
-      <div style="float: left">
-        <div style="padding: 10px">
-          <div class="card" style="width: 18rem">
-            <div class="card-body">
-              <h5 class="card-title"><%= Users.firstName %></h5>
-              <h6 class="card-subtitle mb-2 text-muted">
-                <%= Users.lastName %>
-              </h6>
-              <a href="#" class="card-link">Card link</a>
+      <div class="row">
+        <h2 style="padding: 10px">Customers:</h2>
+        <% Users.forEach(Users => { %>
+        <div class="col-lg">
+          <div style="float: left">
+            <div style="padding: 10px">
+              <div class="card" style="width: 18rem">
+                <div class="card-body">
+                  <h5 class="card-title"><%= Users.firstName %></h5>
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    <%= Users.lastName %>
+                  </h6>
+                  <a href="#" class="card-link">Card link</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        <%})%>
       </div>
-      <%})%>
     </div>
 
     <div class="container">
-      <h2 style="padding: 10px">Bookings:</h2>
-      <% Bookings.forEach(Bookings => { %>
-      <div style="float: left">
-        <div style="padding: 10px">
-          <div class="card" style="width: 18rem">
-            <div class="card-body">
-              <h5 class="card-title"><%= Bookings.bookingID %></h5>
-              <h6 class="card-subtitle mb-2 text-muted">
-                <%= Bookings.time %>
-              </h6>
-              <a href="#" class="card-link">Card link</a>
+      <div class="row">
+        <h2 style="padding: 10px">Bookings:</h2>
+        <% Bookings.forEach(Bookings => { %>
+        <div class="col-lg">
+          <div style="float: left">
+            <div style="padding: 10px">
+              <div class="card" style="width: 18rem">
+                <div class="card-body">
+                  <h5 class="card-title"><%= Bookings.bookingID %></h5>
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    <%= Bookings.bookingUser %>
+                  </h6>
+                  <a href="#" class="card-link">Card link</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        <%})%>
       </div>
-      <%})%>
     </div>
   </body>
 </html>
