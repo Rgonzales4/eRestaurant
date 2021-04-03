@@ -11,7 +11,7 @@ initialisePassport(passport);
 
 express().use(flash());
 
-router.get('/', checkNotAuthenticated, (req, res) => {
+router.get('/', checkNotAuthenticated, async (req, res) => {
   console.log('Login page opened');
   res.render('login', { loginMessage: '', req: req });
 });
@@ -29,7 +29,9 @@ router.get('/', checkNotAuthenticated, (req, res) => {
 //   }
 // });
 
-router.post('/', passport.authenticate('local', {
+router.post(
+  '/',
+  passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login',
     failureFlash: true,

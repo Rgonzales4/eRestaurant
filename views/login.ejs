@@ -45,7 +45,7 @@
         </div>
         <label name="Warning" value=""></label>
         <span style="color: red">
-          
+          <% if (messages.error) { %> <%= messages.error%> <% } %>
         </span>
         <div>
           <a href="/registration"> Don't have an account? Sign up now</a>
