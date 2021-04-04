@@ -170,4 +170,28 @@ h1{
 }
 
 
+.services{
+    height: 700px;
+    position: relative;
+    text-align: center;
+    background-color: rgb(255, 245, 235);
+    width: 100%;
+    text-align: center;
+}
 
+.servicestxt{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.serviceshead{
+    font-size: 150px;
+    font-style: italic;
+    color: rgb(92, 92, 92);
+}
+
+.services p{
+    padding: 20px;
+}
