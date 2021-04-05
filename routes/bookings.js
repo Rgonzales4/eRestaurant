@@ -5,13 +5,14 @@ const router = express.Router();
 
 router.get('/', checkAuthenticated, async (req, res) => {
   console.log('Booking page opened');
-  const booking = await Booking.find().sort({bookingID : 'asc'});
+  const booking = await Booking.find({bookingUser: req.user.email}).sort({bookingID : 'asc'});
   res.render('booking', {req : req, booking : booking});
 });
 
 router.get('/createBooking', checkAuthenticated, (req, res) => {
   console.log('create booking opened');
-  res.render('createBooking', { req : req, booking : new Booking() });
+  res.render('createBooking', { successMessage: '', failMessage: '',
+  req : req, booking : new Booking() });
 })
 
 router.post('/', async (req, res) =>{
@@ -26,13 +27,15 @@ let booking = new Booking({
 
 let confirmBooking = await Booking.findOne({bookingID: req.body.bookingID})
 if(confirmBooking){
-  res.render('createBooking', {req: req, booking : booking})
+  res.render('createBooking', {successMessage: '', failMessage: 'This booking already exists',
+  req: req, booking : booking})
   console.log("This booking already exists")
 }
 else{
   booking = await booking.save()
   console.log("booking saved to databases")
-  res.render('createBooking', {req: req, booking : booking} )
+  res.render('createBooking', {successMessage: 'Booking successfully created', failMessage: '',
+  req: req, booking : booking} )
 }})
 
 
@@ -49,6 +52,7 @@ function checkAuthenticated(req, res, next) {
   }
   res.redirect('/login');
 }
+
 
 module.exports = router;
 
