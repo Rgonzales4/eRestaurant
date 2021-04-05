@@ -29,8 +29,9 @@ let booking = new Booking({
   bookingUser: req.user.email,
 })
 
-let confirmBooking = await Booking.findOne({bookingID: req.body.bookingID})
-if(confirmBooking){
+let confirmBookingID = await Booking.findOne({bookingID: req.body.bookingID})
+let confirmBookingDate = await Booking.findOne({time: req.body.bookingDate})
+if(confirmBookingID){
   res.render('createBooking', {successMessage: '', failMessage: 'This booking already exists',
   req: req, booking : booking})
   console.log("This booking already exists")
@@ -39,6 +40,11 @@ else if (req.body.bookingNumber > 150){
   res.render('createBooking', {successMessage: '', failMessage: 'Please book for less than 150 People',
   req: req, booking : booking})
   console.log("too many people")
+}
+else if (confirmBookingDate){
+  res.render('createBooking', {successMessage: '', failMessage: 'Booking already reserved for this date',
+  req: req, booking : booking})
+  console.log("wrong date")
 }
 else{
   booking = await booking.save()
