@@ -8,7 +8,6 @@ const { db } = require('../models/users');
 
 
 router.get('/', checkAuthenticated, async (req, res) => {
-  console.log(bookingCount());
   const booking = await Booking.find({bookingUser: req.user.email});
   res.render('booking', {req : req, booking : booking});
 });
@@ -35,6 +34,11 @@ if(confirmBooking){
   res.render('createBooking', {successMessage: '', failMessage: 'This booking already exists',
   req: req, booking : booking})
   console.log("This booking already exists")
+}
+else if (req.body.bookingNumber > 150){
+  res.render('createBooking', {successMessage: '', failMessage: 'Please book for less than 150 People',
+  req: req, booking : booking})
+  console.log("too many people")
 }
 else{
   booking = await booking.save()
