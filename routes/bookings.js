@@ -1,11 +1,15 @@
 const express = require('express');
 const Booking = require('../models/booking');
+const {BookingSchema} = Booking;
 const User = require('../models/users')
 const router = express.Router();
+const mongoose = require('mongoose');
+const { db } = require('../models/users');
+
 
 router.get('/', checkAuthenticated, async (req, res) => {
-  console.log('Booking page opened');
-  const booking = await Booking.find({bookingUser: req.user.email}).sort({bookingID : 'asc'});
+  console.log(bookingCount());
+  const booking = await Booking.find({bookingUser: req.user.email});
   res.render('booking', {req : req, booking : booking});
 });
 
@@ -16,9 +20,10 @@ router.get('/createBooking', checkAuthenticated, (req, res) => {
 })
 
 router.post('/', async (req, res) =>{
-
+const newID = await Booking.count({}) + 1;
+console.log(newID)
 let booking = new Booking({
-  bookingID: req.body.bookingID,
+  bookingID: newID,
   time: req.body.bookingDate,
   bookingNumber: req.body.bookingNumber,
   allergyDescription: req.body.allergyDescription,
@@ -38,9 +43,6 @@ else{
   req: req, booking : booking} )
 }})
 
-
-
-
 router.get('/removeBooking', (req, res) => {
   console.log('remove booking opened');
   res.render('removeBooking', {req : req});
@@ -52,7 +54,6 @@ function checkAuthenticated(req, res, next) {
   }
   res.redirect('/login');
 }
-
 
 module.exports = router;
 
