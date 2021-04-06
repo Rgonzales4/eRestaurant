@@ -4,3 +4,6 @@ The Following are Links that may be useful for our website:
 --> https://medium.com/swlh/how-to-create-your-first-login-page-with-html-css-and-javascript-602dd71144f1
 
 testing
+
+CSS:
+--> https://www.youtube.com/watch?v=EkQc-8uzxIA (used this exact vid as a reference but, despite following exactly, css not linking) -Kat

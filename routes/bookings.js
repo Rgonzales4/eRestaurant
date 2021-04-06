@@ -1,62 +1,87 @@
 const express = require('express');
 const Booking = require('../models/booking');
-const {BookingSchema} = Booking;
-const User = require('../models/users')
 const router = express.Router();
 const mongoose = require('mongoose');
-const { db } = require('../models/users');
-
 
 router.get('/', checkAuthenticated, async (req, res) => {
-  const booking = await Booking.find({bookingUser: req.user.email});
-  res.render('booking', {req : req, booking : booking});
+  const booking = await Booking.find({ bookingUser: req.user.email });
+  res.render('booking', { req: req, booking: booking });
 });
 
 router.get('/createBooking', checkAuthenticated, (req, res) => {
   console.log('create booking opened');
-  res.render('createBooking', { successMessage: '', failMessage: '',
-  req : req, booking : new Booking() });
-})
+  res.render('createBooking', {
+    successMessage: '',
+    failMessage: '',
+    req: req,
+    booking: new Booking(),
+  });
+});
 
-router.post('/', async (req, res) =>{
-const newID = await Booking.count({}) + 1;
-console.log(newID)
-let booking = new Booking({
-  bookingID: newID,
-  time: req.body.bookingDate,
-  bookingNumber: req.body.bookingNumber,
-  allergyDescription: req.body.allergyDescription,
-  bookingUser: req.user.email,
-})
+router.post('/', async (req, res) => {
+  const newID = (await Booking.count({})) + 1;
+  console.log(newID);
+  let booking = new Booking({
+    bookingID: newID,
+    time: req.body.bookingDate,
+    bookingNumber: req.body.bookingNumber,
+    allergyDescription: req.body.allergyDescription,
+    bookingUser: req.user.email,
+  });
 
-let confirmBookingID = await Booking.findOne({bookingID: req.body.bookingID})
-let confirmBookingDate = await Booking.findOne({time: req.body.bookingDate})
-if(confirmBookingID){
-  res.render('createBooking', {successMessage: '', failMessage: 'This booking already exists',
-  req: req, booking : booking})
-  console.log("This booking already exists")
-}
-else if (req.body.bookingNumber > 150){
-  res.render('createBooking', {successMessage: '', failMessage: 'Please book for less than 150 People',
-  req: req, booking : booking})
-  console.log("too many people")
-}
-else if (confirmBookingDate){
-  res.render('createBooking', {successMessage: '', failMessage: 'Booking already reserved for this date',
-  req: req, booking : booking})
-  console.log("wrong date")
-}
-else{
-  booking = await booking.save()
-  console.log("booking saved to databases")
-  res.render('createBooking', {successMessage: 'Booking successfully created', failMessage: '',
-  req: req, booking : booking} )
-}})
+  let confirmBookingID = await Booking.findOne({
+    bookingID: req.body.bookingID,
+  });
+  let confirmBookingDate = await Booking.findOne({
+    time: req.body.bookingDate,
+  });
+  if (confirmBookingID) {
+    res.render('createBooking', {
+      successMessage: '',
+      failMessage: 'This booking already exists',
+      req: req,
+      booking: booking,
+    });
+    console.log('This booking already exists');
+  } else if (req.body.bookingNumber > 150) {
+    res.render('createBooking', {
+      successMessage: '',
+      failMessage: 'Please book for less than 150 People',
+      req: req,
+      booking: booking,
+    });
+    console.log('too many people');
+  } else if (confirmBookingDate) {
+    res.render('createBooking', {
+      successMessage: '',
+      failMessage: 'Booking already reserved for this date',
+      req: req,
+      booking: booking,
+    });
+    console.log('wrong date');
+  } else {
+    booking = await booking.save();
+    console.log('booking saved to databases');
+    res.render('createBooking', {
+      successMessage: 'Booking successfully created',
+      failMessage: '',
+      req: req,
+      booking: booking,
+    });
+  }
+});
 
+<<<<<<< HEAD
 // router.get('/removeBooking', (req, res) => {
 //   console.log('remove booking opened');
 //   res.render('removeBooking', {req : req});
 // })
+=======
+router.get('/removeBooking', (req, res) => {
+  console.log('remove booking opened');
+  res.render('removeBooking', { req: req });
+});
+>>>>>>> 7d74f5a412cee870b49f3e955eede7244c1540a9
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
@@ -66,4 +91,3 @@ function checkAuthenticated(req, res, next) {
 }
 
 module.exports = router;
-
