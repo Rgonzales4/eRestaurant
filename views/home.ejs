@@ -4,9 +4,17 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%- include('partials/navbar') %>
+
     <title>Home</title>
+    <!-- <link rel="stylesheet" href="style.css" type="text/css" /> PREVIOUS METHOD, for some reason the CSS isn't being read-->
+    <%- include('partials/navbar') %>
+    <!-- Made a separate ejs file specifically for CSS - "style.ejs" in the partial folder: -->
+    <%- include('partials/style') %>
   </head>
 
-  <body></body>
+  <body>
+    <p>tester</p>
+
+    <div class="testing">div test</div>
+  </body>
 </html>
