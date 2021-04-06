@@ -53,10 +53,10 @@ else{
   req: req, booking : booking} )
 }})
 
-router.get('/removeBooking', (req, res) => {
-  console.log('remove booking opened');
-  res.render('removeBooking', {req : req});
-})
+// router.get('/removeBooking', (req, res) => {
+//   console.log('remove booking opened');
+//   res.render('removeBooking', {req : req});
+// })
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
