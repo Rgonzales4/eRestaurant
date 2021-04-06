@@ -19,6 +19,8 @@ router.get('/createBooking', checkAuthenticated, (req, res) => {
 });
 
 router.post('/', async (req, res) => {
+  var date1 = Date.now()
+  var date2 = req.body.bookingDate
   const newID = (await Booking.count({})) + 1;
   console.log(newID);
   let booking = new Booking({
@@ -51,6 +53,13 @@ router.post('/', async (req, res) => {
       booking: booking,
     });
     console.log('too many people');
+  } else if (req.body.bookingDate < date1){
+    res.render('createBooking', {
+      successMessage: '',
+      failMessage: 'Please input a valid date',
+      req: req,
+      booking: booking,
+    });
   } else if (confirmBookingDate) {
     res.render('createBooking', {
       successMessage: '',
