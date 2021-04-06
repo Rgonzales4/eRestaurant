@@ -29,8 +29,13 @@ router.post('/', async (req, res) => {
     bookingUser: req.user.email,
   });
 
-  let confirmBooking = await Booking.findOne({ bookingID: req.body.bookingID });
-  if (confirmBooking) {
+  let confirmBookingID = await Booking.findOne({
+    bookingID: req.body.bookingID,
+  });
+  let confirmBookingDate = await Booking.findOne({
+    time: req.body.bookingDate,
+  });
+  if (confirmBookingID) {
     res.render('createBooking', {
       successMessage: '',
       failMessage: 'This booking already exists',
@@ -46,6 +51,14 @@ router.post('/', async (req, res) => {
       booking: booking,
     });
     console.log('too many people');
+  } else if (confirmBookingDate) {
+    res.render('createBooking', {
+      successMessage: '',
+      failMessage: 'Booking already reserved for this date',
+      req: req,
+      booking: booking,
+    });
+    console.log('wrong date');
   } else {
     booking = await booking.save();
     console.log('booking saved to databases');
