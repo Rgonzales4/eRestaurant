@@ -68,6 +68,7 @@ app.delete('/logout', (req, res) => {
 });
 
 //Import routes
+app.use(express.static(__dirname + '/css'));
 app.use('/menu', menuRouter);
 app.use('/about', aboutRouter);
 app.use('/login', loginRouter);
