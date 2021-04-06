@@ -26,12 +26,8 @@ mongoose.connect(process.env.DB_Connection, {
 const db = mongoose.connection;
 db.once('open', () => console.log('Connected to Database'));
 
-//Listening
-app.listen(3000, () => {
-  console.log('Server on port 3000');
-});
-
 //Import routes
+app.use(express.static(__dirname + '/css'));
 app.use('/menu', menuRouter);
 app.use('/about', aboutRouter);
 app.use('/login', loginRouter);
@@ -40,12 +36,10 @@ app.use('/registration', registerRouter);
 const User = require('./models/users');
 
 app.use('/', (req, res) => {
-  // if (!req.locals.user) {
-  //   const sentUser = new User();
-  // } else {
-  //   const sentUser = req.locals.user;
-  // }
   res.render('home');
 });
 
-//Logging In Functions
+//Listening
+app.listen(3000, () => {
+  console.log('Server on port 3000');
+});
