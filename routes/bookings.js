@@ -71,18 +71,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-// router.get('/removeBooking', (req, res) => {
-//   console.log('remove booking opened');
-//   res.render('removeBooking', {req : req});
-// })
-=======
-router.get('/removeBooking', (req, res) => {
-  console.log('remove booking opened');
-  res.render('removeBooking', { req: req });
-});
->>>>>>> 7d74f5a412cee870b49f3e955eede7244c1540a9
-
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
