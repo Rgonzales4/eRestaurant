@@ -6,31 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Home</title>
-<<<<<<< HEAD
-    <!-- <link rel="stylesheet" href="style.css" type="text/css" /> PREVIOUS METHOD, for some reason the CSS isn't being read-->
-    <%- include('partials/navbar') %>
-    <!-- Made a separate ejs file specifically for CSS - "style.ejs" in the partial folder: -->
-    <%- include('partials/style') %>
-  </head>
-
-  <body>
-    <p>tester</p>
-
-    <div class="testing">div test</div>
-=======
     <%- include('partials/navbar') %>
 
     <style type="text/css">
       body{
-    margin: 0px;
-    padding: 0px;
-}
-
-header{
-    height: 120px;
-    background-color: rgb(255, 245, 235);
-    width: 100%;
-    text-align: center;
     margin: 0px;
     padding: 0px;
 }
@@ -51,7 +30,10 @@ h1{
     font-size: 40px;
     padding-top: 35px;
     color: rgb(59, 59, 59);
-    font-style: italic;
+}
+
+.logopic{
+  width: 100%;
 }
 
 .navlinks{
@@ -97,7 +79,6 @@ h1{
 
 .bannerhead{
     font-size: 150px;
-    font-style: italic;
     color: rgb(92, 92, 92);
 }
 
@@ -119,6 +100,7 @@ h1{
     width: 50%;
     height: 100%;
     float: left;
+    padding-right: 20px;
 }
 
 .about h1{
@@ -147,10 +129,15 @@ h1{
     height: 100%;
     float: right;
     background-color: rgb(255, 245, 235);
+
+
 }
 
 .award p{
     text-align: center;
+
+
+
 }
 
 .foodimg{
@@ -169,6 +156,8 @@ h1{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 100%;
+    padding: 80px;
 }
 
 .historyhead{
@@ -181,6 +170,7 @@ h1{
     font-size: 60px;
     font-style: italic;
     color: rgb(92, 92, 92);
+    padding: 80px;
 }
 
 .footer{
@@ -200,6 +190,7 @@ h1{
     background-color: rgb(255, 245, 235);
     width: 100%;
     text-align: center;
+    padding: 80px;
 }
 
 .servicestxt{
@@ -207,12 +198,15 @@ h1{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 100%;
+    padding: 80px;
 }
 
 .serviceshead{
     font-size: 150px;
     font-style: italic;
     color: rgb(92, 92, 92);
+    width: 100%;
 }
 
 .services p{
@@ -230,9 +224,11 @@ h1{
         
         <img class="bannerimg" src="https://www.dmarge.com/wp-content/uploads/2016/05/bea.jpeg" alt="Header Image" style="width: 100%; height: 800px;">
         
+        
         <div class="bannertxt">
+            
             <div class="bannerhead">Le Bistrot D'Andre</div>
-            <div class="bannerdesc">Super cheesy company slogan or whatever</div>
+            <div class="bannerdesc">Feel the taste of french food</div>
         </div>
 
        
@@ -242,11 +238,13 @@ h1{
     <div class="mission">
         <div class="about">
             <h1>Our Philosophy</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+            <p>The best food in the city served in the best location makes Le Bistrot D'Andre the perfect dining venue for all types of occasions and the icing on the cake is our first-class front-of-house team. Friendly, polite and always professional, our waiting staff are there to ensure that the time you spend with us is enjoyable from start to finish and that everything about your meal is absolutely perfect. Every member of our waiting staff is fully trained and highly experienced, and shares our determination to ensure that each customer we welcome to Catalina has the dining experience of their life.</p>
         </div>
         <div class="award">
-            <p>totally real and legit award goes here</p>
+          <img src="https://images.squarespace-cdn.com/content/5524fadae4b080589492bc03/1564629592657-BZ6HMHDIC1OQOBDKFL5C/2019+Gold+Medal+Sticky+Balsamic.png?content-type=image%2Fpng"  alt="award" style="width: 50%; height: 300px;">
         </div>
+       
+        
 
     </div>
 
@@ -255,7 +253,7 @@ h1{
 
         <div class="historytxt">
             <div class="historyhead">Our History</div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+            <p>For over 26 years, it has been our pleasure to serve diners in Sydney with the finest food and wine in a stunning location. If you have yet to visit our beautiful restaurant and sample our delicious menu, we sincerely hope that will change in the near future. Whether you are looking for somewhere to have a really special romantic dinner in Sydney or are planning a family celebration and would like to hold it in a restaurant where great food, fine wines and fantastic service are guaranteed, you will not find a better venue anywhere in Sydney than Le Bistrot D'Andre.</p>
         </div>
 
     </div>
@@ -264,7 +262,8 @@ h1{
         
         <div class="servicestxt">
             <div class="serviceshead">Our Services</div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+            <p>You won’t be surprised to learn that you can find some of the best seafood in Sydney being served at our waterfront restaurant. Le Bistrot D'Andre is renowned for having the best Snails in town, and the fresh poached Australian Marron and Soy Cured King Salmon are two of our most popular entrées. Crispy Skin Saltwater Barramundi and Pan Fried Snapper are among the favourite mains for lovers of seafood who visit us on a regular basis.</p>
+            <p>If great steak is what you really want, our Pan Fried Westholme Wagyu Beef should definitely be on your radar. Whatever dishes you order, we guarantee they will be expertly prepared with the best and freshest ingredients, and immaculately presented by Mark, Alan and the team. Our fantastic kitchen team is, of course, a big part of the reason we are considered as one of the very best restaurants Sydney has to offer.</p>
             <p>MAKE A BOOKING (this will be a button to the sign in page)</p>
         </div>
          
@@ -273,6 +272,5 @@ h1{
 
     <div class="footer">footer goes here</div>
 
->>>>>>> 248532b85faad18e393f9bbfaf228e1f2f2703c7
   </body>
 </html>
