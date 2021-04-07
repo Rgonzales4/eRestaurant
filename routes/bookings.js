@@ -18,6 +18,11 @@ router.get('/createBooking', checkAuthenticated, (req, res) => {
   });
 });
 
+router.get('/edit/:bookingID', async (req, res) => {
+  const booking = await Booking.findOne({ bookingID: req.params.bookingID })
+  res.render('edit', { req: req, successMessage: '', failMessage: '', booking: booking })
+})
+
 router.post('/', async (req, res) => {
   const newID = (await Booking.count({})) + 1;
   console.log(newID);
@@ -71,16 +76,22 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.get('/removeBooking', (req, res) => {
-  console.log('remove booking opened');
-  res.render('removeBooking', { req: req });
-});
-
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
   res.redirect('/login');
 }
+
+router.put('/:id', (req, res) => {
+
+})
+
+router.delete('/:bookingID', async (req, res) => {
+  const deleteBookingID = req.params.bookingID;
+  await Booking.findOneAndDelete(deleteBookingID); 
+  res.redirect('/bookings');
+  console.log('Booking ' + deleteBookingID + ' has been deleted');
+})
 
 module.exports = router;
