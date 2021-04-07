@@ -18,6 +18,11 @@ router.get('/createBooking', checkAuthenticated, (req, res) => {
   });
 });
 
+router.get('/edit/:bookingID', async (req, res) => {
+  const booking = await Booking.findOne({ bookingID: req.params.bookingID })
+  res.render('edit', { req: req, successMessage: '', failMessage: '', booking: booking })
+})
+
 router.post('/', async (req, res) => {
   const newID = (await Booking.count({})) + 1;
   console.log(newID);
@@ -77,6 +82,10 @@ function checkAuthenticated(req, res, next) {
   }
   res.redirect('/login');
 }
+
+router.put('/:id', (req, res) => {
+
+})
 
 router.delete('/:bookingID', async (req, res) => {
   const deleteBookingID = req.params.bookingID;

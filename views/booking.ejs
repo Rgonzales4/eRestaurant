@@ -20,6 +20,8 @@
                 <div class="card-title"><%= b.time.toLocaleDateString() %></div>
                 <div class="card-title"><%= b.allergyDescription %></div>
                 <div class="card-title"><%= b.bookingUser %></div>
+                <a href="bookings/edit/<%= b.bookingID %>"
+                class="btn btn-info">Edit Booking</a>
                 <form action="/bookings/<%= b.bookingID %>?_method=DELETE" method="POST"
                     class="d-inline">
                 <button type="submit" class="btn btn-danger">Remove Booking</button>
