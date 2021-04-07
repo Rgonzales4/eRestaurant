@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "appjs": "0.0.20",
+    "appjs-win32": "0.0.19",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
     "ejs-mate": "^3.0.0",
