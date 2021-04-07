@@ -20,10 +20,14 @@
                 <div class="card-title"><%= b.time.toLocaleDateString() %></div>
                 <div class="card-title"><%= b.allergyDescription %></div>
                 <div class="card-title"><%= b.bookingUser %></div>
+                <form action="/bookings/<%= b.bookingID %>?_method=DELETE" method="POST"
+                    class="d-inline">
+                <button type="submit" class="btn btn-danger">Remove Booking</button>
+                </form>
             </div>
         </div>
         <% }) %>
-    <a href="/" type="button">Home</a>
+    <a href="/" type="button" class="btn btn-dark" >Home</a>
 </div>
 </body>
 </html> 

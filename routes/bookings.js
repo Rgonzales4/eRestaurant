@@ -78,4 +78,11 @@ function checkAuthenticated(req, res, next) {
   res.redirect('/login');
 }
 
+router.delete('/:bookingID', async (req, res) => {
+  const deleteBookingID = req.params.bookingID;
+  await Booking.findOneAndDelete(deleteBookingID); 
+  res.redirect('/bookings');
+  console.log('Booking ' + deleteBookingID + ' has been deleted');
+})
+
 module.exports = router;
