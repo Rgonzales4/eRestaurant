@@ -2,6 +2,7 @@ const express = require('express');
 const Booking = require('../models/booking');
 const router = express.Router();
 const mongoose = require('mongoose');
+const { db } = require('../models/booking');
 
 router.get('/', checkAuthenticated, async (req, res) => {
   const booking = await Booking.find({ bookingUser: req.user.email });
@@ -24,7 +25,8 @@ router.get('/edit/:bookingID', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-  const newID = (await Booking.count({})) + 1;
+  const newID = await Booking.count({}) + 1;
+
   console.log(newID);
   let booking = new Booking({
     bookingID: newID,
@@ -93,5 +95,29 @@ router.delete('/:bookingID', async (req, res) => {
   res.redirect('/bookings');
   console.log('Booking ' + deleteBookingID + ' has been deleted');
 })
+
+function checkIfEmpty(){
+  Booking.countDocuments(function (err, count) {
+    if (!err && count === 0) {
+        return true
+    }
+    else {return false}
+})
+}
+
+async function generateNewID() {
+  if (checkIfEmpty == true){
+    let newID = 1
+    return newID
+  }
+  else {
+    let newestBooking = await Booking.findOne().sort({bookingID: -1})
+    return newestBooking.then(data => {data.bookingID + 1})
+  }
+
+}
+
+
+
 
 module.exports = router;
