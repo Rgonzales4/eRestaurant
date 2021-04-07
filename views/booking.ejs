@@ -11,7 +11,6 @@
     <div class="container">
     <h1 class="mb-4">Welcome To The Booking Page</h1>
     <div><a href = "bookings/createBooking" type="button" class="btn btn-outline-success me-2">Create Booking</a>
-        <a href = "bookings/removeBooking" type="button" class="btn btn-outline-success me-2">Remove Booking</a>
     </div>
     <h2 class="mb-2">Here are your current bookings:</h2>
     <% Array.from(booking).forEach(b => { %> 
@@ -21,10 +20,16 @@
                 <div class="card-title"><%= b.time.toLocaleDateString() %></div>
                 <div class="card-title"><%= b.allergyDescription %></div>
                 <div class="card-title"><%= b.bookingUser %></div>
+                <a href="bookings/edit/<%= b.bookingID %>"
+                class="btn btn-info">Edit Booking</a>
+                <form action="/bookings/<%= b.bookingID %>?_method=DELETE" method="POST"
+                    class="d-inline">
+                <button type="submit" class="btn btn-danger">Remove Booking</button>
+                </form>
             </div>
         </div>
         <% }) %>
-    <a href="/" type="button">Home</a>
+    <a href="/" type="button" class="btn btn-dark" >Home</a>
 </div>
 </body>
 </html> 
