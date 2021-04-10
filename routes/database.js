@@ -20,9 +20,18 @@ router.get('/account/:userId', checkAdmin, async (req, res) => {
   res.render('profile', { req: req, user: userAccount });
 });
 
-//NOT YET FINISHED - ITS DELETING THE WRONG USER
+router.get('/booking/:bookingID', checkAdmin, async (req, res) => {
+  const bookingDetails = await Booking.findOne({
+    bookingID: req.params.bookingID,
+  });
+  console.log(
+    `Accessing booking details: ${bookingDetails.bookingID} under ${bookingDetails.bookingUserFirstName} ${bookingDetails.bookingUserLastName}`
+  );
+  res.render('viewBooking', { req: req, booking: bookingDetails });
+});
+
 router.delete('/:userId', checkAdmin, async (req, res) => {
-  console.log('Deletion output Statement');
+  console.log('User Deletion output Statement');
   const userAccount = await User.findOne({ userId: req.params.userId });
   Booking.deleteMany(
     { bookingUser: userAccount.email },
@@ -39,6 +48,14 @@ router.delete('/:userId', checkAdmin, async (req, res) => {
   const Bookings = await Booking.find().sort({ bookingDate: 'asc' });
   res.render('database', { req: req, Users: Users, Bookings: Bookings });
 });
+
+// router.delete('/:bookingID', checkAdmin, async (req, res) => {
+//   console.log(`Booking ${req.params.bookingID} deleted`);
+//   await Booking.findOneAndDelete(req.params.bookingID);
+//   const Users = await User.find().sort({ firstName: 'asc' });
+//   const Bookings = await Booking.find().sort({ bookingDate: 'asc' });
+//   res.render('database', { req: req, Users: Users, Bookings: Bookings });
+// });
 
 function checkAdmin(req, res, next) {
   if (req.isAuthenticated() && req.user.isAdmin === true) {

@@ -70,7 +70,20 @@
                   <h6 class="card-subtitle mb-2 text-muted">
                     <%= Bookings.bookingID %>
                   </h6>
-                  <a href="#" class="btn btn-primary btn-sm">View Booking</a>
+                  <a
+                    href="/database/booking/<%= Bookings.bookingID %>"
+                    class="btn btn-primary btn-sm"
+                    >View Booking</a
+                  >
+                  <form
+                    action="/database/<%= Bookings.bookingID %>?_method=DELETE"
+                    method="POST"
+                    class="d-inline"
+                  >
+                    <button type="submit" class="btn btn-danger btn-sm">
+                      Delete Booking
+                    </button>
+                  </form>
                 </div>
               </div>
             </div>

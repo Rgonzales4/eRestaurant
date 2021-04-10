@@ -1,10 +1,10 @@
 const express = require('express');
 const Booking = require('../models/booking');
 const router = express.Router();
-const mongoose = require('mongoose');
+const crypto = require('crypto');
 
 router.get('/', checkAuthenticated, async (req, res) => {
-  const booking = await Booking.find({ bookingUser: req.user.email });
+  const booking = await Booking.find({ bookingUserEmail: req.user.email });
   res.render('booking', { req: req, booking: booking });
 });
 
@@ -33,7 +33,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
   const newID = (await Booking.count({})) + 1; // Need to change the value of the ID
   console.log(newID);
   let booking = new Booking({
-    bookingID: newID,
+    bookingID: crypto.randomBytes(8).toString('hex'),
     bookingDate: req.body.bookingDate,
     bookingNumber: req.body.bookingNumber,
     allergyDescription: req.body.allergyDescription,

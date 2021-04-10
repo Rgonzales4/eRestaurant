@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const BookingSchema = new Schema({
   bookingID: {
-    type: Number,
+    type: String,
     required: true,
   },
   bookingUserEmail: {
