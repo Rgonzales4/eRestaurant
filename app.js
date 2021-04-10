@@ -15,7 +15,8 @@ const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/registration');
 const bookingRouter = require('./routes/bookings');
 const databaseRouter = require('./routes/database');
-const accountRouter = require('./routes/account');
+const profileRouter = require('./routes/profile');
+
 
 const Booking = require('./models/booking');
 
@@ -76,7 +77,7 @@ app.use('/login', loginRouter);
 app.use('/registration', registerRouter);
 app.use('/bookings', bookingRouter);
 app.use('/database', databaseRouter);
-app.use('/profile', accountRouter);
+app.use('/profile', profileRouter);
 
 app.use('/', (req, res) => {
   res.render('home', { req: req });

@@ -10,7 +10,7 @@
   <body>
     <div class="container-sm" style="padding: 50px">
       <h2>User Profile</h2>
-      <% if (req.user.isAdmin == true){%>
+      <% if (user.isAdmin == true){%>
       <label style="color: green; padding: 10px">Admin Account</label>
       <% } %>
       <div class="row">
@@ -31,21 +31,27 @@
 
         <div class="col-1">
           <div class="row g-3">
-            <label><%= req.user.firstName%></label>
+            <label><%= user.firstName%></label>
           </div>
           <div class="row g-3">
-            <label><%= req.user.lastName%></label>
+            <label><%= user.lastName%></label>
           </div>
           <div class="row g-3">
-            <label><%= req.user.email%></label>
+            <label><%= user.email%></label>
           </div>
           <div class="row g-3">
-            <label><%= req.user.userId%></label>
+            <label><%= user.userId%></label>
           </div>
         </div>
 
         <div class="col"></div>
       </div>
+      <% if (req.user.isAdmin == true){%>
+      <div class="col-lg-4" style="margin-top: 10px">
+        <a href="#" class="btn btn-primary btn-sm">Edit Account</a>
+        <button type="submit" class="btn btn-danger btn-sm">Delete User</button>
+      </div>
+      <% } %>
     </div>
   </body>
 </html>

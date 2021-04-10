@@ -22,13 +22,17 @@
                   <h5 class="card-title"><%= Users.firstName %></h5>
                   <h6 class="card-subtitle mb-2"><%= Users.lastName %></h6>
                   <h6
-                    name="focusUser"
+                    name="userFocus"
                     class="card-text text-muted"
                     style="font-size: 13px"
                   >
                     <%= Users.userId %>
                   </h6>
-                  <a href="#" class="btn btn-primary btn-sm">View</a>
+                  <a
+                    href="database/account/<%= Users.userId%>"
+                    class="btn btn-primary btn-sm"
+                    >View</a
+                  >
                   <button type="submit" class="btn btn-danger btn-sm">
                     Delete User
                   </button>

@@ -11,6 +11,12 @@ router.get('/', checkAdmin, async (req, res) => {
   res.render('database', { req: req, Users: Users, Bookings: Bookings });
 });
 
+router.get('/account/:userId', checkAdmin, async (req, res) => {
+  const userAccount = await User.findOne({ userId: req.params.userId });
+  console.log(`Accessing user profile: ${userAccount.firstName} ${userAccount.lastName}`);
+  res.render('profile', { req: req, user: userAccount });
+});
+
 function checkAdmin(req, res, next) {
   if (req.isAuthenticated() && req.user.isAdmin === true) {
     return next();
