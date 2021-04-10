@@ -34,10 +34,12 @@ router.post('/', checkAuthenticated, async (req, res) => {
   console.log(newID);
   let booking = new Booking({
     bookingID: newID,
-    time: req.body.bookingDate,
+    bookingDate: req.body.bookingDate,
     bookingNumber: req.body.bookingNumber,
     allergyDescription: req.body.allergyDescription,
-    bookingUser: req.user.email,
+    bookingUserEmail: req.user.email,
+    bookingUserFirstName: req.user.firstName,
+    bookingUserLastName: req.user.lastName,
   });
 
   let confirmBookingID = await Booking.findOne({
@@ -46,7 +48,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
 
   let confirmBookingDate = await Booking.findOne({
     // Need to account for time of the reservation
-    time: req.body.bookingDate,
+    bookingDate: req.body.bookingDate,
   });
 
   if (confirmBookingID) {

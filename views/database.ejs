@@ -60,9 +60,15 @@
             <div style="padding: 10px">
               <div class="card" style="width: 18rem">
                 <div class="card-body">
-                  <h5 class="card-title"><%= Bookings.bookingID %></h5>
+                  <h5 class="card-title">
+                    <%= Bookings.bookingDate.toDateString() %>
+                  </h5>
+                  <h6 class="card-subtitle mb-2">
+                    <%= Bookings.bookingUserFirstName %> <%=
+                    Bookings.bookingUserLastName %>
+                  </h6>
                   <h6 class="card-subtitle mb-2 text-muted">
-                    <%= Bookings.bookingUser %>
+                    <%= Bookings.bookingID %>
                   </h6>
                   <a href="#" class="btn btn-primary btn-sm">View Booking</a>
                 </div>

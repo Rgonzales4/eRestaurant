@@ -8,7 +8,7 @@ const { Model, Mongoose } = require('mongoose');
 router.get('/', checkAdmin, async (req, res) => {
   console.log('Database page opened');
   const Users = await User.find().sort({ firstName: 'asc' });
-  const Bookings = await Booking.find().sort({ bookingID: 'asc' });
+  const Bookings = await Booking.find().sort({ bookingDate: 'asc' });
   res.render('database', { req: req, Users: Users, Bookings: Bookings });
 });
 
@@ -22,24 +22,6 @@ router.get('/account/:userId', checkAdmin, async (req, res) => {
 
 //NOT YET FINISHED - ITS DELETING THE WRONG USER
 router.delete('/:userId', checkAdmin, async (req, res) => {
-  // const userBookings = await Booking.find({ bookingUser: userAccount.email });
-
-  // const bookingsDeleted = true;
-  // while (bookingsDeleted) {
-  //   console.log('Deletion in Progress');
-  //   const bookingToDelete = Booking.findOne({ bookingUser: userAccount.email });
-  //   console.log(bookingToDelete);
-  //   if (bookingToDelete.bookingUser == userAccount.email) {
-  //     await Booking.findOneAndDelete(bookingToDelete);
-  //   } else {
-  //     bookingsDeleted = false;
-  //   }
-  // }
-  // console.log(userAccount);
-  // const Users = await User.find().sort({ firstName: 'asc' });
-  // const Bookings = await Booking.find().sort({ bookingID: 'asc' });
-  // res.render('database', { req: req, Users: Users, Bookings: Bookings });
-
   console.log('Deletion output Statement');
   const userAccount = await User.findOne({ userId: req.params.userId });
   Booking.deleteMany(
@@ -54,7 +36,7 @@ router.delete('/:userId', checkAdmin, async (req, res) => {
   );
   await User.findByIdAndDelete(userAccount.id);
   const Users = await User.find().sort({ firstName: 'asc' });
-  const Bookings = await Booking.find().sort({ bookingID: 'asc' });
+  const Bookings = await Booking.find().sort({ bookingDate: 'asc' });
   res.render('database', { req: req, Users: Users, Bookings: Bookings });
 });
 
