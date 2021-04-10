@@ -15,43 +15,41 @@
   </style>
 
   <style type="text/css">
-    body{
+    body {
       text-align: center;
     }
 
-    .header{
-      height: 450px;    
-      background-color: #0C2A0a;
+    .header {
+      height: 450px;
+      background-color: #0c2a0a;
       color: rgb(255, 245, 235);
     }
 
-    .title{
+    .title {
       padding-top: 70px;
       font-size: 150px;
       color: rgb(255, 245, 235);
-      
-
     }
 
-    .description{
+    .description {
       padding-top: 12px;
       padding-left: 10%;
       padding-right: 10%;
     }
 
-    .fill{
-      background-color: #0C2A0a;
+    .fill {
+      background-color: #0c2a0a;
       text-align: center;
       width: 100%;
       height: 400px;
     }
 
-    .fill label{
-      color: #0C2A0a;
+    .fill label {
+      color: #0c2a0a;
       font-size: 20px;
     }
 
-    .col-3{
+    .col-3 {
       background-color: rgb(255, 245, 235);
       width: 40%;
       margin-left: 30%;
@@ -59,70 +57,77 @@
       padding-top: 15px;
     }
 
-    .col-sm-10{
+    .col-sm-10 {
       padding-top: 20px;
       width: 100%;
       text-emphasis: center;
     }
 
-    .form-control{
+    .form-control {
       width: 60%;
       margin-left: 20%;
     }
 
-    .loginwrap{
+    .loginwrap {
       background-color: rgb(255, 245, 235);
       width: 40%;
       margin-left: 30%;
       height: 50px;
     }
 
-    .signup{
-      background-color: #0C2A0a;
+    .signup {
+      background-color: #0c2a0a;
       height: 100px;
       color: rgb(255, 245, 235);
     }
 
-    .signup p{
+    .signup p {
       padding: 1px;
     }
 
-
-    .footer{
-    height: 100px;
-    background-color: rgb(59, 59, 59);
-    padding: 0px;
-    margin: 0px;
-    color: white;
-    text-align: center;
-}
-
+    .footer {
+      height: 100px;
+      background-color: rgb(59, 59, 59);
+      padding: 0px;
+      margin: 0px;
+      color: white;
+      text-align: center;
+    }
   </style>
 
   <body>
-
-<div class="header">
-  <div class="title">Login</div>
-  <p class="description">Use the Login form below to reserve a table for your next visit. Le Bistrot D'Andre Rose Bay accepts online bookings for up to 10 guests.</p>
-  <p class="description">For groups of 11 - 30 guests please contact the team at reservations@LeBistrotD'Andre.com.au.</p>
-  
-</div>
+    <div class="header">
+      <div class="title">Login</div>
+      <p class="description">
+        Use the Login form below to reserve a table for your next visit. Le
+        Bistrot D'Andre Rose Bay accepts online bookings for up to 10 guests.
+      </p>
+      <p class="description">
+        For groups of 11 - 30 guests please contact the team at
+        reservations@LeBistrotD'Andre.com.au.
+      </p>
+    </div>
 
     <form class="fill" action="/login" method="post">
       <div class="col-3">
         <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-        
-        <div class="col-sm-10">
-          <input type="email" class="form-control" id="staticEmail" name="email" required />
-        </div>
 
+        <div class="col-sm-10">
+          <input
+            type="email"
+            class="form-control"
+            id="staticEmail"
+            name="email"
+            required
+          />
+        </div>
       </div>
-      
-      
+
       <div class="col-3">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-        
-        
+        <label for="inputPassword" class="col-sm-2 col-form-label"
+          >Password</label
+        >
+
         <div class="col-sm-10">
           <input
             type="password"
@@ -144,31 +149,18 @@
         <span style="color: red">
           <% if (messages.error) { %> <%= messages.error%> <% } %>
         </span>
-        <div>
+        <!-- <div>
           <a href="/registration"> Don't have an account? Sign up now</a>
-        </div>
-        
-         
+        </div> -->
       </div>
-
-      <div class="loginwrap">
-        <button class="loginbtn" type="submit">Login</button>
-      </div>
-
-      
-
-
     </form>
 
     <div class="signup">
-
       <label name="Warning" value=""></label>
 
-      <p>Don't have an account? <a href="/registration">Sign up now</a> </p>
-
+      <p>Don't have an account? <a href="/registration">Sign up now</a></p>
     </div>
 
     <div class="footer">footer placeholder</div>
-
   </body>
 </html>
