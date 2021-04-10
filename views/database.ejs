@@ -8,22 +8,30 @@
     <title>Database</title>
   </head>
   <body>
-    <h1 style="padding: 10px">Database accessed</h1>
+    <h1 style="padding: 20px">Database accessed</h1>
 
     <div class="container">
       <div class="row">
-        <h2 style="padding: 10px">Customers:</h2>
+        <h2 style="padding: 10px">Registered Users:</h2>
         <% Users.forEach(Users => { %>
-        <div class="col-lg">
+        <div class="col-lg-4">
           <div style="float: left">
             <div style="padding: 10px">
               <div class="card" style="width: 18rem">
                 <div class="card-body">
                   <h5 class="card-title"><%= Users.firstName %></h5>
-                  <h6 class="card-subtitle mb-2 text-muted">
-                    <%= Users.lastName %>
+                  <h6 class="card-subtitle mb-2"><%= Users.lastName %></h6>
+                  <h6
+                    name="focusUser"
+                    class="card-text text-muted"
+                    style="font-size: 13px"
+                  >
+                    <%= Users.userId %>
                   </h6>
-                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="btn btn-primary btn-sm">View</a>
+                  <button type="submit" class="btn btn-danger btn-sm">
+                    Delete User
+                  </button>
                 </div>
               </div>
             </div>
@@ -37,7 +45,7 @@
       <div class="row">
         <h2 style="padding: 10px">Bookings:</h2>
         <% Bookings.forEach(Bookings => { %>
-        <div class="col-lg">
+        <div class="col-lg-4">
           <div style="float: left">
             <div style="padding: 10px">
               <div class="card" style="width: 18rem">
@@ -46,7 +54,7 @@
                   <h6 class="card-subtitle mb-2 text-muted">
                     <%= Bookings.bookingUser %>
                   </h6>
-                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="btn btn-primary btn-sm">View Booking</a>
                 </div>
               </div>
             </div>
