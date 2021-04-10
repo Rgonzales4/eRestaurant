@@ -33,9 +33,15 @@
                     class="btn btn-primary btn-sm"
                     >View</a
                   >
-                  <button type="submit" class="btn btn-danger btn-sm">
-                    Delete User
-                  </button>
+                  <form
+                    action="/database/<%= Users.userId %>?_method=DELETE"
+                    method="POST"
+                    class="d-inline"
+                  >
+                    <button type="submit" class="btn btn-danger btn-sm">
+                      Delete User
+                    </button>
+                  </form>
                 </div>
               </div>
             </div>
