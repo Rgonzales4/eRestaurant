@@ -7,8 +7,9 @@ const { Model, Mongoose } = require('mongoose');
 
 router.get('/', checkAdmin, async (req, res) => {
   console.log('Database page opened');
-  const Users = await User.find().sort({ firstName: 'asc' });
-  const Bookings = await Booking.find().sort({ bookingDate: 'asc' });
+  let Users = await User.find().sort({ firstName: 'asc' });
+  let Bookings = await Booking.find().sort({ bookingDate: 'asc' });
+  console.log(Bookings);
   res.render('database', { req: req, Users: Users, Bookings: Bookings });
 });
 

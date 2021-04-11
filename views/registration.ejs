@@ -15,31 +15,31 @@
   </style> -->
 
   <style type="text/css">
-    body{
-      background-color: #0C2A0a;
+    body {
+      background-color: #0c2a0a;
       color: rgb(255, 245, 235);
       text-align: center;
     }
 
-    .header{
-      height: 450px;    
-      background-color: #0C2A0a;
+    .header {
+      height: 450px;
+      background-color: #0c2a0a;
       color: rgb(255, 245, 235);
     }
 
-    .title{
+    .title {
       padding-top: 70px;
       font-size: 150px;
       color: rgb(255, 245, 235);
     }
 
-    .description{
+    .description {
       padding-top: 12px;
       padding-left: 10%;
       padding-right: 10%;
     }
 
-    .regform{
+    .regform {
       background-color: rgb(255, 245, 235);
       margin-top: 40px;
       padding-bottom: 40px;
@@ -47,70 +47,61 @@
       margin-right: 30%;
     }
 
-    .col-3{
-      width: 100%;  
+    .col-3 {
+      width: 100%;
       background-color: rgb(255, 245, 235);
       font-size: 20px;
       padding-top: 5px;
-      color: #0C2A0a;
+      color: #0c2a0a;
     }
 
-    .col-sm-10{
+    .col-sm-10 {
       margin-left: 20%;
       width: 60%;
       margin-top: 20px;
     }
 
-    .subbtn{
+    .subbtn {
       padding: 20px;
     }
 
-    .footer{
-    height: 100px;
-    background-color: rgb(59, 59, 59);
-    padding: 0px;
-    margin: 0px;
-    color: white;
-    text-align: center;
-}
-
+    .footer {
+      height: 100px;
+      background-color: rgb(59, 59, 59);
+      padding: 0px;
+      margin: 0px;
+      color: white;
+      text-align: center;
+    }
   </style>
 
   <body>
-
     <div class="header">
       <div class="title">Sign Up</div>
-      <p class="description">We are open 7 days for lunch and dinner. Trading hours: lunch from 12:00 pm and dinner from 6:00 pm. A 2 hour seating period applies to all reservations.</p>
-      <p class="description"> </p>
-     </div>
-    <form action="/registration" method="post" class="regform">
-      
+      <p class="description">
+        We are open 7 days for lunch and dinner. Trading hours: lunch from 12:00
+        pm and dinner from 6:00 pm. A 2 hour seating period applies to all
+        reservations.
+      </p>
+      <p class="description"></p>
+    </div>
+    <!-- <form action="/registration" method="POST" class="regform"> OLD REGISTRATION METHOD, BEFORE EMAIL VERIFICATION-->
+    <form action="/registration/processing" method="get" class="regform">
       <div class="col-3">
-        <label for="firstName" class="col-md-3 col-form-label">First Name</label>
+        <label for="firstName" class="col-md-3 col-form-label"
+          >First Name</label
+        >
         <div class="col-sm-10">
-          <input
-            type="String"
-            class="form-control"
-            name="firstName"
-            required
-          />
+          <input type="String" class="form-control" name="firstName" required />
         </div>
       </div>
-
-
 
       <div class="col-3">
         <label for="lastName" class="col-md-3 col-form-label">Last Name</label>
         <div class="col-sm-10">
-          <input
-            type="String"
-            class="form-control"
-            name="lastName"
-            required
-          />
+          <input type="String" class="form-control" name="lastName" required />
         </div>
       </div>
-
 
       <div class="col-3">
         <label for="staticEmail" class="col-md-3 col-form-label">Email</label>
@@ -125,33 +116,57 @@
         </div>
       </div>
 
-
       <div class="col-3">
-        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+        <label for="inputPassword" class="col-sm-2 col-form-label"
+          >Password</label
+        >
       </div>
 
+      <div class="col-sm-10">
+        <input
+          type="password"
+          class="form-control"
+          id="inputPassword"
+          name="password"
+          required
+        />
+        <div id="validationServerUsernameFeedback" class="invalid-feedback">
+          Please enter password
+        </div>
+      </div>
 
-        <div class="col-sm-10">
-          <input
-            type="password"
-            class="form-control"
-            id="inputPassword"
-            name="password"
-            required
-          />
-          <div id="validationServerUsernameFeedback" class="invalid-feedback">
-            Please enter password
-          </div>
-        </div>
+      <div style="padding-top: 10px; padding-bottom: 10px">
+        <button class="btn btn-outline-success me-2" type="submit">
+          Register
+        </button>
+      </div>
+      <div>
+        <span style="color: green"><%= successMessage%></span>
+        <span style="color: red"><%= failMessage%></span>
+        <span style="color: blue"></span>
+      </div>
+    </form>
+    <!-- <button class="btn btn-outline-success me-2" onclick="sendMail()">
+      Register
+    </button> -->
 
-        <div style="padding-top: 10px; padding-bottom: 10px;">
-          <button class="btn btn-outline-success me-2" type="submit">Register</button>
-        </div>
-        <div>
-          <span style="color: green;"><%= successMessage%></span>
-          <span style="color: red;"><%= failMessage%></span>
-        </div>
-        <!-- <div class="footer">footer placeholder</div> -->
+    <!-- <div class="footer">footer placeholder</div> -->
   </body>
 
+  <script>
+    // $(document).ready(function () {
+    //   $('#send_email').click(function () {
+    //     $('#message').text('Sending E-mail...Please wait');
+    //     $.get('http://localhost:3000/send', function (data) {
+    //       if (data == 'sent') {
+    //         $('#message')
+    //           .empty()
+    //           .html(
+    //             '<p>Email is been sent at ' + to + ' . Please check inbox !</p>'
+    //           );
+    //       }
+    //     });
+    //   });
+    // });
+  </script>
 </html>
