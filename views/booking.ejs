@@ -16,10 +16,10 @@
     <% Array.from(booking).forEach(b => { %> 
         <div class="card mt-2">
             <div class="card-body">
-                <h4 class="card-title"><%= b.bookingID %></h4>
-                <div class="card-title"><%= b.time.toLocaleDateString() %></div>
+                <h4 class="card-title"><%= b.time.toLocaleDateString() %></h4>
                 <div class="card-title"><%= b.allergyDescription %></div>
-                <div class="card-title"><%= b.bookingUser %></div>
+                <div class="card-title text-muted"><%= b.bookingUser %></div>
+                <div class="card-title text-muted">Reference ID: <%= b.bookingID %></div>
                 <a href="bookings/edit/<%= b.bookingID %>"
                 class="btn btn-info">Edit Booking</a>
                 <form action="/bookings/<%= b.bookingID %>?_method=DELETE" method="POST"
