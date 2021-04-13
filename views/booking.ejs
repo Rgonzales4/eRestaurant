@@ -17,7 +17,7 @@
         <div class="card mt-2">
             <div class="card-body">
                 <h4 class="card-title"><%= b.time.toLocaleDateString() %></h4>
-                <div class="card-title"><%= b.allergyDescription %></div>
+                <div class="card-title">Allergy Information: <%= b.allergyDescription %></div>
                 <div class="card-title text-muted"><%= b.bookingUser %></div>
                 <div class="card-title text-muted">Reference ID: <%= b.bookingID %></div>
                 <a href="bookings/edit/<%= b.bookingID %>"
