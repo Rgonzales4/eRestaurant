@@ -4,7 +4,6 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 var nodemailer = require('nodemailer');
-const url = require('url');
 
 const User = require('./../models/users');
 
@@ -47,8 +46,8 @@ router.get('/', checkNotAuthenticated, (req, res) => {
 const smtpTransport = nodemailer.createTransport('SMTP', {
   service: 'Gmail',
   auth: {
-    user: process.env.EMAIL_ADDRESS,
-    pass: process.env.EMAIL_ADDRESS_PASSWORD,
+    user: process.env.EMAIL_ADDRESS, // need to change this to the restaurant email
+    pass: process.env.EMAIL_ADDRESS_PASSWORD, // need to change this to the restaurant password
   },
 });
 
