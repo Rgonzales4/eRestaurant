@@ -2,6 +2,8 @@ const express = require('express');
 const Booking = require('../models/booking');
 const router = express.Router();
 const mongoose = require('mongoose');
+const { db } = require('../models/booking');
+const crypto = require('crypto')
 
 router.get('/', checkAuthenticated, async (req, res) => {
   const booking = await Booking.find({ bookingUser: req.user.email });
@@ -29,7 +31,8 @@ router.get('/edit/:bookingID', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const newID = (await Booking.count({})) + 1;
+  const newID = crypto.randomBytes(6).toString("hex")
+
   console.log(newID);
   let booking = new Booking({
     bookingID: newID,
