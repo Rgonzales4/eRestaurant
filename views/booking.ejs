@@ -23,10 +23,10 @@
       <% Array.from(booking).forEach(b => { %>
       <div class="card mt-2">
         <div class="card-body">
-          <div class="card-title"><%= b.bookingDate.toDateString() %></div>
+          <h4 class="card-title"><%= b.bookingDate.toDateString() %></h4>
           <div class="card-title">Allergy Information: <%= b.allergyDescription %></div>
           <div class="card-title"><%= b.bookingUserEmail %></div>
-          <h4 class="card-title">Reference ID: <%= b.bookingID %></h4>
+          <div class="card-title">Reference ID: <%= b.bookingID %></div>
           <a href="bookings/edit/<%= b.bookingID %>" class="btn btn-info"
             >Edit Booking</a
           >
@@ -38,5 +38,7 @@
             <button type="submit" class="btn btn-danger">Remove Booking</button>
           </form>
     </div>
+    </div>
+    <% })%>
   </body>
 </html>
