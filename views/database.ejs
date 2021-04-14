@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('partials/navbar') %>
+    <title>Database</title>
+  </head>
+  <body>
+    <h1 style="padding: 20px">Database accessed</h1>
+
+    <div class="container">
+      <div class="row">
+        <h2 style="padding: 10px">Registered Users:</h2>
+        <% Users.forEach(Users => { %>
+        <div class="col-lg-4">
+          <div style="float: left">
+            <div style="padding: 10px">
+              <div class="card" style="width: 18rem">
+                <div class="card-body">
+                  <h5 class="card-title"><%= Users.firstName %></h5>
+                  <h6 class="card-subtitle mb-2"><%= Users.lastName %></h6>
+                  <h6
+                    name="userFocus"
+                    class="card-text text-muted"
+                    style="font-size: 13px"
+                  >
+                    <%= Users.userId %>
+                  </h6>
+                  <a
+                    href="database/account/<%= Users.userId%>"
+                    class="btn btn-primary btn-sm"
+                    >View</a
+                  >
+                  <form
+                    action="/database/<%= Users.userId %>?_method=DELETE"
+                    method="POST"
+                    class="d-inline"
+                  >
+                    <button type="submit" class="btn btn-danger btn-sm">
+                      Delete User
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%})%>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <h2 style="padding: 10px">Bookings:</h2>
+        <% Bookings.forEach(Bookings => { %>
+        <div class="col-lg-4">
+          <div style="float: left">
+            <div style="padding: 10px">
+              <div class="card" style="width: 18rem">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <%= Bookings.bookingDate.toDateString() %>
+                  </h5>
+                  <h6 class="card-subtitle mb-2">
+                    <%= Bookings.bookingUserFirstName %> <%=
+                    Bookings.bookingUserLastName %>
+                  </h6>
+                  <h6 class="card-subtitle mb-2 text-muted">
+                    <%= Bookings.bookingID %>
+                  </h6>
+                  <a href="#" class="btn btn-primary btn-sm">View Booking</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%})%>
+      </div>
+    </div>
+  </body>
+</html>
