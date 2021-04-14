@@ -35,7 +35,7 @@ router.delete('/:userId', checkAdmin, async (req, res) => {
   console.log('User Deletion output Statement');
   const userAccount = await User.findOne({ userId: req.params.userId });
   Booking.deleteMany(
-    { bookingUser: userAccount.email },
+    { bookingUser: userAccount.bookingUserEmail },
     function (err, result) {
       if (err) {
         console.log(err);
