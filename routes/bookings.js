@@ -29,11 +29,11 @@ router.get('/edit/:bookingID', checkAuthenticated, async (req, res) => {
   });
 });
 
-router.post('/', checkAuthenticated, async (req, res) => {
-  const newID = (await Booking.count({})) + 1; // Need to change the value of the ID
+router.post('/', async (req, res) => {
+  const newID = crypto.randomBytes(6).toString('hex');
   console.log(newID);
   let booking = new Booking({
-    bookingID: crypto.randomBytes(8).toString('hex'),
+    bookingID: newID,
     bookingDate: req.body.bookingDate,
     bookingNumber: req.body.bookingNumber,
     allergyDescription: req.body.allergyDescription,
@@ -50,6 +50,17 @@ router.post('/', checkAuthenticated, async (req, res) => {
     // Need to account for time of the reservation
     bookingDate: req.body.bookingDate,
   });
+
+  let confirmBookingDateNumber = await Booking.find({
+    time: req.body.bookingDate,
+  });
+
+  console.log(
+    confirmBookingDateNumber.forEach((b) => {
+      (i = b.bookingNumber), (j = b.bookingNumber + i);
+      return j;
+    })
+  );
 
   if (confirmBookingID) {
     res.render('createBooking', {
@@ -77,6 +88,14 @@ router.post('/', checkAuthenticated, async (req, res) => {
       booking: booking,
     });
     console.log('wrong date');
+  } else if (req.body.bookingNumber < 0) {
+    res.render('createBooking', {
+      successMessage: '',
+      failMessage: 'Please enter a valid number',
+      req: req,
+      booking: booking,
+    });
+    console.log('too many people');
   } else {
     booking = await booking.save();
     console.log('booking saved to databases');
