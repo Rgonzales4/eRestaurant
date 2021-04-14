@@ -20,7 +20,7 @@ router.get('/createBooking', checkAuthenticated, (req, res) => {
 
 router.get('/edit/:bookingID', async (req, res) => {
   const booking = await Booking.findOne({ bookingID: req.params.bookingID })
-  res.render('edit', { req: req, successMessage: '', failMessage: '', booking: booking })
+  res.render('editBooking', { req: req, successMessage: '', failMessage: '', booking: booking })
 })
 
 router.post('/', async (req, res) => {
