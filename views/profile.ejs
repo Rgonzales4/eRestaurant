@@ -48,7 +48,9 @@
       </div>
       <% if (req.user.isAdmin == true){%>
       <div class="col-lg-4" style="margin-top: 10px">
-        <a href="#" class="btn btn-primary btn-sm">Edit Account</a>
+        <a href="/profile/editProfile" class="btn btn-primary btn-sm"
+          >Edit Account</a
+        >
         <!-- <form
           action="database/account/<%= user.userId %>?_method=DELETE"
           method="POST"

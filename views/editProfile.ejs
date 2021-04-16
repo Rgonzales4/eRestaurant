@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Profile</title>
+    <%- include('partials/navbar') %>
+  </head>
+  <body>
+    <form action="/profile/editProfile" method="POST" class="regform">
+      <div class="container-sm" style="padding: 50px">
+        <h2>Edit User Profile</h2>
+
+        <% if (user.isAdmin == true){%>
+        <label style="color: green; padding: 10px">Admin Account</label>
+        <% } %>
+
+        <h6 class="text-muted" style="padding: 10px">
+          Email and User ID cannot be changed
+        </h6>
+        <div class="row">
+          <div class="col-2">
+            <div class="row">
+              <label class="text-muted">Email</label>
+            </div>
+            <div class="row">
+              <label class="text-muted">User ID</label>
+            </div>
+            <div class="row">
+              <label class="text-muted">First Name</label>
+            </div>
+            <div class="row" style="padding-top: 10px">
+              <label class="text-muted">Last Name</label>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="row g-3">
+              <label><%= user.email%></label>
+            </div>
+            <div class="row g-3">
+              <label><%= user.userId%></label>
+            </div>
+            <div class="row g-3">
+              <input
+                type="String"
+                class="form-control"
+                name="firstName"
+                value="<%= user.firstName%>"
+                required
+              />
+            </div>
+            <div class="row g-3">
+              <input
+                type="String"
+                class="form-control"
+                name="lastName"
+                value="<%= user.lastName%>"
+                required
+              />
+            </div>
+          </div>
+        </div>
+        <div style="padding-top: 10px; padding-bottom: 10px">
+          <button class="btn btn-outline-primary me-2" type="submit">
+            Update Profile
+          </button>
+        </div>
+      </div>
+    </form>
+  </body>
+</html>
