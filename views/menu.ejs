@@ -8,7 +8,38 @@
     <title>Menu</title>
   </head>
   <body>
+<<<<<<< HEAD
+    <div class="container">
+      <h1 class="mb-4">Here is the Menu:</h1>
+      <% Array.from(menu_item).forEach(m => { %>
+      <div class="card mt-2">
+        <div class="card-body">
+          <h4 class="card-title"><%= m.ItemName %></h4>
+          <div class="card-title"><%= m.ItemDescription %></div>
+          <a href="menu/view/<%= m.bookingID %>" class="btn btn-info"
+            >Edit Booking</a
+          >
+        </div>
+      </div>
+      <% }) %>
+    </div>
+=======
+<<<<<<< HEAD
+    <h1 class="mb-4">Here is the Menu:</h1>
+    <% Array.from(menu_item).forEach(m => { %> 
+      <div class="card mt-2">
+          <div class="card-body">
+              <h4 class="card-title"><%= m.ItemName %></h4>
+              <div class="card-title"><%= m.ItemDescription %></div>
+              <a href="menu/view/<%= m.bookingID %>"
+              class="btn btn-info">Edit Booking</a>
+          </div>
+      </div>
+      <% }) %>
+=======
 
     
+>>>>>>> b6a3bc955db4a79b1df2452ab9a1effde43cc879
+>>>>>>> af96d902f16af4021670b5e50ff3c473f62736fa
   </body>
 </html>
