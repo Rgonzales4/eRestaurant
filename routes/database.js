@@ -3,14 +3,11 @@ const router = express.Router();
 
 const User = require('../models/users');
 const Booking = require('../models/booking');
-const methodOverride = require('method-override');
-router.use(methodOverride('_method'));
 
 router.get('/', checkAdmin, async (req, res) => {
   console.log('Database page opened');
   let Users = await User.find().sort({ firstName: 'asc' });
   let Bookings = await Booking.find().sort({ bookingDate: 'asc' });
-  //console.log(Bookings);
   res.render('database', { req: req, Users: Users, Bookings: Bookings });
 });
 
@@ -48,6 +45,7 @@ router.post('/account/:userId/editProfile', checkAdmin, async (req, res) => {
   res.redirect('/database');
 });
 
+//VIEW BOOKING DETAILS
 router.get('/booking/:bookingID', checkAdmin, async (req, res) => {
   const bookingDetails = await Booking.findOne({
     bookingID: req.params.bookingID,
