@@ -1,28 +1,63 @@
-<!-- <% booking.forEach(booking => { %> 
-    <div class="card mt-2">
-        <div class="card-body">
-            <h4 class="card-title"><%= Booking.Time %></h4>
-            <div class="card-title"><%= Booking.BookingUser %></div>
-        </div>
-    </div>
-    <% }) %> -->
-
     <!--<% if (messages.error) { %> <%= messages.error%> <% } %>-->
 
-    <!--router.get('/', (req, res) => {
-  console.log('Booking page opened');
-  res.render('booking', { req: req, booking : new Booking()});
-});-->
+  <!--var date1 = Date.now
+  var date2 = req.body.bookingDate
+  else if (req.body.bookingDate < date1){
+    res.render('createBooking', {
+      successMessage: '',
+      failMessage: 'Please input a valid date',
+      req: req,
+      booking: booking,
+    });
+  } 
 
-<!-- <div class="col-3">
-        <label for="bookingID" class="col-md-3 col-form-label">Booking ID</label>
-        <div class="form-group">
-          <input
-            type="Number"
-            class="form-control"
-            name="bookingID"
-            value="<%= booking.bookingID %>"
-            required
-          />
-        </div>
-      </div>-->
+-->  
+
+<!-- function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
+}
+
+router.put('/:id', (req, res) => {
+
+})
+
+router.delete('/:bookingID', async (req, res) => {
+  const deleteBookingID = req.params.bookingID;
+  await Booking.findOneAndDelete(deleteBookingID); 
+  res.redirect('/bookings');
+  console.log('Booking ' + deleteBookingID + ' has been deleted');
+})
+
+function checkIfEmpty(){
+  Booking.countDocuments(function (err, count) {
+    if (!err && count === 0) {
+        return true
+    }
+    else {return false}
+})
+}
+
+async function generateNewID() {
+  if (checkIfEmpty == true){
+    let newID = 1
+    return newID
+  }
+  else {
+    let newestBooking = await Booking.findOne().sort({bookingID: -1})
+    return newestBooking.then(data => {data.bookingID + 1})
+  }
+
+}
+
+
+-->
+<!--} else if (confirmBookingDate) {
+    res.render('createBooking', {
+      successMessage: '',
+      failMessage: 'Booking already reserved for this date',
+      req: req,
+      booking: booking,
+    });-->

@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 const users = require('./users');
 const Schema = mongoose.Schema;
+const crypto = require('crypto')
 
 const BookingSchema = new Schema({
   bookingID: {
-    type: Number,
+    type: String,
     required: true,
   },
   bookingUserEmail: {

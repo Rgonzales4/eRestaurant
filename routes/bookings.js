@@ -2,6 +2,8 @@ const express = require('express');
 const Booking = require('../models/booking');
 const router = express.Router();
 const mongoose = require('mongoose');
+const { db } = require('../models/booking');
+const crypto = require('crypto')
 
 router.get('/', checkAuthenticated, async (req, res) => {
   const booking = await Booking.find({ bookingUser: req.user.email });
@@ -51,6 +53,9 @@ router.post('/', checkAuthenticated, async (req, res) => {
     bookingDate: req.body.bookingDate,
   });
 
+  let confirmBookingDateNumber = await Booking.find({
+    time: req.body.bookingDate
+  })
   if (confirmBookingID) {
     res.render('createBooking', {
       successMessage: '',
@@ -68,6 +73,16 @@ router.post('/', checkAuthenticated, async (req, res) => {
       booking: booking,
     });
     console.log('too many people');
+
+   } else if (req.body.bookingNumber < 0) {
+      res.render('createBooking', {
+        successMessage: '',
+        failMessage: 'Please enter a valid number',
+        req: req,
+        booking: booking,
+      });
+      console.log('too many people');
+
   } else if (confirmBookingDate) {
     // Not finalised yet -- need to include a time slot
     res.render('createBooking', {
@@ -77,6 +92,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
       booking: booking,
     });
     console.log('wrong date');
+
   } else {
     booking = await booking.save();
     console.log('booking saved to databases');
