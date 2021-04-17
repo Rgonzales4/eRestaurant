@@ -13,7 +13,7 @@
     <div class="container">
       <div class="row">
         <h2 style="padding: 10px">Registered Users:</h2>
-        <% Users.forEach(Users => { %>
+        <% Users.forEach(Users => { %> <% if(!Users.isAdmin) { %>
         <div class="col-lg-4">
           <div style="float: left">
             <div style="padding: 10px">
@@ -47,7 +47,7 @@
             </div>
           </div>
         </div>
-        <%})%>
+        <%}%> <%})%>
       </div>
     </div>
 
@@ -75,16 +75,6 @@
                     class="btn btn-primary btn-sm"
                     >View Booking</a
                   >
-                  <form
-                    action="/database/<%= Bookings.bookingID %>?_method=DELETE"
-                    method="POST"
-                    class="d-inline"
-                  >
-                <!-- NOT FINISHED -->
-                    <button type="submit" class="btn btn-danger btn-sm">
-                      Delete Booking
-                    </button>
-                  </form>
                 </div>
               </div>
             </div>
