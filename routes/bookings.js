@@ -79,6 +79,16 @@ router.post('/', async (req, res) => {
       booking: booking,
     });
     console.log('too many people');
+
+   } else if (req.body.bookingNumber < 0) {
+      res.render('createBooking', {
+        successMessage: '',
+        failMessage: 'Please enter a valid number',
+        req: req,
+        booking: booking,
+      });
+      console.log('too many people');
+
   } else if (confirmBookingDate) {
     // Not finalised yet -- need to include a time slot
     res.render('createBooking', {
