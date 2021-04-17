@@ -47,6 +47,7 @@ router.post('/account/:userId/editProfile', checkAdmin, async (req, res) => {
   res.redirect('/database');
 });
 
+//VIEW BOOKING DETAILS
 router.get('/booking/:bookingID', checkAdmin, async (req, res) => {
   const bookingDetails = await Booking.findOne({
     bookingID: req.params.bookingID,

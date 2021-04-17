@@ -29,7 +29,6 @@ router.get('/edit/:bookingID', checkAuthenticated, async (req, res) => {
   });
 });
 
-
 router.post('/', checkAuthenticated, async (req, res) => {
   const newID = crypto.randomBytes(6).toString('hex');
   console.log(newID);
@@ -97,7 +96,6 @@ router.post('/', checkAuthenticated, async (req, res) => {
       booking: booking,
     });
     console.log('wrong date');
-
   } else if (req.body.bookingNumber < 0) {
     res.render('createBooking', {
       successMessage: '',
@@ -106,7 +104,6 @@ router.post('/', checkAuthenticated, async (req, res) => {
       booking: booking,
     });
     console.log('too many people');
-
   } else {
     booking = await booking.save();
     console.log('booking saved to databases');
@@ -118,14 +115,6 @@ router.post('/', checkAuthenticated, async (req, res) => {
     });
   }
 });
-
-
-function checkAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/login');
-}
 
 router.delete('/:bookingID', async (req, res) => {
   const deleteBookingID = req.params.bookingID;
