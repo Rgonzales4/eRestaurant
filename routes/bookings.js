@@ -4,7 +4,7 @@ const router = express.Router();
 const crypto = require('crypto');
 
 router.get('/', checkAuthenticated, async (req, res) => {
-  const booking = await Booking.find({ bookingUser: req.user.email });
+  const booking = await Booking.find({ bookingUserEmail: req.user.email });
   res.render('booking', { req: req, booking: booking });
 });
 
@@ -28,6 +28,7 @@ router.get('/edit/:bookingID', checkAuthenticated, async (req, res) => {
     booking: booking,
   });
 });
+
 
 router.post('/', checkAuthenticated, async (req, res) => {
   const newID = crypto.randomBytes(6).toString('hex');
@@ -54,6 +55,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
   let confirmBookingDateNumber = await Booking.find({
     time: req.body.bookingDate,
   });
+
   console.log(
     confirmBookingDateNumber.forEach((b) => {
       (i = b.bookingNumber), (j = b.bookingNumber + i);
@@ -95,6 +97,16 @@ router.post('/', checkAuthenticated, async (req, res) => {
       booking: booking,
     });
     console.log('wrong date');
+
+  } else if (req.body.bookingNumber < 0) {
+    res.render('createBooking', {
+      successMessage: '',
+      failMessage: 'Please enter a valid number',
+      req: req,
+      booking: booking,
+    });
+    console.log('too many people');
+
   } else {
     booking = await booking.save();
     console.log('booking saved to databases');
@@ -106,6 +118,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
     });
   }
 });
+
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {

@@ -33,9 +33,11 @@
     "mongoose": "^5.12.3",
     "mongoose-auto-increment": "^5.0.1",
     "mongoose-sequence": "^5.3.1",
+    "nodemailer": "^0.7.1",
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "restful": "^0.4.5"
+    "restful": "^0.4.5",
+    "xoauth2": "^1.2.0"
   }
 }

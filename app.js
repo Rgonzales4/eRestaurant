@@ -17,7 +17,6 @@ const bookingRouter = require('./routes/bookings');
 const databaseRouter = require('./routes/database');
 const profileRouter = require('./routes/profile');
 
-
 const Booking = require('./models/booking');
 
 //EXPRESS setup

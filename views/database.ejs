@@ -13,7 +13,7 @@
     <div class="container">
       <div class="row">
         <h2 style="padding: 10px">Registered Users:</h2>
-        <% Users.forEach(Users => { %>
+        <% Users.forEach(Users => { %> <% if(!Users.isAdmin) { %>
         <div class="col-lg-4">
           <div style="float: left">
             <div style="padding: 10px">
@@ -47,7 +47,7 @@
             </div>
           </div>
         </div>
-        <%})%>
+        <%}%> <%})%>
       </div>
     </div>
 
@@ -70,7 +70,11 @@
                   <h6 class="card-subtitle mb-2 text-muted">
                     <%= Bookings.bookingID %>
                   </h6>
-                  <a href="#" class="btn btn-primary btn-sm">View Booking</a>
+                  <a
+                    href="/database/booking/<%= Bookings.bookingID %>"
+                    class="btn btn-primary btn-sm"
+                    >View Booking</a
+                  >
                 </div>
               </div>
             </div>
