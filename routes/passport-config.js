@@ -36,7 +36,7 @@ function initialize(passport) {
 
   passport.serializeUser(function (user, done) {
     if (user != null) {
-      console.log('User id that logged in:', user.id);
+      console.log('User id that logged in:', user.userId);
       done(null, user.id);
     }
   });

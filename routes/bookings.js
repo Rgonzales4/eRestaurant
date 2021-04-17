@@ -18,9 +18,10 @@ router.get('/createBooking', checkAuthenticated, (req, res) => {
   });
 });
 
-router.get('/edit/:bookingID', async (req, res) => {
+router.get('/edit/:bookingID', checkAuthenticated, async (req, res) => {
+  // Not yet finished
   const booking = await Booking.findOne({ bookingID: req.params.bookingID });
-  res.render('edit', {
+  res.render('editBooking', {
     req: req,
     successMessage: '',
     failMessage: '',
@@ -28,24 +29,28 @@ router.get('/edit/:bookingID', async (req, res) => {
   });
 });
 
-router.post('/', async (req, res) => {
+router.post('/', checkAuthenticated, async (req, res) => {
   const newID = crypto.randomBytes(6).toString('hex');
-
   console.log(newID);
   let booking = new Booking({
     bookingID: newID,
-    time: req.body.bookingDate,
+    bookingDate: req.body.bookingDate,
     bookingNumber: req.body.bookingNumber,
     allergyDescription: req.body.allergyDescription,
-    bookingUser: req.user.email,
+    bookingUserEmail: req.user.email,
+    bookingUserFirstName: req.user.firstName,
+    bookingUserLastName: req.user.lastName,
   });
 
   let confirmBookingID = await Booking.findOne({
     bookingID: req.body.bookingID,
   });
+
   let confirmBookingDate = await Booking.findOne({
-    time: req.body.bookingDate,
+    // Need to account for time of the reservation
+    bookingDate: req.body.bookingDate,
   });
+
   let confirmBookingDateNumber = await Booking.find({
     time: req.body.bookingDate,
   });
@@ -65,6 +70,7 @@ router.post('/', async (req, res) => {
     });
     console.log('This booking already exists');
   } else if (req.body.bookingNumber > 150) {
+    // Need to keep a counter for the whole day
     res.render('createBooking', {
       successMessage: '',
       failMessage: 'Please book for less than 150 People',
@@ -80,6 +86,15 @@ router.post('/', async (req, res) => {
       booking: booking,
     });
     console.log('too many people');
+  } else if (confirmBookingDate) {
+    // Not finalised yet -- need to include a time slot
+    res.render('createBooking', {
+      successMessage: '',
+      failMessage: 'Booking already reserved for this date',
+      req: req,
+      booking: booking,
+    });
+    console.log('wrong date');
   } else {
     booking = await booking.save();
     console.log('booking saved to databases');
@@ -99,13 +114,18 @@ function checkAuthenticated(req, res, next) {
   res.redirect('/login');
 }
 
-router.put('/:id', (req, res) => {});
-
 router.delete('/:bookingID', async (req, res) => {
   const deleteBookingID = req.params.bookingID;
+  console.log('Booking ' + deleteBookingID + ' has been deleted');
   await Booking.findOneAndDelete(deleteBookingID);
   res.redirect('/bookings');
-  console.log('Booking ' + deleteBookingID + ' has been deleted');
 });
+
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
+}
 
 module.exports = router;

@@ -1,41 +1,43 @@
-
-   <div class="col-3">
-        <label for="bookingDate" class="col-md-3 col-form-label">Date of Booking</label>
-        <div class="form-group">
-          <input
-            type="Date"
-            class="form-control"
-            name="bookingDate"
-            value="<%= booking.time %>"
-            required
-          />
-        </div>
-      </div>
-      <div class="col-3">
-        <label for="bookingNumber" class="col-md-3 col-form-label">Number of People for Booking</label>
-        <div class="form-group">
-          <input
-            type="number"
-            class="form-control"
-            name="bookingNumber"
-            value="<%= booking.bookingNumber %>"
-            required
-          />
-        </div>
-      </div>
-      <div class="col-3">
-        <label for="allergyDescription" class="col-md-3 col-form-label">Any Allergy or Food Requirements</label>
-        <div class="form-group">
-          <input
-            type="String"
-            class="form-control"
-            name="allergyDescription"
-            value="<%= booking.allergyDescription %>"
-          />
-        </div>
-      </div>
-      <div class="mb-2"></div>
-      
+<div class="col-3">
+  <label for="bookingDate" class="col col-form-label">Date of Booking</label>
+  <div class="form-group">
+    <input
+      type="Date"
+      class="form-control"
+      name="bookingDate"
+      value="<%= booking.time %>"
+      required
+    />
+  </div>
+</div>
+<div class="col-3">
+  <label for="bookingNumber" class="col col-form-label"
+    >Number of People for Booking</label
+  >
+  <div class="form-group">
+    <input
+      type="number"
+      class="form-control"
+      name="bookingNumber"
+      value="<%= booking.bookingNumber %>"
+      required
+    />
+  </div>
+</div>
+<div class="col-3">
+  <label for="allergyDescription" class="col col-form-label"
+    >Any Allergy or Food Requirements</label
+  >
+  <div class="form-group">
+    <input
+      type="String"
+      class="form-control"
+      name="allergyDescription"
+      value="<%= booking.allergyDescription %>"
+    />
+  </div>
+</div>
+<div class="mb-2"></div>
 
 <button type="submit" class="btn btn-primary">Save</button>
 <a href="/bookings" type="button" class="btn btn-secondary">Cancel</a>
