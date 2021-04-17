@@ -9,16 +9,40 @@ router.get('/', checkAdmin, async (req, res) => {
   console.log('Database page opened');
   let Users = await User.find().sort({ firstName: 'asc' });
   let Bookings = await Booking.find().sort({ bookingDate: 'asc' });
-  console.log(Bookings);
+  //console.log(Bookings);
   res.render('database', { req: req, Users: Users, Bookings: Bookings });
 });
 
 router.get('/account/:userId', checkAdmin, async (req, res) => {
   const userAccount = await User.findOne({ userId: req.params.userId });
+  console.log(`View profile page: ${req.params}`);
   console.log(
-    `Accessing user profile: ${userAccount.firstName} ${userAccount.lastName}`
+    `Database accessing user profile: ${userAccount.firstName} ${userAccount.lastName}`
   );
-  res.render('profile', { req: req, user: userAccount });
+  res.render('profile', {
+    req: req,
+    user: userAccount,
+    adminEdit: true,
+    userID: req.params.userId,
+  });
+});
+
+router.get('/account/:userId/editProfile', checkAdmin, async (req, res) => {
+  const userAccount = await User.findOne({ userId: req.params.userId });
+  console.log(`Edit profile page: ${req.params}`);
+  console.log(
+    `Edit User ${userAccount.userId} ${userAccount.firstName} ${userAccount.lastName} page open`
+  );
+  res.render('editProfile', { req: req, user: userAccount, adminEdit: true });
+});
+
+//UPDATING USER PROFILE FUNCTION
+router.post('/account/:userId/editProfile', checkAdmin, async (req, res) => {
+  const filter = { userId: req.params.userId };
+  const update = { firstName: req.body.firstName, lastName: req.body.lastName };
+  console.log(update);
+  await User.findOneAndUpdate(filter, update);
+  res.redirect('/database');
 });
 
 router.get('/booking/:bookingID', checkAdmin, async (req, res) => {

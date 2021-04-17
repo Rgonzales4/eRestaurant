@@ -9,7 +9,7 @@ router.get('/', checkAuthenticated, async (req, res) => {
   console.log(
     `User ${userAccount.userId} ${userAccount.firstName} ${userAccount.lastName} page open`
   );
-  res.render('profile', { req: req, user: userAccount });
+  res.render('profile', { req: req, user: userAccount, adminEdit: false });
 });
 
 router.get('/editProfile', checkAuthenticated, async (req, res) => {
@@ -17,9 +17,11 @@ router.get('/editProfile', checkAuthenticated, async (req, res) => {
   console.log(
     `Edit User ${userAccount.userId} ${userAccount.firstName} ${userAccount.lastName} page open`
   );
-  res.render('editProfile', { req: req, user: userAccount });
+  res.render('editProfile', { req: req, user: userAccount, adminEdit: false });
 });
 
+
+//UPDATING THE PROFILE FUNCTION
 router.post('/editProfile', checkAuthenticated, async (req, res) => {
   const filter = { email: req.user.email };
   const update = { firstName: req.body.firstName, lastName: req.body.lastName };

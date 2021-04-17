@@ -8,7 +8,13 @@
     <%- include('partials/navbar') %>
   </head>
   <body>
-    <form action="/profile/editProfile" method="POST" class="regform">
+    <% if (adminEdit == false){%> 
+      <form action="/profile/editProfile" method="POST" class="regform">
+      <% } else if (adminEdit == true) { %>
+      <form action="/database/account/<%= user.userId%>/editProfile" method="POST" class="regform">
+
+    <% } %>
+    
       <div class="container-sm" style="padding: 50px">
         <h2>Edit User Profile</h2>
 

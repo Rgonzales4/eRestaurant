@@ -12,36 +12,36 @@ router.get('/', checkNotAuthenticated, (req, res) => {
   res.render('registration', { successMessage: '', failMessage: '', req: req });
 });
 
-//BEFORE IMPLEMENTATION OF AN EMAIL VERIFICATION:
-// router.post('/', async (req, res) => {
-//   //const { email, password, firstName, lastName } = req.body;
-//   const hashedPassword = await bcrypt.hash(req.body.password, 10);
-//   const newUser = new User({
-//     userId: Date.now().toString(),
-//     email: req.body.email,
-//     //password: req.body.password,
-//     password: hashedPassword,
-//     firstName: req.body.firstName,
-//     lastName: req.body.lastName,
-//     isAdmin: false,
-//   });
+//REGISTRATION WITHOUT EMAIL VERIFICATION:
+router.post('/', async (req, res) => {
+  //const { email, password, firstName, lastName } = req.body;
+  const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  const newUser = new User({
+    userId: Date.now().toString(),
+    email: req.body.email,
+    //password: req.body.password,
+    password: hashedPassword,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    isAdmin: false,
+  });
 
-//   let user = await User.findOne({ email: req.body.email });
-//   if (user) {
-//     res.render('registration', {
-//       failMessage: 'Email has already been registered',
-//       successMessage: '',
-//       req: req,
-//     });
-//   } else {
-//     await newUser.save();
-//     res.render('registration', {
-//       successMessage: 'Registration in process',
-//       failMessage: '',
-//       req: req,
-//     });
-//   }
-// });
+  let user = await User.findOne({ email: req.body.email });
+  if (user) {
+    res.render('registration', {
+      failMessage: 'Email has already been registered',
+      successMessage: '',
+      req: req,
+    });
+  } else {
+    await newUser.save();
+    res.render('registration', {
+      successMessage: 'Successfully Registered',
+      failMessage: '',
+      req: req,
+    });
+  }
+});
 
 const smtpTransport = nodemailer.createTransport('SMTP', {
   service: 'Gmail',

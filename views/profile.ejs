@@ -46,22 +46,19 @@
 
         <div class="col"></div>
       </div>
-      <% if (req.user.isAdmin == true){%>
       <div class="col-lg-4" style="margin-top: 10px">
+        <% if (adminEdit == false){%>
         <a href="/profile/editProfile" class="btn btn-primary btn-sm"
           >Edit Account</a
         >
-        <!-- <form
-          action="database/account/<%= user.userId %>?_method=DELETE"
-          method="POST"
-          class="d-inline"
+        <% } else if (adminEdit == true) { %>
+        <a
+          href="/database/account/<%= user.userId%>/editProfile"
+          class="btn btn-primary btn-sm"
+          >Edit Account</a
         >
-          <button type="submit" class="btn btn-danger btn-sm">
-            Delete User
-          </button>
-        </form> -->
+        <% } %>
       </div>
-      <% } %>
     </div>
   </body>
 </html>
