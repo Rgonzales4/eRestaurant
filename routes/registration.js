@@ -4,12 +4,12 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 
+const User = require('./../models/users');
+
 router.get('/', checkNotAuthenticated, (req, res) => {
   console.log('Registration page opened');
   res.render('registration', { successMessage: '', failMessage: '', req: req });
 });
-
-const User = require('./../models/users');
 
 router.post('/', async (req, res) => {
   //const { email, password, firstName, lastName } = req.body;
