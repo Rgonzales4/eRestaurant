@@ -9,7 +9,6 @@
   </head>
   <body>
     <div class="container">
-
       <h1 class="mb-4">Welcome To The Booking Page</h1>
       <div>
         <a
@@ -25,7 +24,9 @@
       <div class="card mt-2">
         <div class="card-body">
           <h4 class="card-title"><%= b.bookingDate.toDateString() %></h4>
-          <div class="card-title">Allergy Information: <%= b.allergyDescription %></div>
+          <div class="card-title">
+            Allergy Information: <%= b.allergyDescription %>
+          </div>
           <div class="card-title"><%= b.bookingUserEmail %></div>
           <div class="card-title">Reference ID: <%= b.bookingID %></div>
           <a href="bookings/edit/<%= b.bookingID %>" class="btn btn-info"
@@ -38,15 +39,9 @@
           >
             <button type="submit" class="btn btn-danger">Remove Booking</button>
           </form>
-<<<<<<< HEAD
-    </div>
-=======
-
         </div>
       </div>
       <% }) %>
->>>>>>> 91a3e0ce4a4150ddc831fda11a0daafbfc60e7bb
     </div>
-    <% })%>
   </body>
 </html>
