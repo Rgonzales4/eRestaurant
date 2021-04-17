@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Home</title>
-
     <%- include('partials/navbar') %>
 
 <style type="text/css">
@@ -71,6 +70,7 @@ h1{
     width: 70%;
     height: 100%;
     float: left;
+    padding-right: 20px;
 }
 
 .about h1{
@@ -99,10 +99,15 @@ h1{
     height: 100%;
     float: right;
     background-color: rgb(255, 245, 235);
+
+
 }
 
 .award p{
     text-align: center;
+
+
+
 }
 
 .history{
@@ -124,7 +129,6 @@ h1{
 }
 
 .historydesc{
-    font-style: italic;
     color: #0C2A0a;
     margin-top: 20px;
     margin-left: 120px;
@@ -148,6 +152,7 @@ h1{
     background-color: rgb(255, 245, 235);
     width: 100%;
     text-align: center;
+    padding: 80px;
 }
 
 .servicestxt{
@@ -184,9 +189,11 @@ h1{
         
         <img class="bannerimg" src="https://s3-ap-southeast-2.amazonaws.com/production.assets.merivale.com.au/wp-content/uploads/2019/08/28085906/little_felix_gallery7.jpg" alt="Header Image" style="width: 100%; height: 800px;">
         
+        
         <div class="bannertxt">
+            
             <div class="bannerhead">Le Bistrot D'Andre</div>
-            <p class="bannerdesc">Super cheesy company slogan or whatever</p>
+            <p class="bannerdesc">Feel the taste of french food</p>
         </div>
 
        
@@ -196,7 +203,7 @@ h1{
     <div class="history">
       <div class="historytxt">
           <div class="historyhead">Our History</div>
-          <p class="historydesc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+          <p class="historydesc">For over 26 years, it has been our pleasure to serve diners in Sydney with the finest food and wine in a stunning location. If you have yet to visit our beautiful restaurant and sample our delicious menu, we sincerely hope that will change in the near future. Whether you are looking for somewhere to have a really special romantic dinner in Sydney or are planning a family celebration and would like to hold it in a restaurant where great food, fine wines and fantastic service are guaranteed, you will not find a better venue anywhere in Sydney than Le Bistrot D'Andre.</p>
       </div>
 
   </div>
@@ -204,11 +211,13 @@ h1{
     <div class="philosophy">
         <div class="about">
             <h1>Our Philosophy</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+            <p>The best food in the city served in the best location makes Le Bistrot D'Andre the perfect dining venue for all types of occasions and the icing on the cake is our first-class front-of-house team. Friendly, polite and always professional, our waiting staff are there to ensure that the time you spend with us is enjoyable from start to finish and that everything about your meal is absolutely perfect. Every member of our waiting staff is fully trained and highly experienced, and shares our determination to ensure that each customer we welcome to Catalina has the dining experience of their life.</p>
         </div>
         <div class="award">
             <img src="https://s3-ap-southeast-2.amazonaws.com/production.assets.merivale.com.au/wp-content/uploads/2019/08/28085901/little_felix_gallery4.jpg" style="width: 100%;">
         </div>
+       
+        
 
     </div>
 
@@ -218,13 +227,18 @@ h1{
         
         <div class="servicestxt">
             <div class="serviceshead">Our Services</div>
-            <p class="servicedesc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-            <p>MAKE A BOOKING (this will be a button to the sign in page)</p>
+            <p class="servicedesc">The best food in the city served in the best location makes Le Bistrot D'Andre the perfect dining venue for all types of occasions and the icing on the cake is our first-class front-of-house team. Friendly, polite and always professional, our waiting staff are there to ensure that the time you spend with us is enjoyable from start to finish and that everything about your meal is absolutely perfect. Every member of our waiting staff is fully trained and highly experienced, and shares our determination to ensure that each customer we welcome to Le Bistrot D'Andre has the dining experience of their life.</p>
+            <p class="servicedesc">If you would like to experience the best fine dining in Sydney, call and make a reservation with us today. We promise you a truly memorable dining experience in beautiful surroundings, and we look forward to you becoming a much-valued regular at Le Bistrot D'Andre restaurant in the future.</p>
+            <form action="http://localhost:3000/login">
+                <input type="submit" value="Make a booking" />
+            </form>
+        
+            
         </div>
          
     </div>
 
 
-    <div class="footer">footer goes here</div>
+    <div class="footer">Le Bistrot D'Andre</div>
   </body>
 </html>
