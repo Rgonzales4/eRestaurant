@@ -29,7 +29,7 @@ router.get('/edit/:bookingID', checkAuthenticated, async (req, res) => {
   });
 });
 
-router.post('/', async (req, res) => {
+router.post('/', checkAuthenticated, async (req, res) => {
   const newID = crypto.randomBytes(6).toString('hex');
   console.log(newID);
   let booking = new Booking({
@@ -116,7 +116,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.delete('/:bookingID', async (req, res) => {
+router.delete('/:bookingID', checkAuthenticated, async (req, res) => {
   const deleteBookingID = req.params.bookingID;
   console.log('Booking ' + deleteBookingID + ' has been deleted');
   await Booking.findOneAndDelete(deleteBookingID);
