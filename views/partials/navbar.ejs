@@ -52,12 +52,16 @@
           Login / Sign Up
         </a>
         <% } else if (req.user.isAdmin == true){%>
-          <label style="padding-right: 10px;">Welcome, Admin <%= req.user.firstName%></label>
+          <label style="padding-right: 10px; margin-left: 10px;">Welcome, <a href="/profile">
+            Admin <%= req.user.firstName%>
+          </a></label>
           <form action="/logout?_method=DELETE" method="POST">
             <button class="btn btn-outline-danger me-2" type="submit">Log Out</button>
           </form>
         <% } else {%>
-        <label style="padding-right: 10px;"> Welcome, <%= req.user.firstName%> </label>
+          <label style="padding-right: 10px; margin-left: 10px;">Welcome, <a href="/profile">
+          <%= req.user.firstName%>
+        </a></label>
         <form action="/logout?_method=DELETE" method="POST">
           <button class="btn btn-outline-danger me-2" type="submit">Log Out</button>
         </form>

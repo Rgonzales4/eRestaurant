@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  console.log('Request for home recieved');
-  res.render('home');
+  console.log('System Message page opened');
+  res.render('message', { req: req, messageResult: ' ' });
 });
 
 module.exports = router;

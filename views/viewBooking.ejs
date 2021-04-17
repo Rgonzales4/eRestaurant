@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking Details</title>
+    <%- include('partials/navbar') %>
+  </head>
+  <body>
+    <div class="container-sm" style="padding: 50px">
+      <h2>Booking Details</h2>
+
+      <div class="row">
+        <div class="col-2">
+          <div class="row">
+            <label class="text-muted">Booking Date</label>
+          </div>
+          <div class="row">
+            <label class="text-muted">Booking User</label>
+          </div>
+          <div class="row">
+            <label class="text-muted">Booking Email</label>
+          </div>
+          <div class="row">
+            <label class="text-muted">Number of People</label>
+          </div>
+          <div class="row">
+            <label class="text-muted">Booking ID</label>
+          </div>
+          <div class="row">
+            <label class="text-muted">Description</label>
+          </div>
+        </div>
+
+        <div class="col-3">
+          <div class="row g-3">
+            <label><%= booking.bookingDate.toDateString()%></label>
+          </div>
+          <div class="row g-3">
+            <label
+              ><%= booking.bookingUserFirstName%> <%=
+              booking.bookingUserLastName%></label
+            >
+          </div>
+          <div class="row g-3">
+            <label><%= booking.bookingUserEmail%></label>
+          </div>
+          <div class="row g-3">
+            <label><%= booking.bookingNumber%></label>
+          </div>
+          <div class="row g-3">
+            <label><%= booking.bookingID%></label>
+          </div>
+          <div class="row g-3">
+            <label><%= booking.allergyDescription%></label>
+          </div>
+        </div>
+
+        <div class="col"></div>
+      </div>
+      <div style="padding-top: 10px">
+        <a href="#" class="btn btn-primary btn-sm">Edit Booking Details</a>
+        <form
+          action="/database/booking/<%= booking.bookingID %>?_method=DELETE"
+          method="POST"
+          class="d-inline"
+        >
+          <button type="submit" class="btn btn-danger btn-sm">
+            Delete Booking
+          </button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

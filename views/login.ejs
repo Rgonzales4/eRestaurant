@@ -144,11 +144,12 @@
           <button class="btn btn-outline-success me-2" type="submit">
             Login
           </button>
+          <div class="row"></div>
         </div>
-        <label name="Warning" value=""></label>
         <span style="color: red">
           <% if (messages.error) { %> <%= messages.error%> <% } %>
         </span>
+
         <!-- <div>
           <a href="/registration"> Don't have an account? Sign up now</a>
         </div> -->
@@ -156,8 +157,6 @@
     </form>
 
     <div class="signup">
-      <label name="Warning" value=""></label>
-
       <p>Don't have an account? <a href="/registration">Sign up now</a></p>
     </div>
 
