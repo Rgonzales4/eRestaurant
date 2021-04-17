@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const users = require('./users');
 const Schema = mongoose.Schema;
 
 const MenuSchema = new Schema({

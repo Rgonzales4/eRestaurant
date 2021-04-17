@@ -3,14 +3,13 @@ const router = express.Router();
 
 const User = require('../models/users');
 const Booking = require('../models/booking');
-const methodOverride = require('method-override');
-router.use(methodOverride('_method'));
+const MenuItem = require('../models/menu_item');
+const { Model, Mongoose } = require('mongoose');
 
 router.get('/', checkAdmin, async (req, res) => {
   console.log('Database page opened');
   let Users = await User.find().sort({ firstName: 'asc' });
   let Bookings = await Booking.find().sort({ bookingDate: 'asc' });
-  //console.log(Bookings);
   res.render('database', { req: req, Users: Users, Bookings: Bookings });
 });
 
