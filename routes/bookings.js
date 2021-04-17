@@ -1,9 +1,7 @@
 const express = require('express');
 const Booking = require('../models/booking');
 const router = express.Router();
-const mongoose = require('mongoose');
-const { db } = require('../models/booking');
-const crypto = require('crypto')
+const crypto = require('crypto');
 
 router.get('/', checkAuthenticated, async (req, res) => {
   const booking = await Booking.find({ bookingUser: req.user.email });
@@ -31,7 +29,7 @@ router.get('/edit/:bookingID', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const newID = crypto.randomBytes(6).toString("hex")
+  const newID = crypto.randomBytes(6).toString('hex');
 
   console.log(newID);
   let booking = new Booking({
@@ -49,15 +47,15 @@ router.post('/', async (req, res) => {
     time: req.body.bookingDate,
   });
   let confirmBookingDateNumber = await Booking.find({
-    time: req.body.bookingDate
-  })
-  console.log(confirmBookingDateNumber.forEach(
-    b =>{
-    i = b.bookingNumber,
-    j = b.bookingNumber + i
-    return j}
-    ))
-    
+    time: req.body.bookingDate,
+  });
+  console.log(
+    confirmBookingDateNumber.forEach((b) => {
+      (i = b.bookingNumber), (j = b.bookingNumber + i);
+      return j;
+    })
+  );
+
   if (confirmBookingID) {
     res.render('createBooking', {
       successMessage: '',
@@ -74,14 +72,14 @@ router.post('/', async (req, res) => {
       booking: booking,
     });
     console.log('too many people');
-   } else if (req.body.bookingNumber < 0) {
-      res.render('createBooking', {
-        successMessage: '',
-        failMessage: 'Please enter a valid number',
-        req: req,
-        booking: booking,
-      });
-      console.log('too many people');
+  } else if (req.body.bookingNumber < 0) {
+    res.render('createBooking', {
+      successMessage: '',
+      failMessage: 'Please enter a valid number',
+      req: req,
+      booking: booking,
+    });
+    console.log('too many people');
   } else {
     booking = await booking.save();
     console.log('booking saved to databases');
