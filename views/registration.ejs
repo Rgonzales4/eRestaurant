@@ -8,11 +8,11 @@
     <title>Registration</title>
   </head>
 
-  <style>
+  <!-- <style>
     #loginBtn {
       display: none;
     }
-  </style>
+  </style> -->
 
   <style type="text/css">
     body{
@@ -82,7 +82,7 @@
       <div class="title">Sign Up</div>
       <p class="description">We are open 7 days for lunch and dinner. Trading hours: lunch from 12:00 pm and dinner from 6:00 pm. A 2 hour seating period applies to all reservations.</p>
       <p class="description"> </p>
-     
+     </div>
     <form action="/registration" method="post" class="regform">
       
       <div class="col-3">
@@ -144,18 +144,14 @@
           </div>
         </div>
 
-      </form>
-
-        <div class="subbtn">
-          <button type="submit">Register</button>
+        <div style="padding-top: 10px; padding-bottom: 10px;">
+          <button class="btn btn-outline-success me-2" type="submit">Register</button>
         </div>
-       
-       
-        <div style="color: green;">
-          <%= message%>
+        <div>
+          <span style="color: green;"><%= successMessage%></span>
+          <span style="color: red;"><%= failMessage%></span>
         </div>
-
-        <div class="footer">footer placeholder</div>
-      
+        <!-- <div class="footer">footer placeholder</div> -->
   </body>
+
 </html>
