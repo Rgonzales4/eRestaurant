@@ -64,6 +64,16 @@ router.get('/booking/:bookingID', checkAdmin, async (req, res) => {
   res.render('viewBooking', { req: req, booking: bookingDetails });
 });
 
+//TOGGLE BOOKING
+router.post('/booking/:bookingID/update', checkAdmin, async (req, res) => {
+  const updateBooking = req.params.bookingID;
+  console.log('Booking ' + updateBooking + ' has been updated');
+  const filter = { bookingID: updateBooking };
+  const update = { isActive: false };
+  await Booking.findOneAndUpdate(filter, update);
+  res.redirect('/database');
+});
+
 //DELETE BOOKING
 router.delete('/booking/:bookingID', checkAdmin, async (req, res) => {
   console.log('Booking Deletion output Statement');
