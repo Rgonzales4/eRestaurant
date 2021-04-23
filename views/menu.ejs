@@ -9,6 +9,12 @@
   </head>
   <body>
     <h1 style="padding: 20px">Menu Items</h1>
+    <% if (user.isAdmin == true) {%> <% } %>
+    <div class="container">
+      <button class="btn btn-success">
+        <a href="menu/createMenuItem">Create Menu Item</a>
+      </button>
+    </div>
     <div class="container">
       <div class="row">
         <% if(menu_item) {%> <% Array.from(menu_item).forEach(m => { %>
