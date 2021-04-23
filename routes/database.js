@@ -10,8 +10,8 @@ router.get('/', checkAdmin, async (req, res) => {
   console.log('Database page opened');
   let Users = await User.find().sort({ firstName: 'asc' });
   let Bookings = await Booking.find().sort({ bookingDate: 'asc' });
-  let MenuItems = await MenuItem.find().sort({ itemID: 'asc' });
-  res.render('database', { req: req, Users: Users, Bookings: Bookings, MenuItems: MenuItems});
+  let MenuItems = await MenuItem.find().sort({itenMane: 'asc'});
+  res.render('database', { req: req, Users: Users, Bookings: Bookings, MenuItems: MenuItems });
 });
 
 //VIEW USER PROFILE
@@ -66,8 +66,8 @@ router.delete('/booking/:bookingID', checkAdmin, async (req, res) => {
   await Booking.findOneAndDelete(req.params.bookingID);
   const Users = await User.find().sort({ firstName: 'asc' });
   const Bookings = await Booking.find().sort({ bookingDate: 'asc' });
-  const MenuItems = await MenuItem.find().sort({ itemID: 'asc' });
-  res.render('database', { req: req, Users: Users, Bookings: Bookings, MenuItems: MenuItems});
+  let MenuItems = await MenuItem.find().sort({itenMane: 'asc'});
+  res.render('database', { req: req, Users: Users, Bookings: Bookings, MenuItems: MenuItems });
 });
 
 //DELETE USER
@@ -89,8 +89,8 @@ router.delete('/:userId', checkAdmin, async (req, res) => {
   await User.findByIdAndDelete(userAccount.id);
   const Users = await User.find().sort({ firstName: 'asc' });
   const Bookings = await Booking.find().sort({ bookingDate: 'asc' });
-  const MenuItems = await MenuItem.find().sort({ itemID: 'asc' });
-  res.render('database', { req: req, Users: Users, Bookings: Bookings, MenuItems: MenuItems});
+  let MenuItems = await MenuItem.find().sort({itenMane: 'asc'});
+  res.render('database', { req: req, Users: Users, Bookings: Bookings, MenuItems: MenuItems });
 });
 
 function checkAdmin(req, res, next) {

@@ -40,7 +40,9 @@ router.post('/', checkAuthenticated, async (req, res) => {
     bookingUserEmail: req.user.email,
     bookingUserFirstName: req.user.firstName,
     bookingUserLastName: req.user.lastName,
+    bookingMealTime: req.body.bookingMealTime,
   });
+  console.log(req.body.bookingMealTime)
 
   let confirmBookingID = await Booking.findOne({
     bookingID: req.body.bookingID,
@@ -52,15 +54,8 @@ router.post('/', checkAuthenticated, async (req, res) => {
   });
 
   let confirmBookingDateNumber = await Booking.find({
-    time: req.body.bookingDate,
+    bookingDate: req.body.bookingDate,
   });
-
-  console.log(
-    confirmBookingDateNumber.forEach((b) => {
-      (i = b.bookingNumber), (j = b.bookingNumber + i);
-      return j;
-    })
-  );
 
   if (confirmBookingID) {
     res.render('createBooking', {
