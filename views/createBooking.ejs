@@ -10,8 +10,8 @@
 
   <body>
     <div class="container">
-    <h1 class="mb-2">Create Booking</h1>
-    <% if(req.user){%>
+      <h1 style="padding: 20px">Create Booking</h1>
+      <!-- <% if(req.user){%>
     <div>
       <label
       for="bookingUser"
@@ -19,14 +19,14 @@
       value="<%- req.user.email%>">
     </label>
     </div>
-    <%}   %>
-    <div>
-      <span style="color: green;"><%= successMessage %></span>
-      <span style="color: red;"><%= failMessage %></span>
-    </div>
-    
-    <form action="/bookings" method="POST" style="margin: 20px">
-      <%- include('partials/_booking_form_fields') %>
+    <%}   %> -->
+      <div>
+        <span style="color: green"><%= successMessage %></span>
+        <span style="color: red"><%= failMessage %></span>
+      </div>
+
+      <form action="/bookings" method="POST" style="margin: 20px">
+        <%- include('partials/_booking_form_fields') %>
       </form>
     </div>
   </body>

@@ -40,7 +40,11 @@ router.post('/', checkAuthenticated, async (req, res) => {
     bookingUserEmail: req.user.email,
     bookingUserFirstName: req.user.firstName,
     bookingUserLastName: req.user.lastName,
+<<<<<<< HEAD
     bookingMealTime: req.body.bookingMealTime,
+=======
+    isActive: true,
+>>>>>>> roshelBranch
   });
   console.log(req.body.bookingMealTime)
 
@@ -111,11 +115,14 @@ router.post('/', checkAuthenticated, async (req, res) => {
   }
 });
 
-router.delete('/:bookingID', async (req, res) => {
-  const deleteBookingID = req.params.bookingID;
-  console.log('Booking ' + deleteBookingID + ' has been deleted');
-  await Booking.findOneAndDelete(deleteBookingID);
-  res.redirect('/bookings');
+router.post('/:bookingID', checkAuthenticated, async (req, res) => {
+  const cancelBooking = req.params.bookingID;
+  console.log('Booking ' + cancelBooking + ' has been cancelled');
+  const filter = { bookingID: cancelBooking };
+  const update = { isActive: false };
+  await Booking.findOneAndUpdate(filter, update);
+  const booking = await Booking.find({ bookingUserEmail: req.user.email });
+  res.render('booking', { req: req, booking: booking });
 });
 
 function checkAuthenticated(req, res, next) {

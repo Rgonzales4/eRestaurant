@@ -34,6 +34,9 @@
           <div class="row">
             <label class="text-muted">Booking Period</label>
           </div>
+          <div class="row">
+            <label class="text-muted">Active Booking</label>
+          </div>
         </div>
 
         <div class="col-3">
@@ -61,12 +64,26 @@
           <div class="row g-3">
             <label><%= booking.bookingMealTime %></label>
           </div>
+          <div class="row g-3">
+            <label><%= booking.isActive%></label>
+          </div>
         </div>
 
         <div class="col"></div>
       </div>
       <div style="padding-top: 10px">
         <a href="#" class="btn btn-primary btn-sm">Edit Booking Details</a>
+        <% if (booking.isActive) { %>
+        <form
+          action="/database/booking/<%= booking.bookingID %>/update"
+          method="POST"
+          class="d-inline"
+        >
+          <button type="submit" class="btn btn-danger btn-sm">
+            Cancel Booking
+          </button>
+        </form>
+        <% } %>
         <form
           action="/database/booking/<%= booking.bookingID %>?_method=DELETE"
           method="POST"

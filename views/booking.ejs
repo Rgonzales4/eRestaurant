@@ -8,7 +8,7 @@
     <title>Booking</title>
   </head>
   <body>
-    <div class="container">
+    <div class="container" style="padding: 20px">
       <h1 class="mb-4">Welcome To The Booking Page</h1>
       <div>
         <a
@@ -18,30 +18,54 @@
           >Create Booking</a
         >
       </div>
+    </div>
 
-      <h2 class="mb-2">Here are your current bookings:</h2>
-      <% Array.from(booking).forEach(b => { %>
-      <div class="card mt-2">
-        <div class="card-body">
-          <h4 class="card-title"><%= b.bookingDate.toDateString() %></h4>
-          <div class="card-title">
-            Allergy Information: <%= b.allergyDescription %>
+    <div class="container">
+      <div class="row">
+        <div class="col" style="padding: 20px">
+          <h2>Current bookings:</h2>
+          <% Array.from(booking).forEach(b => { %> <% if(b.isActive == true) {%>
+          <div class="card mt-2">
+            <div class="card-body">
+              <h4 class="card-title"><%= b.bookingDate.toDateString() %></h4>
+              <div class="card-title">Reference ID: <%= b.bookingID %></div>
+              <div class="card-title"><%= b.bookingUserEmail %></div>
+              <div class="card-title">
+                Allergy Information: <%= b.allergyDescription %>
+              </div>
+              <a href="bookings/edit/<%= b.bookingID %>" class="btn btn-info"
+                >Edit Booking</a
+              >
+              <form
+                action="/bookings/<%= b.bookingID %>"
+                method="POST"
+                class="d-inline"
+              >
+                <button type="submit" class="btn btn-danger">
+                  Remove Booking
+                </button>
+              </form>
+            </div>
           </div>
-          <div class="card-title"><%= b.bookingUserEmail %></div>
-          <div class="card-title">Reference ID: <%= b.bookingID %></div>
-          <a href="bookings/edit/<%= b.bookingID %>" class="btn btn-info"
-            >Edit Booking</a
-          >
-          <form
-            action="/bookings/<%= b.bookingID %>?_method=DELETE"
-            method="POST"
-            class="d-inline"
-          >
-            <button type="submit" class="btn btn-danger">Remove Booking</button>
-          </form>
+          <% } %> <% }) %>
+        </div>
+        <div class="col" style="padding: 20px">
+          <h2 class="mb-2">Previous bookings:</h2>
+          <% Array.from(booking).forEach(b => { %> <% if(b.isActive == false)
+          {%>
+          <div class="card mt-2">
+            <div class="card-body">
+              <h4 class="card-title"><%= b.bookingDate.toDateString() %></h4>
+              <div class="card-title">Reference ID: <%= b.bookingID %></div>
+              <div class="card-title"><%= b.bookingUserEmail %></div>
+              <div class="card-title">
+                Allergy Information: <%= b.allergyDescription %>
+              </div>
+            </div>
+          </div>
+          <% } %> <% }) %>
         </div>
       </div>
-      <% }) %>
     </div>
   </body>
 </html>
