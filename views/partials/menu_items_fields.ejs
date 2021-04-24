@@ -1,66 +1,153 @@
 <div class="container" style="padding: 20px">
   <h1>Create a Menu Item</h1>
-  <form>
-    <div class="container" style="padding: 20px">
-      <div class="form-group">
-        <label for="itemName">Dish Name</label>
-        <input
-          type="text"
-          class="form-control"
-          id="itemName"
-          placeholder="Input dish name"
-        />
-      </div>
+  <span style="color: red"><%= errorMessage%></span>
 
-      <div class="form-group">
-        <label for="itemDescription">Description</label>
-        <input
-          type="text"
-          class="form-control"
-          id="itemDescription"
-          placeholder="Input description"
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="itemIngredients">Ingredients</label>
-        <input
-          type="text"
-          class="form-control"
-          id="itemIngredients"
-          placeholder="Input ingredients"
-        />
-      </div>
-    </div>
-
-    <h5 style="margin-top: 10px">Time Category</h5>
-    <div class="container" style="padding: 20px">
+  <form action="/menu/createMenuItem" method="POST">
+    <div class="container">
       <div class="row">
-        <div class="form-check col">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value="Breakfast"
-            id="flexCheckDefault"
-          />
-          <label class="form-check-label" for="mealType">
-            Breakfast
-          </label>
+        <div class="col">
+          <h5 style="margin-top: 10px">Dish Details:</h5>
+          <div class="container">
+            <div class="col">
+              <div class="form-group">
+                <label for="itemName">Dish Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="itemName"
+                  placeholder="Input dish name"
+                  name="itemName"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="itemPrice">Dish Price</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text" id="itemPrice">$</span>
+                  <input
+                    type="number"
+                    class="form-control"
+                    step="any"
+                    min="0"
+                    id="itemPrice"
+                    name="itemPrice"
+                    oninput="check(this)"
+                    required
+                  />
+                </div>
+              </div>
+              <br />
+              <div class="form-group">
+                <label for="itemDescription">Description</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="itemDescription"
+                  placeholder="Input description"
+                  name="itemDescription"
+                  rows="9"
+                  required
+                ></textarea>
+              </div>
+              <br />
+              <div class="form-group">
+                <label for="itemIngredients">Ingredients</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="itemIngredients"
+                  placeholder="Input ingredients"
+                  name="itemIngredients"
+                  rows="5"
+                  required
+                ></textarea>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="form-check col">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value="LunchDinner"
-            id="flexCheckDefault"
-          />
-          <label class="form-check-label" for="mealType">
-            Lunch & Dinner
-          </label>
-        </div>
+        <div class="col">
+          <h5 style="margin-top: 20px">Food or Drink?</h5>
+          <div class="container">
+            <input type="radio" id="Food" name="isItFood" value="Food" />
+            <label for="Food">Food</label><br />
+            <input type="radio" id="Drink" name="isItFood" value="Drink" />
+            <label for="Drink">Drink</label><br />
+          </div>
+
+          <br />
+
+          <h5 style="margin-top: 20px">Time Category:</h5>
+          <div class="container">
+            <input
+              type="radio"
+              id="Breakfast"
+              name="mealType"
+              value="Breakfast"
+            />
+            <label for="Breakfast">Breakfast</label><br />
+            <input
+              type="radio"
+              id="Lunch"
+              name="mealType"
+              value="LunchDinner"
+            />
+            <label for="LunchDinner">Lunch & Dinner</label><br />
+          </div>
+
+          <br />
+
+          <h5 style="margin-top: 20px">Dietary Requirements:</h5>
+          <div class="container">
+            <input
+              type="checkbox"
+              id="dairyFree"
+              name="dairyFree"
+              value="true"
+            />
+            <label for="dairyFree">Dairy Free</label><br />
+            <input
+              type="checkbox"
+              id="glutenFree"
+              name="glutenFree"
+              value="true"
+            />
+            <label for="glutenFree">Gluten Free</label><br />
+            <input type="checkbox" id="nutFree" name="nutFree" value="true" />
+            <label for="nutFree">Nut Free</label><br />
+            <input
+              type="checkbox"
+              id="veganScum"
+              name="veganScum"
+              value="true"
+            />
+            <label for="veganScum">Vegan Scum</label><br />
+            <input
+              type="checkbox"
+              id="vegetarian"
+              name="vegetarian"
+              value="true"
+            />
+            <label for="vegetarian">Vegetarian</label><br />
+          </div>
+          <br />
+          <button type="submit" class="btn btn-primary">
+            Create Menu Item
+          </button>
+          <a href="/menu" class="btn btn-secondary">Cancel</a>
         </div>
       </div>
     </div>
   </form>
 </div>
+
+<script>
+  function check(input) {
+    if (input.value == 0) {
+      input.setCustomValidity('The number must not be zero.');
+    } else {
+      // input is fine -- reset the error message
+      input.setCustomValidity('');
+    }
+  }
+</script>

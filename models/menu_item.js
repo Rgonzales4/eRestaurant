@@ -9,8 +9,8 @@ const MenuSchema = new Schema({
 
   // Food = True, Drinks = False
   isItFood: {
-    type: Boolean,
-    requred: true,
+    type: String,
+    required: true,
   },
 
   itemName: {
@@ -42,26 +42,31 @@ const MenuSchema = new Schema({
   // Dietary Requirements:
   veganScum: {
     type: Boolean,
+    default: 'false',
     required: true,
   },
 
   glutenFree: {
     type: Boolean,
+    default: 'false',
     required: true,
   },
 
   nutFree: {
     type: Boolean,
+    default: 'false',
     required: true,
   },
 
   vegetarian: {
     type: Boolean,
+    default: 'false',
     required: true,
   },
 
   dairyFree: {
     type: Boolean,
+    default: 'false',
     required: true,
   },
 });

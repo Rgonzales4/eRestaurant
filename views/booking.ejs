@@ -28,6 +28,9 @@
           <div class="card mt-2">
             <div class="card-body">
               <h4 class="card-title"><%= b.bookingDate.toDateString() %></h4>
+              <p class="card-title text-muted">
+                <%= b.bookingMealTime %> Reservation
+              </p>
               <div class="card-title">Reference ID: <%= b.bookingID %></div>
               <div class="card-title"><%= b.bookingUserEmail %></div>
               <div class="card-title">

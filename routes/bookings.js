@@ -43,7 +43,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
     isActive: true,
     bookingMealTime: req.body.bookingMealTime,
   });
-  console.log(req.body.bookingMealTime)
+  console.log(req.body.bookingMealTime);
 
   let confirmBookingID = await Booking.findOne({
     bookingID: req.body.bookingID,
@@ -119,7 +119,7 @@ router.post('/:bookingID', checkAuthenticated, async (req, res) => {
   const update = { isActive: false };
   await Booking.findOneAndUpdate(filter, update);
   const booking = await Booking.find({ bookingUserEmail: req.user.email });
-  res.render('booking', { req: req, booking: booking });
+  res.redirect('/bookings');
 });
 
 function checkAuthenticated(req, res, next) {
