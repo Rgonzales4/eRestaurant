@@ -5,6 +5,9 @@ const User = require('../models/users');
 const Booking = require('../models/booking');
 const MenuItem = require('../models/menu_item');
 const { Model, Mongoose } = require('mongoose');
+const menuRouter = require('./menu');
+
+router.use('/menu', menuRouter);
 
 router.get('/', checkAdmin, async (req, res) => {
   console.log('Database page opened');

@@ -23,7 +23,7 @@
       <p><%= menuItem.itemIngredients%></p>
       <br />
     </div>
-    
+
     <% if (req.user && req.user.isAdmin == true) {%>
     <div class="container">
       <a
@@ -31,7 +31,11 @@
         class="btn btn-primary btn-sm"
         >Edit Menu Item</a
       >
-      <form action="#" method="POST" class="d-inline">
+      <form
+        action="/menu/<%= menuItem.itemID %>?_method=DELETE"
+        method="POST"
+        class="d-inline"
+      >
         <button type="submit" class="btn btn-danger btn-sm">Delete Item</button>
       </form>
     </div>

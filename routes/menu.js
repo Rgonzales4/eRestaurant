@@ -29,6 +29,7 @@ router.get('/editMenuItem/:itemID', checkAdmin, async (req, res) => {
   });
 });
 
+//CREATE MENU ITEMS
 router.post('/createMenuItem', checkAdmin, async (req, res) => {
   console.log('Menu Item being created:');
   const newMenuItem = new MenuItem({
@@ -58,6 +59,7 @@ router.post('/createMenuItem', checkAdmin, async (req, res) => {
   }
 });
 
+//EDIT MENU ITEMS
 router.post('/editMenuItem/:itemID', checkAdmin, async (req, res) => {
   const filter = { itemID: req.params.itemID };
   const update = {
@@ -75,6 +77,17 @@ router.post('/editMenuItem/:itemID', checkAdmin, async (req, res) => {
   };
   console.log(update);
   await MenuItem.findOneAndUpdate(filter, update);
+  res.redirect('/menu');
+});
+
+//DELETE MENU ITEM
+router.delete('/:itemID', checkAdmin, async (req, res) => {
+  console.log('Menu Item deletion output statement');
+  const deletingMenuItem = await MenuItem.findOne({
+    itemID: req.params.itemID,
+  });
+  console.log(`Menu Item ${deletingMenuItem.itemName} deleted`);
+  await MenuItem.findByIdAndDelete(deletingMenuItem.id);
   res.redirect('/menu');
 });
 
