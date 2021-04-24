@@ -32,7 +32,13 @@ router.get('/edit/:bookingID', checkAuthenticated, async (req, res) => {
 router.post('/', checkAuthenticated, async (req, res) => {
   const newID = crypto.randomBytes(6).toString('hex');
   let remainCapacity = 150;
-  console.log(newID);
+  var thisYear = new Date().getFullYear();
+  var thisMonth = new Date().getMonth();
+  var thisDay = new Date().getDay();
+  var todayDate = new Date();
+  var todayDate100 = new Date(thisYear + 100, thisMonth, thisDay)
+  var todayDate1000 = new Date(thisYear + 1000, thisMonth, thisDay)
+  console.log(todayDate);
   let booking = new Booking({
     bookingID: newID,
     bookingDate: req.body.bookingDate,
@@ -45,14 +51,10 @@ router.post('/', checkAuthenticated, async (req, res) => {
     isActive: true,
   });
   console.log(req.body.bookingMealTime)
+  let bookingDateFormatted = new Date(req.body.bookingDate)
 
   let confirmBookingID = await Booking.findOne({
     bookingID: req.body.bookingID,
-  });
-
-  let confirmBookingDate = await Booking.findOne({
-    // Need to account for time of the reservation
-    bookingDate: req.body.bookingDate,
   });
 
   var bookingByDay = await Booking.find({
@@ -82,6 +84,27 @@ router.post('/', checkAuthenticated, async (req, res) => {
     res.render('createBooking', {
       successMessage: '',
       failMessage: 'No spots available, please book for less than ' + otherCapacity + ' people',
+      req: req,
+      booking: booking,
+    });
+  } else if (bookingDateFormatted < todayDate) {
+    res.render('createBooking', {
+      successMessage: '',
+      failMessage: 'Please book for a future date',
+      req: req,
+      booking: booking,
+    });
+  } else if (bookingDateFormatted > todayDate1000) {
+      res.render('createBooking', {
+        successMessage: '',
+        failMessage: 'Come on, 1000 years, REALLY?!!',
+        req: req,
+        booking: booking,
+    });
+  } else if (bookingDateFormatted > todayDate100) {
+    res.render('createBooking', {
+      successMessage: '',
+      failMessage: 'Check back with us at the end of the century',
       req: req,
       booking: booking,
     });
