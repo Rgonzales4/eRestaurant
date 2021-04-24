@@ -50,12 +50,6 @@ router.post('/', checkAuthenticated, async (req, res) => {
     bookingUserEmail: req.user.email,
     bookingUserFirstName: req.user.firstName,
     bookingUserLastName: req.user.lastName,
-<<<<<<< HEAD
-    isActive: true,
-    bookingMealTime: req.body.bookingMealTime,
-  });
-  console.log(req.body.bookingMealTime);
-=======
     bookingMealTime: req.body.bookingMealTime,
     isActive: true,
   });
@@ -63,7 +57,6 @@ router.post('/', checkAuthenticated, async (req, res) => {
   let userBookings = await Booking.find({
     bookingUserEmail: req.user.email
   })
->>>>>>> kyrusBranch
 
   let confirmBookingID = await Booking.findOne({
     bookingID: req.body.bookingID,
@@ -204,14 +197,8 @@ router.post('/:bookingID', checkAuthenticated, async (req, res) => {
   const filter = { bookingID: cancelBooking };
   const update = { isActive: false };
   await Booking.findOneAndUpdate(filter, update);
-<<<<<<< HEAD
-  const booking = await Booking.find({ bookingUserEmail: req.user.email });
-  res.redirect('/bookings');
-});
-=======
   res.redirect('/bookings');
 }});
->>>>>>> kyrusBranch
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
