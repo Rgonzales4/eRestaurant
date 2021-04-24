@@ -10,10 +10,6 @@ router.get('/', checkAdmin, async (req, res) => {
   console.log('Database page opened');
   let Users = await User.find().sort({ firstName: 'asc' });
   let Bookings = await Booking.find().sort({ bookingDate: 'asc' });
-<<<<<<< HEAD
-  let MenuItems = await MenuItem.find().sort({ itemID: 'asc'});
-  res.render('database', { req: req, Users: Users, Bookings: Bookings, MenuItems: MenuItems });
-=======
   let MenuItems = await MenuItem.find().sort({ itemName: 'asc' });
   res.render('database', {
     req: req,
@@ -21,7 +17,6 @@ router.get('/', checkAdmin, async (req, res) => {
     Bookings: Bookings,
     MenuItems: MenuItems,
   });
->>>>>>> roshelBranch
 });
 
 //VIEW USER PROFILE
@@ -82,14 +77,6 @@ router.post('/booking/:bookingID/update', checkAdmin, async (req, res) => {
 //DELETE BOOKING
 router.delete('/booking/:bookingID', checkAdmin, async (req, res) => {
   console.log('Booking Deletion output Statement');
-<<<<<<< HEAD
-  console.log(`Booking ${req.params.bookingID} deleted`);
-  await Booking.findOneAndDelete(req.params.bookingID);
-  let Users = await User.find().sort({ firstName: 'asc' });
-  let Bookings = await Booking.find().sort({ bookingDate: 'asc' });
-  let MenuItems = await MenuItem.find().sort({ itemID: 'asc'});
-  res.render('database', { req: req, Users: Users, Bookings: Bookings, MenuItems: MenuItems });
-=======
   const deleteBooking = await Booking.findOne({
     bookingID: req.params.bookingID,
   });
@@ -97,7 +84,6 @@ router.delete('/booking/:bookingID', checkAdmin, async (req, res) => {
   await Booking.findByIdAndDelete(deleteBooking.id);
   console.log(`Booking ${deleteBooking.bookingID} deleted`);
   res.redirect('/database');
->>>>>>> roshelBranch
 });
 
 //DELETE USER
