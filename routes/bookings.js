@@ -5,7 +5,7 @@ const crypto = require('crypto');
 
 router.get('/', checkAuthenticated, async (req, res) => {
   const booking = await Booking.find({ bookingUserEmail: req.user.email });
-  res.render('booking', { req: req, booking: booking });
+  res.render('booking', { failMessage: '', req: req, booking: booking });
 });
 
 router.get('/createBooking', checkAuthenticated, (req, res) => {
@@ -32,13 +32,17 @@ router.get('/edit/:bookingID', checkAuthenticated, async (req, res) => {
 router.post('/', checkAuthenticated, async (req, res) => {
   const newID = crypto.randomBytes(6).toString('hex');
   let remainCapacity = 150;
-  var thisYear = new Date().getFullYear();
-  var thisMonth = new Date().getMonth();
-  var thisDay = new Date().getDay();
-  var todayDate = new Date();
-  var todayDate100 = new Date(thisYear + 100, thisMonth, thisDay)
-  var todayDate1000 = new Date(thisYear + 1000, thisMonth, thisDay)
+  let thisYear = new Date().getFullYear();
+  let thisMonth = new Date().getMonth();
+  let thisDay = new Date().getDay();
+  let todayDate = new Date();
+  let todayDate100 = new Date(thisYear + 100, thisMonth, thisDay)
+  let todayDate1000 = new Date(thisYear + 1000, thisMonth, thisDay)
+  let bookingDateFormatted = new Date(req.body.bookingDate)
+
   console.log(todayDate);
+  console.log(req.body.bookingMealTime)
+
   let booking = new Booking({
     bookingID: newID,
     bookingDate: req.body.bookingDate,
@@ -50,8 +54,10 @@ router.post('/', checkAuthenticated, async (req, res) => {
     bookingMealTime: req.body.bookingMealTime,
     isActive: true,
   });
-  console.log(req.body.bookingMealTime)
-  let bookingDateFormatted = new Date(req.body.bookingDate)
+
+  let userBookings = await Booking.find({
+    bookingUserEmail: req.user.email
+  })
 
   let confirmBookingID = await Booking.findOne({
     bookingID: req.body.bookingID,
@@ -117,26 +123,48 @@ router.post('/', checkAuthenticated, async (req, res) => {
     });
     console.log('too many people');
   } else {
-    booking = await booking.save();
-    console.log('booking saved to databases');
-    res.render('createBooking', {
-      successMessage: 'Booking successfully created',
-      failMessage: '',
-      req: req,
-      booking: booking,
-    });
-  }
-});
+    try {
+      booking = await booking.save();
+      console.log('booking saved to databases');
+      res.render('createBooking', {
+        successMessage: 'Booking successfully created',
+        failMessage: '',
+        req: req,
+        booking: booking,
+    })}
+    catch (e) {
+      console.log(e);
+      res.render('createBooking', {
+        req: req,
+        successMessage: '',
+        failMessage: 'Please select a time',
+        booking: booking,
+      });
+    }
+}});
 
 router.post('/:bookingID', checkAuthenticated, async (req, res) => {
+  let thisBooking = await Booking.findOne({bookingID: req.params.bookingID})
+  let thisBookingDate = thisBooking.bookingDate
+  let thisBookingDateFormatted = new Date(thisBookingDate)
+  let thisBookingYear = thisBookingDateFormatted.getFullYear();
+  let thisBookingMonth = thisBookingDateFormatted.getMonth();
+  let thisBookingDay = thisBookingDateFormatted.getDay();
+  let yesterDate = new Date(thisBookingYear, thisBookingMonth, thisBookingDay - 1);
+  let todayDate = new Date();
+  const booking = await Booking.find({ bookingUserEmail: req.user.email });
+  if (todayDate > yesterDate){
+    res.redirect('/bookings')
+    // res.render('booking', { failMessage: 'Must cancel Bookings at least a day before commencement', req: req, booking: booking });
+    console.log('too close');
+  } else {
   const cancelBooking = req.params.bookingID;
   console.log('Booking ' + cancelBooking + ' has been cancelled');
   const filter = { bookingID: cancelBooking };
   const update = { isActive: false };
   await Booking.findOneAndUpdate(filter, update);
-  const booking = await Booking.find({ bookingUserEmail: req.user.email });
-  res.render('booking', { req: req, booking: booking });
-});
+  res.redirect('/bookings');
+}});
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
