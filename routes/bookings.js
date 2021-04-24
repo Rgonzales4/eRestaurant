@@ -55,10 +55,6 @@ router.post('/', checkAuthenticated, async (req, res) => {
     bookingDate: req.body.bookingDate,
   });
 
-  let confirmBookingDateNumber = await Booking.find({
-    bookingDate: req.body.bookingDate,
-  });
-
   var bookingByDay = await Booking.find({
     bookingDate: req.body.bookingDate,
     isActive: true,
