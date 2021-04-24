@@ -9,21 +9,12 @@ router.get('/', async (req, res) => {
   res.render('menu', { req: req, menu_item: menuItem });
 });
 
-router.get('/:itemID', async (req, res) => {
-  const currentMenuItem = await MenuItem.findOne({
-    itemID: req.params.itemID,
-  });
-  console.log(currentMenuItem);
-  console.log('Menu Item', currentMenuItem.itemName, 'is being viewed');
-  res.render('viewMenuItem', { req: req, menuItem: currentMenuItem });
-});
-
-router.get('/createMenuItem', async (req, res) => {
+router.get('/createMenuItem', checkAdmin, async (req, res) => {
   console.log('Create Menu Item page');
   res.render('createMenuItem', { req: req, errorMessage: '' });
 });
 
-router.post('/createMenuItem', async (req, res) => {
+router.post('/createMenuItem', checkAdmin, async (req, res) => {
   console.log('Menu Item being created:');
   const newMenuItem = new MenuItem({
     itemID: crypto.randomBytes(6).toString('hex'),
@@ -42,7 +33,6 @@ router.post('/createMenuItem', async (req, res) => {
   console.log(newMenuItem);
   try {
     await newMenuItem.save();
-    const menuItem = await MenuItem.find({});
     res.redirect('/menu');
   } catch (e) {
     console.log(e);
@@ -52,5 +42,21 @@ router.post('/createMenuItem', async (req, res) => {
     });
   }
 });
+
+router.get('/:itemID', async (req, res) => {
+  const currentMenuItem = await MenuItem.findOne({
+    itemID: req.params.itemID,
+  });
+  console.log(currentMenuItem);
+  console.log('Menu Item', currentMenuItem.itemName, 'is being viewed');
+  res.render('viewMenuItem', { req: req, menuItem: currentMenuItem });
+});
+
+function checkAdmin(req, res, next) {
+  if (req.isAuthenticated() && req.user.isAdmin === true) {
+    return next();
+  }
+  res.redirect('/');
+}
 
 module.exports = router;
