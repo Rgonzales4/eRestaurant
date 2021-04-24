@@ -19,7 +19,6 @@ router.get('/createBooking', checkAuthenticated, (req, res) => {
 });
 
 router.get('/edit/:bookingID', checkAuthenticated, async (req, res) => {
-  // Not yet finished
   const booking = await Booking.findOne({ bookingID: req.params.bookingID });
   res.render('editBooking', {
     req: req,
@@ -113,6 +112,24 @@ router.post('/', checkAuthenticated, async (req, res) => {
 });
 
 router.put('/:bookingID', async (req, res) => {
+  const filter = {bookingID: req.params.bookingID}
+  const update = {
+    bookingDate: req.body.bookingDate,
+    bookingNumber: req.body.bookingNumber,
+    allergyDescription: req.body.allergyDescription,
+    bookingUserEmail: req.user.email,
+    bookingUserFirstName: req.user.firstName,
+    bookingUserLastName: req.user.lastName,
+    isActive: true,
+    bookingMealTime: req.body.bookingMealTime
+  }
+  console.log(update);
+  await Booking.findOneAndUpdate(filter, update);
+  res.redirect('/bookings');
+})
+
+router.put('/:bookingID', async (req, res) => {
+  //NEED TO ADD CLAUSES IN
   const filter = {bookingID: req.params.bookingID}
   const update = {
   bookingDate: req.body.bookingDate,
