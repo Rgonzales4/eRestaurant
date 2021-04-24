@@ -23,12 +23,10 @@ const BookingSchema = new Schema({
     required: true,
     default: null,
   },
-
   bookingNumber: {
     type: Number,
     required: true,
   },
-
   bookingDate: {
     type: Date,
     required: true,
@@ -39,6 +37,11 @@ const BookingSchema = new Schema({
   },
   isActive: {
     type: Boolean,
+  },
+
+  bookingMealTime: {
+    type: String,
+    default: '',
     required: true,
   },
 });

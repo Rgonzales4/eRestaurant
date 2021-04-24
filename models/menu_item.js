@@ -34,18 +34,8 @@ const MenuSchema = new Schema({
   },
 
   // Menu Time Category --> All Boolean, used for filtering
-  breakfast: {
-    type: Boolean,
-    required: true,
-  },
-
-  lunch: {
-    type: Boolean,
-    required: true,
-  },
-
-  dinner: {
-    type: Boolean,
+  mealType: {
+    type: String,
     required: true,
   },
 
