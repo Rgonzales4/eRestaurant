@@ -35,14 +35,12 @@ const BookingSchema = new Schema({
     type: String,
     default: 'N/A',
   },
-<<<<<<< HEAD
   bookingMealTime: {
     type: String,
     default: '',
-=======
+  },
   isActive: {
     type: Boolean,
->>>>>>> roshelBranch
     required: true,
   },
 });

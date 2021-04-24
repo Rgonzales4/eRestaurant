@@ -31,6 +31,7 @@ router.get('/edit/:bookingID', checkAuthenticated, async (req, res) => {
 
 router.post('/', checkAuthenticated, async (req, res) => {
   const newID = crypto.randomBytes(6).toString('hex');
+  let remainCapacity = 150;
   console.log(newID);
   let booking = new Booking({
     bookingID: newID,
@@ -40,11 +41,8 @@ router.post('/', checkAuthenticated, async (req, res) => {
     bookingUserEmail: req.user.email,
     bookingUserFirstName: req.user.firstName,
     bookingUserLastName: req.user.lastName,
-<<<<<<< HEAD
     bookingMealTime: req.body.bookingMealTime,
-=======
     isActive: true,
->>>>>>> roshelBranch
   });
   console.log(req.body.bookingMealTime)
 
@@ -61,6 +59,21 @@ router.post('/', checkAuthenticated, async (req, res) => {
     bookingDate: req.body.bookingDate,
   });
 
+  var bookingByDay = await Booking.find({
+    bookingDate: req.body.bookingDate,
+    isActive: true,
+  });
+  bookingByDay.forEach(bookingDay =>{
+  if (bookingDay.bookingMealTime == req.body.bookingMealTime){
+    remainCapacity = remainCapacity - bookingDay.bookingNumber
+  }
+  })
+  
+  remainCapacity = remainCapacity - req.body.bookingNumber; 
+  otherCapacity = req.body.bookingNumber - -remainCapacity;
+  
+  console.log(remainCapacity)
+
   if (confirmBookingID) {
     res.render('createBooking', {
       successMessage: '',
@@ -69,32 +82,13 @@ router.post('/', checkAuthenticated, async (req, res) => {
       booking: booking,
     });
     console.log('This booking already exists');
-  } else if (req.body.bookingNumber > 150) {
-    // Need to keep a counter for the whole day
+  } else if (remainCapacity < 0) {
     res.render('createBooking', {
       successMessage: '',
-      failMessage: 'Please book for less than 150 People',
+      failMessage: 'No spots available, please book for less than ' + otherCapacity + ' people',
       req: req,
       booking: booking,
     });
-    console.log('too many people');
-  } else if (req.body.bookingNumber < 0) {
-    res.render('createBooking', {
-      successMessage: '',
-      failMessage: 'Please enter a valid number',
-      req: req,
-      booking: booking,
-    });
-    console.log('too many people');
-  } else if (confirmBookingDate) {
-    // Not finalised yet -- need to include a time slot
-    res.render('createBooking', {
-      successMessage: '',
-      failMessage: 'Booking already reserved for this date',
-      req: req,
-      booking: booking,
-    });
-    console.log('wrong date');
   } else if (req.body.bookingNumber < 0) {
     res.render('createBooking', {
       successMessage: '',
@@ -131,5 +125,6 @@ function checkAuthenticated(req, res, next) {
   }
   res.redirect('/login');
 }
+
 
 module.exports = router;
