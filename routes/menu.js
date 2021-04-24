@@ -11,7 +11,22 @@ router.get('/', async (req, res) => {
 
 router.get('/createMenuItem', checkAdmin, async (req, res) => {
   console.log('Create Menu Item page');
-  res.render('createMenuItem', { req: req, errorMessage: '' });
+  res.render('createMenuItem', {
+    req: req,
+    errorMessage: '',
+    menuItem: new MenuItem(),
+  });
+});
+
+router.get('/editMenuItem/:itemID', checkAdmin, async (req, res) => {
+  console.log('Edit Menu Item page');
+  const currentItem = await MenuItem.findOne({ itemID: req.params.itemID });
+  console.log(currentItem);
+  res.render('editMenuItem', {
+    req: req,
+    errorMessage: '',
+    menuItem: currentItem,
+  });
 });
 
 router.post('/createMenuItem', checkAdmin, async (req, res) => {
@@ -41,6 +56,26 @@ router.post('/createMenuItem', checkAdmin, async (req, res) => {
       errorMessage: 'Please make sure you filled in all the necessary sections',
     });
   }
+});
+
+router.post('/editMenuItem/:itemID', checkAdmin, async (req, res) => {
+  const filter = { itemID: req.params.itemID };
+  const update = {
+    isItFood: req.body.isItFood,
+    itemName: req.body.itemName,
+    itemPrice: req.body.itemPrice,
+    itemDescription: req.body.itemDescription,
+    itemIngredients: req.body.itemIngredients,
+    mealType: req.body.mealType,
+    veganScum: req.body.veganScum,
+    glutenFree: req.body.glutenFree,
+    nutFree: req.body.nutFree,
+    vegetarian: req.body.vegetarian,
+    dairyFree: req.body.dairyFree,
+  };
+  console.log(update);
+  await MenuItem.findOneAndUpdate(filter, update);
+  res.redirect('/menu');
 });
 
 router.get('/:itemID', async (req, res) => {
