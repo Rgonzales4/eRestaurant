@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const users = require('./users');
 const Schema = mongoose.Schema;
-const crypto = require('crypto')
+const crypto = require('crypto');
 
 const BookingSchema = new Schema({
   bookingID: {
@@ -23,12 +23,10 @@ const BookingSchema = new Schema({
     required: true,
     default: null,
   },
-
   bookingNumber: {
     type: Number,
     required: true,
   },
-
   bookingDate: {
     type: Date,
     required: true,
@@ -36,6 +34,15 @@ const BookingSchema = new Schema({
   allergyDescription: {
     type: String,
     default: 'N/A',
+  },
+  isActive: {
+    type: Boolean,
+  },
+
+  bookingMealTime: {
+    type: String,
+    default: '',
+    required: true,
   },
 });
 

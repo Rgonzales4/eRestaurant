@@ -35,6 +35,8 @@ mongoose.connect(process.env.DB_Connection, {
 const db = mongoose.connection;
 db.once('open', () => console.log('Connected to Database'));
 
+mongoose.set('useFindAndModify', false);
+
 //Flash & Session
 app.use(flash());
 app.use(

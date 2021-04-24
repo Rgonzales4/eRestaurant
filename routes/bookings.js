@@ -40,7 +40,10 @@ router.post('/', checkAuthenticated, async (req, res) => {
     bookingUserEmail: req.user.email,
     bookingUserFirstName: req.user.firstName,
     bookingUserLastName: req.user.lastName,
+    isActive: true,
+    bookingMealTime: req.body.bookingMealTime,
   });
+  console.log(req.body.bookingMealTime);
 
   let confirmBookingID = await Booking.findOne({
     bookingID: req.body.bookingID,
@@ -52,15 +55,8 @@ router.post('/', checkAuthenticated, async (req, res) => {
   });
 
   let confirmBookingDateNumber = await Booking.find({
-    time: req.body.bookingDate,
+    bookingDate: req.body.bookingDate,
   });
-
-  console.log(
-    confirmBookingDateNumber.forEach((b) => {
-      (i = b.bookingNumber), (j = b.bookingNumber + i);
-      return j;
-    })
-  );
 
   if (confirmBookingID) {
     res.render('createBooking', {
@@ -116,10 +112,13 @@ router.post('/', checkAuthenticated, async (req, res) => {
   }
 });
 
-router.delete('/:bookingID', async (req, res) => {
-  const deleteBookingID = req.params.bookingID;
-  console.log('Booking ' + deleteBookingID + ' has been deleted');
-  await Booking.findOneAndDelete(deleteBookingID);
+router.post('/:bookingID', checkAuthenticated, async (req, res) => {
+  const cancelBooking = req.params.bookingID;
+  console.log('Booking ' + cancelBooking + ' has been cancelled');
+  const filter = { bookingID: cancelBooking };
+  const update = { isActive: false };
+  await Booking.findOneAndUpdate(filter, update);
+  const booking = await Booking.find({ bookingUserEmail: req.user.email });
   res.redirect('/bookings');
 });
 
