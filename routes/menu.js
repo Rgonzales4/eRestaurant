@@ -9,9 +9,13 @@ router.get('/', async (req, res) => {
   res.render('menu', { req: req, menu_item: menuItem });
 });
 
-router.get('/view/:itemID', async (req, res) => {
-  const menuItem = await MenuItem.findOne({ itemID: req.params.itemID });
-  res.render('viewMenuItem', { req: req, menu_item: menuItem });
+router.get('/:itemID', async (req, res) => {
+  const currentMenuItem = await MenuItem.findOne({
+    itemID: req.params.itemID,
+  });
+  console.log(currentMenuItem);
+  console.log('Menu Item', currentMenuItem.itemName, 'is being viewed');
+  res.render('viewMenuItem', { req: req, menuItem: currentMenuItem });
 });
 
 router.get('/createMenuItem', async (req, res) => {

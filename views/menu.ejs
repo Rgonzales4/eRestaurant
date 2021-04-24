@@ -12,7 +12,9 @@
 
     <% if (req.user) {%> <% } %>
     <div class="container">
-      <a href="menu/createMenuItem" class="btn btn-success">Create Menu Item</a>
+      <a href="menu/createMenuItem" class="btn btn-outline-success me-2"
+        >Create Menu Item</a
+      >
     </div>
     <br />
 
@@ -24,7 +26,7 @@
             <div class="card-body">
               <h4 class="card-title"><%= m.itemName %></h4>
               <div class="card-title"><%= m.itemDescription %></div>
-              <a href="#" class="btn btn-info">Read More</a>
+              <a href="menu/<%= m.itemID%>" class="btn btn-info">Read More</a>
             </div>
           </div>
         </div>
