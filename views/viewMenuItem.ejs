@@ -10,6 +10,20 @@
   <body>
     <div class="container">
       <h1 style="padding: 20px"><%= menuItem.itemName%></h1>
+
+      <% if(image) {%>
+      <p>Image is supposed to go here</p>
+      <!-- <img 
+        
+        FOR SOME REASON THIS TAG KEEPS 
+        CALLED THE FUNCTION TO VIEW A MENU ITEM
+
+        srcset="acaiBowl.png"
+        style="width: 50%; height: 50%"
+      /> -->
+      <% } %>
+
+      <br />
       <h5 class="text-muted">Price: $<%= menuItem.itemPrice%></h5>
 
       <p class="text-muted"><%= menuItem.mealType%> menu item</p>

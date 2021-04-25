@@ -45,7 +45,9 @@
               name="itemDescription"
               rows="9"
               required
-            > <%= menuItem.itemDescription%>  </textarea>
+            >
+<%= menuItem.itemDescription%></textarea
+            >
           </div>
           <br />
           <div class="form-group">
@@ -58,7 +60,9 @@
               name="itemIngredients"
               rows="5"
               required
-            > <%= menuItem.itemIngredients%> </textarea>
+            >
+<%= menuItem.itemIngredients%></textarea
+            >
           </div>
         </div>
       </div>
@@ -186,6 +190,13 @@
         <label for="vegetarian">Vegetarian</label><br />
       </div>
       <br />
+
+      <h5 style="margin-top: 20px">Upload an Image:</h5>
+      <div class="container">
+        <p class="text-muted">PNG files only</p>
+        <label for="image">Upload Image</label>
+        <input type="file" id="image" name="image" value="" />
+      </div>
     </div>
   </div>
 </div>

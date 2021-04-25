@@ -17,8 +17,6 @@ const bookingRouter = require('./routes/bookings');
 const databaseRouter = require('./routes/database');
 const profileRouter = require('./routes/profile');
 
-const Booking = require('./models/booking');
-
 //EXPRESS setup
 const app = express();
 app.use(express.urlencoded({ extended: false }));
@@ -64,6 +62,8 @@ function checkNotAuthenticated(req, res, next) {
   next();
 }
 
+app.use(express.static('uploads'));
+
 //Logging Out
 app.delete('/logout', (req, res) => {
   req.logOut();
@@ -71,7 +71,7 @@ app.delete('/logout', (req, res) => {
 });
 
 //Import routes
-app.use(express.static(__dirname + '/css'));
+app.use(express.static('css'));
 app.use('/menu', menuRouter);
 app.use('/about', aboutRouter);
 app.use('/login', loginRouter);
