@@ -7,20 +7,14 @@
     <%- include('partials/navbar') %>
     <title>Menu</title>
   </head>
-  <body>
+  <body style="margin-bottom: 20px">
     <div class="container">
       <h1 style="padding: 20px"><%= menuItem.itemName%></h1>
 
-      <% if(image) {%>
-      <p>Image is supposed to go here</p>
-      <!-- <img 
-        
-        FOR SOME REASON THIS TAG KEEPS 
-        CALLED THE FUNCTION TO VIEW A MENU ITEM
-
-        srcset="acaiBowl.png"
-        style="width: 50%; height: 50%"
-      /> -->
+      <% if(menuItem.itemImg) { %>
+      <div class="container">
+        <img src="/uploads/<%= menuItem.itemImg%>" width="80%" />
+      </div>
       <% } %>
 
       <br />

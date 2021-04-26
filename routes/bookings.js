@@ -121,6 +121,8 @@ router.post('/:bookingID', checkAuthenticated, async (req, res) => {
   res.redirect('/bookings');
 });
 
+
+
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();

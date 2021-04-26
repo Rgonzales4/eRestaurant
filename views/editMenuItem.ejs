@@ -12,7 +12,11 @@
       <h1>Edit a Menu Item</h1>
       <span style="color: red"><%= errorMessage%></span>
 
-      <form action="/menu/editMenuItem/<%= menuItem.itemID%>" method="POST">
+      <form
+        action="/menu/editMenuItem/<%= menuItem.itemID%>"
+        method="POST"
+        enctype="multipart/form-data"
+      >
         <%- include('partials/menu_items_fields') %>
 
         <div class="container" style="padding: 20px">

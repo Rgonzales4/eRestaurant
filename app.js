@@ -21,9 +21,13 @@ const profileRouter = require('./routes/profile');
 const app = express();
 app.use(express.urlencoded({ extended: false }));
 
+// EJS Setup
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+app.use(express.static('uploads'));
+app.use(express.static('views'));
 
 //Connect to Database
 mongoose.connect(process.env.DB_Connection, {
@@ -61,8 +65,6 @@ function checkNotAuthenticated(req, res, next) {
   }
   next();
 }
-
-app.use(express.static('uploads'));
 
 //Logging Out
 app.delete('/logout', (req, res) => {
