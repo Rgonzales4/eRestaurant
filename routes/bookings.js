@@ -2,6 +2,7 @@ const express = require('express');
 const Booking = require('../models/booking');
 const router = express.Router();
 const crypto = require('crypto');
+const { isUndefined } = require('util');
 
 router.get('/', checkAuthenticated, async (req, res) => {
   const booking = await Booking.find({ bookingUserEmail: req.user.email });
@@ -55,10 +56,6 @@ router.post('/', checkAuthenticated, async (req, res) => {
     isActive: true,
   });
 
-  let userBookings = await Booking.find({
-    bookingUserEmail: req.user.email
-  })
-
   let confirmBookingID = await Booking.findOne({
     bookingID: req.body.bookingID,
   });
@@ -86,6 +83,13 @@ router.post('/', checkAuthenticated, async (req, res) => {
       booking: booking,
     });
     console.log('This booking already exists');
+  } else if (checkForBookingsMade(req) === true) {
+    res.render('createBooking', {
+      successMessage: '',
+      failMessage: 'You already have a booking for this date and time!',
+      req: req,
+      booking: booking,
+    });    
   } else if (remainCapacity < 0) {
     res.render('createBooking', {
       successMessage: '',
@@ -173,5 +177,21 @@ function checkAuthenticated(req, res, next) {
   res.redirect('/login');
 }
 
+async function checkForBookingsMade(req){
+  try {if (await Booking.findOne({
+    bookingUserEmail: req.body.bookingUserEmail,
+    bookingDate: req.body.bookingDate, 
+    bookingMealTime: req.body.bookingMealTime,
+  }) === undefined) 
+  
+  {console.log(req.body.bookingUserEmail)
+    return false;}
+  else {
+    console.log(req.body.bookingUserEmail)
+    return true;}}
+  catch(e){
+    return false;
+  }
+}
 
 module.exports = router;
