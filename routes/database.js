@@ -10,8 +10,13 @@ router.get('/', checkAdmin, async (req, res) => {
   console.log('Database page opened');
   let Users = await User.find().sort({ firstName: 'asc' });
   let Bookings = await Booking.find().sort({ bookingDate: 'asc' });
-  let MenuItems = await MenuItem.find().sort({itenMane: 'asc'});
-  res.render('database', { req: req, Users: Users, Bookings: Bookings, MenuItems: MenuItems });
+  let MenuItems = await MenuItem.find().sort({ itemName: 'asc' });
+  res.render('database', {
+    req: req,
+    Users: Users,
+    Bookings: Bookings,
+    MenuItems: MenuItems,
+  });
 });
 
 //VIEW USER PROFILE
@@ -59,15 +64,26 @@ router.get('/booking/:bookingID', checkAdmin, async (req, res) => {
   res.render('viewBooking', { req: req, booking: bookingDetails });
 });
 
+//TOGGLE BOOKING
+router.post('/booking/:bookingID/update', checkAdmin, async (req, res) => {
+  const updateBooking = req.params.bookingID;
+  console.log('Booking ' + updateBooking + ' has been updated');
+  const filter = { bookingID: updateBooking };
+  const update = { isActive: false };
+  await Booking.findOneAndUpdate(filter, update);
+  res.redirect('/database');
+});
+
 //DELETE BOOKING
 router.delete('/booking/:bookingID', checkAdmin, async (req, res) => {
   console.log('Booking Deletion output Statement');
-  console.log(`Booking ${req.params.bookingID} deleted`);
-  await Booking.findOneAndDelete(req.params.bookingID);
-  const Users = await User.find().sort({ firstName: 'asc' });
-  const Bookings = await Booking.find().sort({ bookingDate: 'asc' });
-  let MenuItems = await MenuItem.find().sort({itenMane: 'asc'});
-  res.render('database', { req: req, Users: Users, Bookings: Bookings, MenuItems: MenuItems });
+  const deleteBooking = await Booking.findOne({
+    bookingID: req.params.bookingID,
+  });
+  console.log(deleteBooking);
+  await Booking.findByIdAndDelete(deleteBooking.id);
+  console.log(`Booking ${deleteBooking.bookingID} deleted`);
+  res.redirect('/database');
 });
 
 //DELETE USER
@@ -89,8 +105,13 @@ router.delete('/:userId', checkAdmin, async (req, res) => {
   await User.findByIdAndDelete(userAccount.id);
   const Users = await User.find().sort({ firstName: 'asc' });
   const Bookings = await Booking.find().sort({ bookingDate: 'asc' });
-  let MenuItems = await MenuItem.find().sort({itenMane: 'asc'});
-  res.render('database', { req: req, Users: Users, Bookings: Bookings, MenuItems: MenuItems });
+  const MenuItems = await MenuItem.find().sort({ itemName: 'asc' });
+  res.render('database', {
+    req: req,
+    Users: Users,
+    Bookings: Bookings,
+    MenuItems: MenuItems,
+  });
 });
 
 function checkAdmin(req, res, next) {

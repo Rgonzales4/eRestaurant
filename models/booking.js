@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const users = require('./users');
 const Schema = mongoose.Schema;
-const crypto = require('crypto')
+const crypto = require('crypto');
 
 const BookingSchema = new Schema({
   bookingID: {
@@ -37,7 +37,10 @@ const BookingSchema = new Schema({
   },
   bookingMealTime: {
     type: String,
-    default: '',
+    required: true,
+  },
+  isActive: {
+    type: Boolean,
     required: true,
   },
 });

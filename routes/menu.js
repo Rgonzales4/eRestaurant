@@ -13,4 +13,9 @@ router.get('/view/:itemID', async (req, res) => {
   res.render('viewMenuItem', { req: req, menu_item: menuItem });
 });
 
+router.get('/createMenuItem', async (req, res) => {
+  console.log('Create Menu Item page');
+  res.render('createMenuItem', { req: req });
+});
+
 module.exports = router;
