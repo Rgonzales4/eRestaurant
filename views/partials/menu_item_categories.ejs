@@ -1,0 +1,13 @@
+<div class="container">
+  <% if(menuItem.dairyFree) {%>
+  <label><span class="badge bg-primary">Dairy Free</span></label>
+  <% } %> <% if(menuItem.glutenFree) {%>
+  <label><span class="badge bg-secondary">Gluten Free</span></label>
+  <% } %> <% if(menuItem.nutFree) {%>
+  <label><span class="badge bg-warning text-dark">Nut Free</span></label>
+  <% } %> <% if(menuItem.veganScum) {%>
+  <label><span class="badge bg-success">Vegan Friendly</span></label>
+  <% } %> <% if(menuItem.vegetarian) {%>
+  <label><span class="badge bg-success">Vegetarian Friendly</span></label>
+  <% } %>
+</div>

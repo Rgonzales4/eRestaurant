@@ -37,12 +37,12 @@ router.post('/', checkAuthenticated, async (req, res) => {
   let thisMonth = new Date().getMonth();
   let thisDay = new Date().getDay();
   let todayDate = new Date();
-  let todayDate100 = new Date(thisYear + 100, thisMonth, thisDay)
-  let todayDate1000 = new Date(thisYear + 1000, thisMonth, thisDay)
-  let bookingDateFormatted = new Date(req.body.bookingDate)
+  let todayDate100 = new Date(thisYear + 100, thisMonth, thisDay);
+  let todayDate1000 = new Date(thisYear + 1000, thisMonth, thisDay);
+  let bookingDateFormatted = new Date(req.body.bookingDate);
 
   console.log(todayDate);
-  console.log(req.body.bookingMealTime)
+  console.log(req.body.bookingMealTime);
 
   let booking = new Booking({
     bookingID: newID,
@@ -64,16 +64,16 @@ router.post('/', checkAuthenticated, async (req, res) => {
     bookingDate: req.body.bookingDate,
     isActive: true,
   });
-  bookingByDay.forEach(bookingDay =>{
-  if (bookingDay.bookingMealTime == req.body.bookingMealTime){
-    remainCapacity = remainCapacity - bookingDay.bookingNumber
-  }
-  })
-  
-  remainCapacity = remainCapacity - req.body.bookingNumber; 
+  bookingByDay.forEach((bookingDay) => {
+    if (bookingDay.bookingMealTime == req.body.bookingMealTime) {
+      remainCapacity = remainCapacity - bookingDay.bookingNumber;
+    }
+  });
+
+  remainCapacity = remainCapacity - req.body.bookingNumber;
   otherCapacity = req.body.bookingNumber - -remainCapacity;
-  
-  console.log(remainCapacity)
+
+  console.log(remainCapacity);
 
   if (confirmBookingID) {
     res.render('createBooking', {
@@ -89,11 +89,14 @@ router.post('/', checkAuthenticated, async (req, res) => {
       failMessage: 'You already have a booking for this date and time!',
       req: req,
       booking: booking,
-    });    
+    });
   } else if (remainCapacity < 0) {
     res.render('createBooking', {
       successMessage: '',
-      failMessage: 'No spots available, please book for less than ' + otherCapacity + ' people',
+      failMessage:
+        'No spots available, please book for less than ' +
+        otherCapacity +
+        ' people',
       req: req,
       booking: booking,
     });
@@ -105,11 +108,11 @@ router.post('/', checkAuthenticated, async (req, res) => {
       booking: booking,
     });
   } else if (bookingDateFormatted > todayDate1000) {
-      res.render('createBooking', {
-        successMessage: '',
-        failMessage: 'Come on, 1000 years, REALLY?!!',
-        req: req,
-        booking: booking,
+    res.render('createBooking', {
+      successMessage: '',
+      failMessage: 'Come on, 1000 years, REALLY?!!',
+      req: req,
+      booking: booking,
     });
   } else if (bookingDateFormatted > todayDate100) {
     res.render('createBooking', {
@@ -135,8 +138,8 @@ router.post('/', checkAuthenticated, async (req, res) => {
         failMessage: '',
         req: req,
         booking: booking,
-    })}
-    catch (e) {
+      });
+    } catch (e) {
       console.log(e);
       res.render('createBooking', {
         req: req,
@@ -145,30 +148,36 @@ router.post('/', checkAuthenticated, async (req, res) => {
         booking: booking,
       });
     }
-}});
+  }
+});
 
 router.post('/:bookingID', checkAuthenticated, async (req, res) => {
-  let thisBooking = await Booking.findOne({bookingID: req.params.bookingID})
-  let thisBookingDate = thisBooking.bookingDate
-  let thisBookingDateFormatted = new Date(thisBookingDate)
+  let thisBooking = await Booking.findOne({ bookingID: req.params.bookingID });
+  let thisBookingDate = thisBooking.bookingDate;
+  let thisBookingDateFormatted = new Date(thisBookingDate);
   let thisBookingYear = thisBookingDateFormatted.getFullYear();
   let thisBookingMonth = thisBookingDateFormatted.getMonth();
   let thisBookingDay = thisBookingDateFormatted.getDay();
-  let yesterDate = new Date(thisBookingYear, thisBookingMonth, thisBookingDay - 1);
+  let yesterDate = new Date(
+    thisBookingYear,
+    thisBookingMonth,
+    thisBookingDay - 1
+  );
   let todayDate = new Date();
   const booking = await Booking.find({ bookingUserEmail: req.user.email });
-  if (todayDate > yesterDate){
-    res.redirect('/bookings')
+  if (todayDate > yesterDate) {
+    res.redirect('/bookings');
     // res.render('booking', { failMessage: 'Must cancel Bookings at least a day before commencement', req: req, booking: booking });
     console.log('too close');
   } else {
-  const cancelBooking = req.params.bookingID;
-  console.log('Booking ' + cancelBooking + ' has been cancelled');
-  const filter = { bookingID: cancelBooking };
-  const update = { isActive: false };
-  await Booking.findOneAndUpdate(filter, update);
-  res.redirect('/bookings');
-}});
+    const cancelBooking = req.params.bookingID;
+    console.log('Booking ' + cancelBooking + ' has been cancelled');
+    const filter = { bookingID: cancelBooking };
+    const update = { isActive: false };
+    await Booking.findOneAndUpdate(filter, update);
+    res.redirect('/bookings');
+  }
+});
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
@@ -176,7 +185,6 @@ function checkAuthenticated(req, res, next) {
   }
   res.redirect('/login');
 }
-
 async function checkForBookingsMade(req){
   let CFBM = await Booking.findOne({
     bookingUserEmail: req.body.bookingUserEmail,

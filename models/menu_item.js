@@ -9,8 +9,8 @@ const MenuSchema = new Schema({
 
   // Food = True, Drinks = False
   isItFood: {
-    type: Boolean,
-    requred: true,
+    type: String,
+    required: true,
   },
 
   itemName: {
@@ -33,45 +33,45 @@ const MenuSchema = new Schema({
     required: true,
   },
 
+  // Image for the menu item
+  itemImg: {
+    type: String,
+  },
+
   // Menu Time Category --> All Boolean, used for filtering
-  breakfast: {
-    type: Boolean,
-    required: true,
-  },
-
-  lunch: {
-    type: Boolean,
-    required: true,
-  },
-
-  dinner: {
-    type: Boolean,
+  mealType: {
+    type: String,
     required: true,
   },
 
   // Dietary Requirements:
   veganScum: {
     type: Boolean,
+    default: 'false',
     required: true,
   },
 
   glutenFree: {
     type: Boolean,
+    default: 'false',
     required: true,
   },
 
   nutFree: {
     type: Boolean,
+    default: 'false',
     required: true,
   },
 
   vegetarian: {
     type: Boolean,
+    default: 'false',
     required: true,
   },
 
   dairyFree: {
     type: Boolean,
+    default: 'false',
     required: true,
   },
 });

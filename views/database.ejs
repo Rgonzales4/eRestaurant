@@ -14,35 +14,33 @@
       <div class="row">
         <h2 style="padding: 10px">Registered Users:</h2>
         <% Users.forEach(Users => { %> <% if(!Users.isAdmin) { %>
-        <div class="col-lg-4">
-          <div style="float: left">
-            <div style="padding: 10px">
-              <div class="card" style="width: 18rem">
-                <div class="card-body">
-                  <h5 class="card-title"><%= Users.firstName %></h5>
-                  <h6 class="card-subtitle mb-2"><%= Users.lastName %></h6>
-                  <h6
-                    name="userFocus"
-                    class="card-text text-muted"
-                    style="font-size: 13px"
-                  >
-                    <%= Users.userId %>
-                  </h6>
-                  <a
-                    href="database/account/<%= Users.userId%>"
-                    class="btn btn-primary btn-sm"
-                    >View</a
-                  >
-                  <form
-                    action="/database/<%= Users.userId %>?_method=DELETE"
-                    method="POST"
-                    class="d-inline"
-                  >
-                    <button type="submit" class="btn btn-danger btn-sm">
-                      Delete User
-                    </button>
-                  </form>
-                </div>
+        <div class="col-lg-4" style="float: left">
+          <div style="padding: 10px">
+            <div class="card" style="width: 18rem">
+              <div class="card-body">
+                <h5 class="card-title"><%= Users.firstName %></h5>
+                <h6 class="card-subtitle mb-2"><%= Users.lastName %></h6>
+                <h6
+                  name="userFocus"
+                  class="card-text text-muted"
+                  style="font-size: 13px"
+                >
+                  <%= Users.userId %>
+                </h6>
+                <a
+                  href="database/account/<%= Users.userId%>"
+                  class="btn btn-primary btn-sm"
+                  >View</a
+                >
+                <form
+                  action="/database/<%= Users.userId %>?_method=DELETE"
+                  method="POST"
+                  class="d-inline"
+                >
+                  <button type="submit" class="btn btn-danger btn-sm">
+                    Delete User
+                  </button>
+                </form>
               </div>
             </div>
           </div>
@@ -73,7 +71,8 @@
                   <a
                     href="/database/booking/<%= Bookings.bookingID %>"
                     class="btn btn-primary btn-sm"
-                    >View Booking</a>
+                    >View Booking</a
+                  >
                 </div>
               </div>
             </div>
@@ -88,7 +87,7 @@
         <% if(!req.MenuItems) { %>
         <h2 style="padding: 10px">Menu Items:</h2>
         <% MenuItems.forEach(Item => { %>
-        <div style="float: left">
+        <div class="col-lg-4" style="float: left">
           <div style="padding: 10px">
             <div class="card" style="width: 18rem">
               <div class="card-body">
@@ -96,7 +95,7 @@
                 <h6 class="card-subtitle mb-2 text-muted">
                   <%= Item.itemID %>
                 </h6>
-                <a href="#" class="card-link">View Menu Item</a>
+                <a href="database/menu/<%= Item.itemID%>" class="btn btn-primary btn-sm">View Menu Item</a>
               </div>
             </div>
           </div>
