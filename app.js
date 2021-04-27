@@ -17,15 +17,17 @@ const bookingRouter = require('./routes/bookings');
 const databaseRouter = require('./routes/database');
 const profileRouter = require('./routes/profile');
 
-const Booking = require('./models/booking');
-
 //EXPRESS setup
 const app = express();
 app.use(express.urlencoded({ extended: false }));
 
+// EJS Setup
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+app.use(express.static('uploads'));
+app.use(express.static('views'));
 
 //Connect to Database
 mongoose.connect(process.env.DB_Connection, {
@@ -34,6 +36,8 @@ mongoose.connect(process.env.DB_Connection, {
 });
 const db = mongoose.connection;
 db.once('open', () => console.log('Connected to Database'));
+
+mongoose.set('useFindAndModify', false);
 
 //Flash & Session
 app.use(flash());
@@ -69,7 +73,7 @@ app.delete('/logout', (req, res) => {
 });
 
 //Import routes
-app.use(express.static(__dirname + '/css'));
+app.use(express.static('css'));
 app.use('/menu', menuRouter);
 app.use('/about', aboutRouter);
 app.use('/login', loginRouter);
