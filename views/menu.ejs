@@ -8,17 +8,30 @@
     <title>Menu</title>
   </head>
   <body>
+    <h1 style="padding: 20px">Menu Items</h1>
+
+    <% if (req.user && req.user.isAdmin == true) { %>
     <div class="container">
-      <h1 class="mb-4">Here is the Menu:</h1>
-      <% Array.from(menu_item).forEach(m => { %>
-      <div class="card mt-2">
-        <div class="card-body">
-          <h4 class="card-title"><%= m.ItemName %></h4>
-          <div class="card-title"><%= m.ItemDescription %></div>
-          <a href="menu/view/<%= m.bookingID %>" class="btn btn-info"
-            >Edit Booking</a
-          >
+      <a href="menu/createMenuItem" class="btn btn-outline-success me-2"
+        >Create Menu Item</a
+      >
+    </div>
+    <% } %>
+    <br />
+
+    <div class="container">
+      <div class="row">
+        <% if(menu_item) {%> <% Array.from(menu_item).forEach(m => { %>
+        <div class="col-lg-4" style="float: left">
+          <div class="card mt-2">
+            <div class="card-body">
+              <h4 class="card-title"><%= m.itemName %></h4>
+              <div class="card-title"><%= m.itemDescription %></div>
+              <a href="/menu/<%= m.itemID%>" class="btn btn-info">Read More</a>
+            </div>
+          </div>
         </div>
+         
       </div>
     </div>
   </body>
