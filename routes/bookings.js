@@ -83,7 +83,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
       booking: booking,
     });
     console.log('This booking already exists');
-  } else if (checkForBookingsMade(req) === true) {
+  } else if (checkForBookingsMade == true) {
     res.render('createBooking', {
       successMessage: '',
       failMessage: 'You already have a booking for this date and time!',
@@ -178,16 +178,16 @@ function checkAuthenticated(req, res, next) {
 }
 
 async function checkForBookingsMade(req){
-  try {if (await Booking.findOne({
+  let CFBM = await Booking.findOne({
     bookingUserEmail: req.body.bookingUserEmail,
     bookingDate: req.body.bookingDate, 
     bookingMealTime: req.body.bookingMealTime,
-  }) === undefined) 
-  
-  {console.log(req.body.bookingUserEmail)
+  }) 
+  try {if (CFBM.bookingUserEmail === undefined) 
+  {console.log(CFBM.bookingUserEmail)
     return false;}
   else {
-    console.log(req.body.bookingUserEmail)
+    console.log(CFBM.bookingUserEmail)
     return true;}}
   catch(e){
     return false;
