@@ -35,12 +35,14 @@ const BookingSchema = new Schema({
     type: String,
     default: 'N/A',
   },
-  isActive: {
-    type: Boolean,
-  },
 
   bookingMealTime: {
     type: String,
+    required: true,
+  },
+
+  isActive: {
+    type: Boolean,
     required: true,
   },
 });
