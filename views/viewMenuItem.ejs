@@ -10,6 +10,49 @@
   <body>
     <div class="container">
       <h1 style="padding: 20px"><%= menuItem.itemName%></h1>
+
+      <% if(image) {%>
+      <p>Image is supposed to go here</p>
+      <!-- <img 
+        
+        FOR SOME REASON THIS TAG KEEPS 
+        CALLED THE FUNCTION TO VIEW A MENU ITEM
+
+        srcset="acaiBowl.png"
+        style="width: 50%; height: 50%"
+      /> -->
+      <% } %>
+
+      <br />
+      <h5 class="text-muted">Price: $<%= menuItem.itemPrice%></h5>
+
+      <p class="text-muted"><%= menuItem.mealType%> menu item</p>
+      <%- include('partials/menu_item_categories')%>
+      <br />
+
+      <p><%= menuItem.itemDescription%></p>
+      <br />
+
+      <h6>Ingredients:</h6>
+      <p><%= menuItem.itemIngredients%></p>
+      <br />
     </div>
+
+    <% if (req.user && req.user.isAdmin == true) {%>
+    <div class="container">
+      <a
+        href="/menu/editMenuItem/<%= menuItem.itemID%>"
+        class="btn btn-primary btn-sm"
+        >Edit Menu Item</a
+      >
+      <form
+        action="/menu/<%= menuItem.itemID %>?_method=DELETE"
+        method="POST"
+        class="d-inline"
+      >
+        <button type="submit" class="btn btn-danger btn-sm">Delete Item</button>
+      </form>
+    </div>
+    <% } %>
   </body>
 </html>

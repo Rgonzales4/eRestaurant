@@ -87,7 +87,7 @@
         <% if(!req.MenuItems) { %>
         <h2 style="padding: 10px">Menu Items:</h2>
         <% MenuItems.forEach(Item => { %>
-        <div style="float: left">
+        <div class="col-lg-4" style="float: left">
           <div style="padding: 10px">
             <div class="card" style="width: 18rem">
               <div class="card-body">
@@ -95,7 +95,7 @@
                 <h6 class="card-subtitle mb-2 text-muted">
                   <%= Item.itemID %>
                 </h6>
-                <a href="#" class="btn btn-primary btn-sm">View Menu Item</a>
+                <a href="database/menu/<%= Item.itemID%>" class="btn btn-primary btn-sm">View Menu Item</a>
               </div>
             </div>
           </div>

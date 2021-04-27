@@ -1,144 +1,204 @@
-<div class="container" style="padding: 20px">
-  <h1>Create a Menu Item</h1>
-  <span style="color: red"><%= errorMessage%></span>
-
-  <form action="/menu/createMenuItem" method="POST">
-    <div class="container">
-      <div class="row">
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h5 style="margin-top: 10px">Dish Details:</h5>
+      <div class="container">
         <div class="col">
-          <h5 style="margin-top: 10px">Dish Details:</h5>
-          <div class="container">
-            <div class="col">
-              <div class="form-group">
-                <label for="itemName">Dish Name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="itemName"
-                  placeholder="Input dish name"
-                  name="itemName"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="itemPrice">Dish Price</label>
-                <div class="input-group has-validation">
-                  <span class="input-group-text" id="itemPrice">$</span>
-                  <input
-                    type="number"
-                    class="form-control"
-                    step="any"
-                    min="0"
-                    id="itemPrice"
-                    name="itemPrice"
-                    oninput="check(this)"
-                    required
-                  />
-                </div>
-              </div>
-              <br />
-              <div class="form-group">
-                <label for="itemDescription">Description</label>
-                <textarea
-                  type="text"
-                  class="form-control"
-                  id="itemDescription"
-                  placeholder="Input description"
-                  name="itemDescription"
-                  rows="9"
-                  required
-                ></textarea>
-              </div>
-              <br />
-              <div class="form-group">
-                <label for="itemIngredients">Ingredients</label>
-                <textarea
-                  type="text"
-                  class="form-control"
-                  id="itemIngredients"
-                  placeholder="Input ingredients"
-                  name="itemIngredients"
-                  rows="5"
-                  required
-                ></textarea>
-              </div>
+          <div class="form-group">
+            <label for="itemName">Dish Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="itemName"
+              placeholder="Input dish name"
+              value="<%= menuItem.itemName%>"
+              name="itemName"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="itemPrice">Dish Price</label>
+            <div class="input-group has-validation">
+              <span class="input-group-text" id="itemPrice">$</span>
+              <input
+                type="number"
+                class="form-control"
+                step="any"
+                min="0"
+                id="itemPrice"
+                name="itemPrice"
+                oninput="check(this)"
+                placeholder="Input price"
+                value="<%= menuItem.itemPrice%>"
+                required
+              />
             </div>
           </div>
-        </div>
-
-        <div class="col">
-          <h5 style="margin-top: 20px">Food or Drink?</h5>
-          <div class="container">
-            <input type="radio" id="Food" name="isItFood" value="Food" />
-            <label for="Food">Food</label><br />
-            <input type="radio" id="Drink" name="isItFood" value="Drink" />
-            <label for="Drink">Drink</label><br />
-          </div>
-
           <br />
-
-          <h5 style="margin-top: 20px">Time Category:</h5>
-          <div class="container">
-            <input
-              type="radio"
-              id="Breakfast"
-              name="mealType"
-              value="Breakfast"
-            />
-            <label for="Breakfast">Breakfast</label><br />
-            <input
-              type="radio"
-              id="Lunch"
-              name="mealType"
-              value="LunchDinner"
-            />
-            <label for="LunchDinner">Lunch & Dinner</label><br />
-          </div>
-
-          <br />
-
-          <h5 style="margin-top: 20px">Dietary Requirements:</h5>
-          <div class="container">
-            <input
-              type="checkbox"
-              id="dairyFree"
-              name="dairyFree"
-              value="true"
-            />
-            <label for="dairyFree">Dairy Free</label><br />
-            <input
-              type="checkbox"
-              id="glutenFree"
-              name="glutenFree"
-              value="true"
-            />
-            <label for="glutenFree">Gluten Free</label><br />
-            <input type="checkbox" id="nutFree" name="nutFree" value="true" />
-            <label for="nutFree">Nut Free</label><br />
-            <input
-              type="checkbox"
-              id="veganScum"
-              name="veganScum"
-              value="true"
-            />
-            <label for="veganScum">Vegan Scum</label><br />
-            <input
-              type="checkbox"
-              id="vegetarian"
-              name="vegetarian"
-              value="true"
-            />
-            <label for="vegetarian">Vegetarian</label><br />
+          <div class="form-group">
+            <label for="itemDescription">Description</label>
+            <textarea
+              type="text"
+              class="form-control"
+              id="itemDescription"
+              placeholder="Input description"
+              name="itemDescription"
+              rows="9"
+              required
+            >
+<%= menuItem.itemDescription%></textarea
+            >
           </div>
           <br />
-          <button type="submit" class="btn btn-primary">
-            Create Menu Item
-          </button>
-          <a href="/menu" class="btn btn-secondary">Cancel</a>
+          <div class="form-group">
+            <label for="itemIngredients">Ingredients</label>
+            <textarea
+              type="text"
+              class="form-control"
+              id="itemIngredients"
+              placeholder="Input ingredients"
+              name="itemIngredients"
+              rows="5"
+              required
+            >
+<%= menuItem.itemIngredients%></textarea
+            >
+          </div>
         </div>
       </div>
     </div>
-  </form>
+
+    <div class="col">
+      <h5 style="margin-top: 20px">Food or Drink?</h5>
+      <div class="container">
+        <% if(menuItem.isItFood == "Food") { %>
+        <input type="radio" id="Food" name="isItFood" value="Food" checked />
+        <% } else { %>
+        <input type="radio" id="Food" name="isItFood" value="Food" />
+        <% } %>
+        <label for="Food">Food</label>
+        <br />
+
+        <% if(menuItem.isItFood == "Drink") { %>
+        <input type="radio" id="Drink" name="isItFood" value="Drink" checked />
+        <% } else { %>
+        <input type="radio" id="Drink" name="isItFood" value="Drink" />
+        <% } %>
+        <label for="Drink">Drink</label>
+        <br />
+      </div>
+
+      <br />
+
+      <h5 style="margin-top: 20px">Time Category:</h5>
+      <div class="container">
+        <% if(menuItem.mealType == "Breakfast") { %>
+        <input
+          type="radio"
+          id="Breakfast"
+          name="mealType"
+          value="Breakfast"
+          checked
+        />
+        <% } else { %>
+        <input type="radio" id="Breakfast" name="mealType" value="Breakfast" />
+        <% } %>
+        <label for="Breakfast">Breakfast</label><br />
+
+        <% if(menuItem.mealType == "LunchDinner") { %>
+        <input
+          type="radio"
+          id="Lunch"
+          name="mealType"
+          value="LunchDinner"
+          checked
+        />
+        <% } else { %>
+        <input type="radio" id="Lunch" name="mealType" value="LunchDinner" />
+        <% } %>
+        <label for="LunchDinner">Lunch & Dinner</label><br />
+      </div>
+
+      <br />
+
+      <h5 style="margin-top: 20px">Dietary Requirements:</h5>
+      <div class="container">
+        <% if(menuItem.dairyFree) { %>
+        <input
+          type="checkbox"
+          id="dairyFree"
+          name="dairyFree"
+          value="true"
+          checked
+        />
+        <% } else {%>
+        <input type="checkbox" id="dairyFree" name="dairyFree" value="true" />
+        <% } %>
+        <label for="dairyFree">Dairy Free</label><br />
+
+        <% if(menuItem.glutenFree) { %>
+        <input
+          type="checkbox"
+          id="glutenFree"
+          name="glutenFree"
+          value="true"
+          checked
+        />
+        <% } else {%>
+        <input type="checkbox" id="glutenFree" name="glutenFree" value="true" />
+        <% } %>
+        <label for="glutenFree">Gluten Free</label><br />
+
+        <% if(menuItem.nutFree) { %>
+        <input
+          type="checkbox"
+          id="nutFree"
+          name="nutFree"
+          value="true"
+          checked
+        />
+        <% } else {%>
+        <input type="checkbox" id="nutFree" name="nutFree" value="true" />
+        <% } %>
+        <label for="nutFree">Nut Free</label><br />
+
+        <% if(menuItem.dairyFree) { %>
+        <input
+          type="checkbox"
+          id="veganScum"
+          name="veganScum"
+          value="true"
+          checked
+        />
+        <% } else {%>
+        <input type="checkbox" id="veganScum" name="veganScum" value="true" />
+        <% } %>
+        <label for="veganScum">Vegan Scum</label><br />
+
+        <% if(menuItem.dairyFree) { %>
+        <input
+          type="checkbox"
+          id="vegetarian"
+          name="vegetarian"
+          value="true"
+          checked
+        />
+
+        <% } else {%>
+        <input type="checkbox" id="vegetarian" name="vegetarian" value="true" />
+        <% } %>
+        <label for="vegetarian">Vegetarian</label><br />
+      </div>
+      <br />
+
+      <h5 style="margin-top: 20px">Upload an Image:</h5>
+      <div class="container">
+        <p class="text-muted">PNG files only</p>
+        <label for="image">Upload Image</label>
+        <input type="file" id="image" name="image" value="" />
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>

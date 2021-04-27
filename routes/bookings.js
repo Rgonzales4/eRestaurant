@@ -53,10 +53,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
     bookingMealTime: req.body.bookingMealTime,
     isActive: true,
   });
-
-  let userBookings = await Booking.find({
-    bookingUserEmail: req.user.email
-  })
+  console.log(booking);
 
   let confirmBookingID = await Booking.findOne({
     bookingID: req.body.bookingID,
