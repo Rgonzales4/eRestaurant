@@ -3,19 +3,17 @@ const express = require('express');
 const router = express.Router();
 const crypto = require('crypto');
 const multer = require('multer');
-const fs = require('fs');
 
 const MenuItem = require('../models/menu_item');
-const ItemImage = require('../models/item_image');
+
+router.use(express.static('uploads'));
 
 // Multer setup for storing uploaded files (images for menu items)
 const Storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads');
+    cb(null, './views/uploads');
   },
   filename: (req, file, cb) => {
-    //Returns the extension of the file
-    var ext = file.originalname.substr(file.originalname.lastIndexOf('.'));
     cb(null, file.originalname);
   },
 });
@@ -59,24 +57,9 @@ router.post('/createMenuItem', checkAdmin, upload, async (req, res) => {
   var newImage;
   var newMenuItem;
   if (req.file) {
-    let img = {
-      filename: req.file.originalname,
-      contentType: req.file.mimetype,
-      imageBase64: fs.readFileSync(req.file.path),
-    };
-
-    newImage = new ItemImage(img, (err) => {
-      if (err) {
-        console.log(err);
-        res.render('createMenuItem', {
-          req: req,
-          errorMessage: 'Problem with creating the image of the menu item',
-        });
-      }
-    });
-
-    await newImage.save();
+    newImage = req.file.originalname;
   }
+
   newMenuItem = new MenuItem({
     itemID: crypto.randomBytes(6).toString('hex'),
     isItFood: req.body.isItFood,
@@ -101,33 +84,25 @@ router.post('/createMenuItem', checkAdmin, upload, async (req, res) => {
     res.render('createMenuItem', {
       req: req,
       errorMessage: 'Please make sure you filled in all the necessary sections',
+      menuItem: newMenu,
     });
   }
 });
 
 //EDIT MENU ITEMS
-router.post('/editMenuItem/:itemID', checkAdmin, async (req, res) => {
+router.post('/editMenuItem/:itemID', checkAdmin, upload, async (req, res) => {
   //Create Image object is an image has been uploaded
   var newImage;
-  if (req.file) {
-    let img = {
-      // imageID: crypto.randomBytes(6).toString('hex'),
-      filename: req.file.originalname,
-      contentType: req.file.mimetype,
-      imageBase64: fs.readFileSync(req.file.path),
-    };
-
-    newImage = new ItemImage(img, (err) => {
-      if (err) {
-        console.log(err);
-        res.render('createMenuItem', {
-          req: req,
-          errorMessage: 'Problem with creating the image of the menu item',
-        });
-      }
+  console.log('Output for req.file: ');
+  console.log(req.file);
+  if (!req.file) {
+    console.log('No new Menu item image was uploaded');
+    var currentMenuItem = await MenuItem.findOne({
+      itemID: req.params.itemID,
     });
-
-    await newImage.save();
+    newImage = currentMenuItem.itemImg;
+  } else {
+    newImage = req.file.originalname;
   }
 
   const filter = { itemID: req.params.itemID };
@@ -150,28 +125,7 @@ router.post('/editMenuItem/:itemID', checkAdmin, async (req, res) => {
   res.redirect('/menu');
 });
 
-//DELETE MENU ITEM
-router.delete('/:itemID', checkAdmin, async (req, res) => {
-  console.log('Menu Item deletion output statement');
-  const deletingMenuItem = await MenuItem.findOne({
-    itemID: req.params.itemID,
-  });
-  console.log(`Menu Item ${deletingMenuItem.itemName} deleted`);
-  await ItemImage.findByIdAndDelete(deletingMenuItem.itemImg);
-  await MenuItem.findByIdAndDelete(deletingMenuItem.id);
-  res.redirect('/menu');
-});
-
-// VIEWING MENU ITEM
-// router.get('/:filename', async (req, res) => {
-//   console.log(' ');
-//   console.log('Trying to load the image');
-//   const foodImage = await ItemImage.findOne({ filename: req.params.filename });
-//   console.log(foodImage.filename);
-//   // const currentItem = await MenuItem.findById({ itemImg: foodImage.id });
-//   res.render('viewMenuItem', { req: req, image: foodImage });
-// });
-
+//VIEW MENU ITEM
 router.get('/:itemID', async (req, res) => {
   console.log('\n', 'Viewing Menu item');
   var currentMenuItem = await MenuItem.findOne({
@@ -179,19 +133,21 @@ router.get('/:itemID', async (req, res) => {
   });
   console.log('Menu Item', currentMenuItem.itemName, 'is being viewed');
   console.log(`${currentMenuItem.itemName} data:`, currentMenuItem);
-  var foodImage;
-  if (currentMenuItem.itemImg) {
-    foodImage = await ItemImage.findById({
-      _id: currentMenuItem.itemImg,
-    });
-    console.log('Image name:', foodImage.filename);
-  }
-
   res.render('viewMenuItem', {
     req: req,
     menuItem: currentMenuItem,
-    image: foodImage,
   });
+});
+
+//DELETE MENU ITEM
+router.delete('/:itemID', checkAdmin, async (req, res) => {
+  console.log('Menu Item deletion output statement');
+  const deletingMenuItem = await MenuItem.findOne({
+    itemID: req.params.itemID,
+  });
+  console.log(`Menu Item ${deletingMenuItem.itemName} deleted`);
+  await MenuItem.findByIdAndDelete(deletingMenuItem.id);
+  res.redirect('/menu');
 });
 
 function checkAdmin(req, res, next) {

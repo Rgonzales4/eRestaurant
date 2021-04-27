@@ -1,6 +1,4 @@
-const { ObjectID } = require('bson');
 const mongoose = require('mongoose');
-const item_image = require('./item_image');
 const Schema = mongoose.Schema;
 
 const MenuSchema = new Schema({
@@ -37,8 +35,7 @@ const MenuSchema = new Schema({
 
   // Image for the menu item
   itemImg: {
-    type: ObjectID,
-    ref: 'Image',
+    type: String,
   },
 
   // Menu Time Category --> All Boolean, used for filtering
