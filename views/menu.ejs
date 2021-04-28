@@ -20,47 +20,48 @@
 
         <div class="container" style="float: left; width: 30%; background-color: grey; padding: 1%; align-content: center;">
           
-          <form>
+          <form action="/menu/searchFilter" method="POST">
           <div style="padding: 5%; font-size: 30px;">Search Filters</div>
 
           <div style="padding: 4%;">
             <label for="customRange1" class="form-label" style="font-size: 20px;">Price</label>
             <input type="range" class="form-range" id="customRange1">
+
           </div>
 
 
           <label for="customRange1" class="form-label" style="padding-top: 5%; padding-left: 5%; font-size: 20px;">Dietary Requirements</label>
           
           <div class="form-check" style="margin-left: 9%;">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
+            <input class="form-check-input" type="checkbox" value="true" name="vegetarian" id="flexCheckDefault">
+            <label class="form-check-label" for="vegetarian">
               Vegetarian
             </label>
           </div>
 
           <div class="form-check" style="margin-left: 9%;">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input class="form-check-input" type="checkbox" value="true" name="vegan" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
               Vegan
             </label>
           </div>
 
           <div class="form-check" style="margin-left: 9%;">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input class="form-check-input" type="checkbox" value="true" name="glutenFree" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
               Gluten Free
             </label>
           </div>
 
           <div class="form-check" style="margin-left: 9%;">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input class="form-check-input" type="checkbox" value="true" name="dairyFree" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
               Dairy Free
             </label>
           </div>
 
           <div class="form-check" style="margin-left: 9%;">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <input class="form-check-input" type="checkbox" value="true" name="nutFree" id="flexCheckDefault">
             <label class="form-check-label" for="flexCheckDefault">
               Nut Free
             </label>
@@ -68,8 +69,10 @@
           
 
           <div class="container" style="padding-top: 30px; width: 100%; " >
-            <a class="btn btn-outline-success me-2">Clear All</a>
+            <button class="btn btn-outline-success me-2" type="reset">Clear All</button>
           </div>
+
+          <button type="submit"class="btn btn-success">Search</button>
 
         </form>
 
@@ -87,8 +90,8 @@
 
           <div class="row">
             <% if(menu_item) {%> <% Array.from(menu_item).forEach(m => { %>
-            <div class="col-lg-4" style="float: left">
-              <div class="card mt-2">
+            <div class="col-lg-4" style="float: left" >
+              <div class="card mt-2" style="margin-bottom: 10%;">
                 <div class="card-body">
                   <h4 class="card-title"><%= m.itemName %></h4>
                   <div class="card-title"><%= m.itemDescription %></div>
