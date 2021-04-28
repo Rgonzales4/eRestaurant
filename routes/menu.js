@@ -20,6 +20,8 @@ const Storage = multer.diskStorage({
 
 const upload = multer({ storage: Storage }).single('image');
 
+
+//MENU FILTER
 router.get('/', async (req, res) => {
   console.log('Menu page opened');
   const menuItem = await MenuItem.find({});
@@ -29,6 +31,7 @@ router.get('/', async (req, res) => {
 router.post('/searchFilter', async (req,res) => {
   // var vegetarianItem;
   // var veganItem;
+  
   var menuItem;
 
   //vegetarian food
