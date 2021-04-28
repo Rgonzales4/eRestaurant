@@ -45,6 +45,11 @@ const BookingSchema = new Schema({
     type: Boolean,
     required: true,
   },
+
+  menuItems: {
+    type: Array,
+    required: false,
+  }
 });
 
 module.exports = mongoose.model('Booking', BookingSchema);

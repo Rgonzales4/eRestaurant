@@ -22,6 +22,7 @@ router.get('/createBooking', checkAuthenticated, (req, res) => {
 router.get('/edit/:bookingID', checkAuthenticated, async (req, res) => {
   // Not yet finished
   const booking = await Booking.findOne({ bookingID: req.params.bookingID });
+  const menu =
   res.render('editBooking', {
     req: req,
     successMessage: '',

@@ -10,24 +10,39 @@
 
   <body>
     <div class="container">
-    <h1 class="mb-2">Edit Booking</h1>
-    <% if(req.user){%>
-    <div>
-      <label
-      for="bookingUser"
-      name="bookingUser"
-      value="<%- req.user.email%>">
-    </label>
-    </div>
-    <%}   %>
-    <div>
-      <span style="color: green;"><%= successMessage %></span>
-      <span style="color: red;"><%= failMessage %></span>
-    </div>
-    
-    <form action="/bookings/<%= booking.bookingID %>?_method=PUT" method="POST" style="margin: 20px">
-      <%- include('partials/_booking_form_fields') %>
-      </form>
+      <h1 class="mb-2">Edit Booking</h1>
+      <% if(req.user){%>
+      <div class="row">
+        <div class="col">
+          <div>
+            <label
+              for="bookingUser"
+              name="bookingUser"
+              value="<%- req.user.email%>"
+            >
+            </label>
+          </div>
+          <%} %>
+          <div>
+            <span style="color: green"><%= successMessage %></span>
+            <span style="color: red"><%= failMessage %></span>
+          </div>
+
+          <form
+            action="/bookings/<%= booking.bookingID %>?_method=PUT"
+            method="POST"
+            style="margin: 20px"
+          >
+            <%- include('partials/_booking_form_fields') %>
+          </form>
+        </div>
+        <div class="col">
+          <h2>Menu</h2>
+        </div>
+        <div class="col">
+          <h2>Cart</h2>
+        </div>
+      </div>
     </div>
   </body>
 </html>
