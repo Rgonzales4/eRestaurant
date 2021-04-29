@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const multer = require('multer');
 
 const MenuItem = require('../models/menu_item');
+var menuGroup;
 
 router.use(express.static('uploads'));
 
@@ -91,6 +92,9 @@ router.post('/searchFilter', async (req,res) => {
 
 
   res.render('menu', {req:req, menu_item: menuItem});
+
+
+
 });
 
 //OPENING THE CREATE PAGE FOR MENU ITEM

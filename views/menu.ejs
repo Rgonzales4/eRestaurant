@@ -7,7 +7,7 @@
     <%- include('partials/navbar') %>
     <title style="color: rgb(255, 245, 235);">Menu</title>
   </head>
-  <body>
+  <body style="background-color: rgba(255, 245, 235, 0.548);">
     <h1 style="padding-top: 40px; text-align: left; padding-left: 12%;" >MENU</h1>
 
     
@@ -18,9 +18,9 @@
 
       <div class="wrapper">
 
-        <div class="container" style="float: left; width: 30%; background-color: grey; padding: 1%; align-content: center;">
+        <div class="container" style="float: left; width: 30%; background-color: rgba(128, 128, 128, 0.616); padding: 1%; align-content: center; border-radius: 25px;">
           
-          <form action="/menu/searchFilter" method="POST">
+          <form action="/menu/searchFilter" method="POST" >
           <div style="padding: 5%; font-size: 30px;">Search Filters</div>
 
           <div style="padding: 4%;">
@@ -83,6 +83,7 @@
         <div class="container" style="float: right; width: 70%;" >
 
           <div class="btn-group" role="group" aria-label="Basic outlined example" style="width: 100%; padding-top: 2%; padding-bottom: 2%;">
+            <button type="button" class="btn btn-outline-secondary" id="all" autofocus>All</button>
             <button type="button" class="btn btn-outline-secondary">Breakfast</button>
             <button type="button" class="btn btn-outline-secondary">Lunch & Dinner</button>
             <button type="button" class="btn btn-outline-secondary">Drinks</button>
