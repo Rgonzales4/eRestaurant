@@ -5,7 +5,9 @@ const crypto = require('crypto');
 const multer = require('multer');
 
 const MenuItem = require('../models/menu_item');
-var menuGroup;
+var breakfastGroup;
+var lunchDinnerGroup;
+var drinkGroup;
 
 router.use(express.static('uploads'));
 
@@ -33,6 +35,10 @@ router.post('/searchFilter', async (req,res) => {
   // var vegetarianItem;
   // var veganItem;
   
+  var breakfastGroup = await MenuItem.find({nutFree: true});
+  var lunchDinnerGroup = await MenuItem.find({nutFree: true});
+  var drinkGroup = await MenuItem.find({nutFree: true});
+
   var menuItem;
 
   //vegetarian food
@@ -238,5 +244,6 @@ function checkAdmin(req, res, next) {
   }
   res.redirect('/');
 }
+
 
 module.exports = router;
