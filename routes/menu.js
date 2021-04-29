@@ -5,6 +5,9 @@ const crypto = require('crypto');
 const multer = require('multer');
 
 const MenuItem = require('../models/menu_item');
+var breakfastGroup;
+var lunchDinnerGroup;
+var drinkGroup;
 
 router.use(express.static('uploads'));
 
@@ -20,6 +23,8 @@ const Storage = multer.diskStorage({
 
 const upload = multer({ storage: Storage }).single('image');
 
+
+//MENU FILTER
 router.get('/', async (req, res) => {
   console.log('Menu page opened');
   const menuItem = await MenuItem.find({});
@@ -29,6 +34,11 @@ router.get('/', async (req, res) => {
 router.post('/searchFilter', async (req,res) => {
   // var vegetarianItem;
   // var veganItem;
+  
+  var breakfastGroup = await MenuItem.find({nutFree: true});
+  var lunchDinnerGroup = await MenuItem.find({nutFree: true});
+  var drinkGroup = await MenuItem.find({nutFree: true});
+
   var menuItem;
 
   //vegetarian food
@@ -85,9 +95,23 @@ router.post('/searchFilter', async (req,res) => {
   }
   
   }
+  
+  //if(req.body.nutFree == null && req.body.dairyFree == null && req.body.glutenFree == null && req.body.vegan == null && req.body.vegetarian){
+    //console.log('clear them filters bby');
+    //menuItem = await MenuItem.find({});
+  //}
 
 
-  res.render('menu', {req:req, menu_item: menuItem});
+  if(menuItem != null){
+    res.render('menu', {req:req, menu_item: menuItem});
+  }else{
+    const menuItem = await MenuItem.find({});
+  res.render('menu', { req: req, menu_item: menuItem });
+  }
+  
+
+
+
 });
 
 //OPENING THE CREATE PAGE FOR MENU ITEM
@@ -220,5 +244,6 @@ function checkAdmin(req, res, next) {
   }
   res.redirect('/');
 }
+
 
 module.exports = router;
