@@ -236,19 +236,21 @@ function checkAuthenticated(req, res, next) {
   }
   res.redirect('/login');
 }
-async function checkForBookingsMade(req){
+async function checkForBookingsMade(req) {
   let CFBM = await Booking.findOne({
     bookingUserEmail: req.body.bookingUserEmail,
-    bookingDate: req.body.bookingDate, 
+    bookingDate: req.body.bookingDate,
     bookingMealTime: req.body.bookingMealTime,
-  }) 
-  try {if (CFBM.bookingUserEmail === undefined) 
-  {console.log(CFBM.bookingUserEmail)
-    return false;}
-  else {
-    console.log(CFBM.bookingUserEmail)
-    return true;}}
-  catch(e){
+  });
+  try {
+    if (CFBM.bookingUserEmail === undefined) {
+      console.log(CFBM.bookingUserEmail);
+      return false;
+    } else {
+      console.log(CFBM.bookingUserEmail);
+      return true;
+    }
+  } catch (e) {
     return false;
   }
 }

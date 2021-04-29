@@ -26,6 +26,70 @@ router.get('/', async (req, res) => {
   res.render('menu', { req: req, menu_item: menuItem });
 });
 
+router.post('/searchFilter', async (req,res) => {
+  // var vegetarianItem;
+  // var veganItem;
+  var menuItem;
+
+  //vegetarian food
+  if(req.body.vegetarian){    
+    if (menuItem == null){
+        menuItem = await MenuItem.find({vegetarian: true});
+    } else {
+      var vegetarianItem = await MenuItem.find({vegetarian: true});
+      menuItem = menuItem.concat(vegetarianItem);
+    }
+  }
+
+  //vegan food
+  if(req.body.vegan){
+    if (menuItem == null){
+      menuItem = await MenuItem.find({veganScum: true});
+  } else {
+    var veganItem = await MenuItem.find({veganScum: true});
+    menuItem = menuItem.concat(veganItem);
+  }
+  
+  }
+
+
+  //gluten-free
+  if(req.body.glutenFree){
+    if (menuItem == null){
+      menuItem = await MenuItem.find({glutenFree: true});
+  } else {
+    var glutenFreeItem = await MenuItem.find({glutenFree: true});
+    menuItem = menuItem.concat(glutenFreeItem);
+  }
+  
+  }
+
+  //Dairy Free 
+  if(req.body.dairyFree){
+    if (menuItem == null){
+      menuItem = await MenuItem.find({dairyFree: true});
+  } else {
+    var dairyFreeItem = await MenuItem.find({dairyFree: true});
+    menuItem = menuItem.concat(dairyFreeItem);
+  }
+  
+  }
+
+  //Dairy Free 
+  if(req.body.nutFree){
+    if (menuItem == null){
+      menuItem = await MenuItem.find({nutFree: true});
+  } else {
+    var nutFreeItem = await MenuItem.find({nutFree: true});
+    menuItem = menuItem.concat(nutFreeItem);
+  }
+  
+  }
+
+
+  res.render('menu', {req:req, menu_item: menuItem});
+});
+
 //OPENING THE CREATE PAGE FOR MENU ITEM
 router.get('/createMenuItem', checkAdmin, async (req, res) => {
   console.log('Create Menu Item page');
