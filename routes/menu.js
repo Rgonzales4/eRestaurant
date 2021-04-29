@@ -89,9 +89,20 @@ router.post('/searchFilter', async (req,res) => {
   }
   
   }
+  
+  //if(req.body.nutFree == null && req.body.dairyFree == null && req.body.glutenFree == null && req.body.vegan == null && req.body.vegetarian){
+    //console.log('clear them filters bby');
+    //menuItem = await MenuItem.find({});
+  //}
 
 
-  res.render('menu', {req:req, menu_item: menuItem});
+  if(menuItem != null){
+    res.render('menu', {req:req, menu_item: menuItem});
+  }else{
+    const menuItem = await MenuItem.find({});
+  res.render('menu', { req: req, menu_item: menuItem });
+  }
+  
 
 
 
