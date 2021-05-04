@@ -1,0 +1,83 @@
+<head>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+    crossorigin="anonymous"
+  />
+</head>
+
+<nav
+  class="navbar sticky-top navbar-expand-lg navbar-light"
+  style="background-color: rgb(255, 245, 235)"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Le Bistrot D'Andre</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/menu">Menu</a>
+        </li>
+        <% if (req.user){%>
+          <li class="nav-item">
+            <a class="nav-link" href="/bookings">Booking</a>
+          </li>
+        <% }%>
+        <li class="nav-item">
+          <a class="nav-link" href="/about">About Us</a>
+        </li>
+        <% if (req.user && req.user.isAdmin == true){%>
+          <li class="nav-item">
+            <a class="nav-link" href="/database">Database</a>
+          </li>
+        <% }%>
+      </div>
+      </ul>
+      <!-- some comment 
+        <a id="loginBtn" class="btn btn-outline-danger me-2" type="button" href="/login">
+          Login / Sign Up
+        </a>
+      -->
+
+
+
+      <% if (!req.user) {%>
+        <a id="loginBtn" class="btn btn-secondary me-2" type="button" href="/login" >
+          Login / Sign Up
+        </a>
+        <% } else if (req.user.isAdmin == true){%>
+          <label style="padding-right: 10px; margin-left: 10px;">Welcome, <a href="/profile">
+            Admin <%= req.user.firstName%>
+          </a></label>
+          <form action="/logout?_method=DELETE" method="POST">
+            <button class="btn btn-outline-danger me-2" type="submit">Log Out</button>
+          </form>
+        <% } else {%>
+          <label style="padding-right: 10px; margin-left: 10px;">Welcome, <a href="/profile">
+          <%= req.user.firstName%>
+        </a></label>
+        <form action="/logout?_method=DELETE" method="POST">
+          <button class="btn btn-outline-danger me-2" type="submit">Log Out</button>
+        </form>
+        <% } %>
+      <label class="me-auto" style="padding-right: 10px;">
+
+      </label>
+      
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include('partials/navbar') %>
+    <title>Login</title>
+  </head>
+
+  <style>
+    #loginBtn {
+      display: none;
+    }
+  </style>
+
+  <style type="text/css">
+    body {
+      text-align: center;
+    }
+
+    .header {
+      height: 450px;
+      background-color: #0c2a0a;
+      color: rgb(255, 245, 235);
+    }
+
+    .title {
+      padding-top: 70px;
+      font-size: 150px;
+      color: rgb(255, 245, 235);
+    }
+
+    .description {
+      padding-top: 12px;
+      padding-left: 10%;
+      padding-right: 10%;
+    }
+
+    .foot {
+      height: 100px;
+      background-color: rgb(59, 59, 59);
+      color: white;
+      text-align: center;
+      width: 100%;
+    }
+  </style>
+
+  <body style="background-color: #0c2a0a">
+    <div class="header">
+      <div class="title">Login</div>
+      <p class="description">
+        Use the Login form below to reserve a table for your next visit. Le
+        Bistrot D'Andre accepts online bookings for up to 10 guests.
+      </p>
+      <p class="description">
+        For groups of 11 - 30 guests please contact the team at
+        lebistrotdandre08@gmail.com
+      </p>
+    </div>
+
+    <form
+      class="fill"
+      action="/login"
+      method="post"
+      style="
+        width: 40%;
+        margin-left: 30%;
+        background-color: rgb(255, 245, 235);
+        height: 400px;
+      "
+    >
+      <div style="padding: 10px">
+        <div class="col">
+          <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+
+          <div class="col">
+            <input
+              type="email"
+              class="form-control"
+              id="staticEmail"
+              name="email"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="col">
+          <label for="inputPassword" class="col-sm-2 col-form-label"
+            >Password</label
+          >
+        </div>
+
+        <div class="col">
+          <input
+            type="password"
+            class="form-control"
+            id="inputPassword"
+            name="password"
+            required
+          />
+        </div>
+      </div>
+
+      <div id="validationServerUsernameFeedback" class="invalid-feedback">
+        Please enter password
+      </div>
+
+      <div style="padding-top: 20px">
+        <button class="btn btn-outline-success me-2" type="submit">
+          Login
+        </button>
+      </div>
+
+      <span style="color: red">
+        <% if (messages.error) { %> <%= messages.error%> <% } %>
+      </span>
+
+      <div class="signup">
+        <p>Don't have an account? <a href="/registration">Sign up now</a></p>
+      </div>
+    </form>
+
+    <div class="foot">Le Bistrot D'Andre</div>
+  </body>
+</html>
