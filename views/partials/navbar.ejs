@@ -47,8 +47,16 @@
         <% }%>
       </div>
       </ul>
-      <% if (!req.user) {%>
+      <!-- some comment 
         <a id="loginBtn" class="btn btn-outline-danger me-2" type="button" href="/login">
+          Login / Sign Up
+        </a>
+      -->
+
+
+
+      <% if (!req.user) {%>
+        <a id="loginBtn" class="btn btn-secondary me-2" type="button" href="/login" >
           Login / Sign Up
         </a>
         <% } else if (req.user.isAdmin == true){%>
@@ -67,8 +75,9 @@
         </form>
         <% } %>
       <label class="me-auto" style="padding-right: 10px;">
-        
+
       </label>
+      
     </div>
   </div>
 </nav>
