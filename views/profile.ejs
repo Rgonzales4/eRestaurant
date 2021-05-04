@@ -46,19 +46,43 @@
 
         <div class="col"></div>
       </div>
-      <div class="col-lg-4" style="margin-top: 10px">
-        <% if (adminEdit == false){%>
-        <a href="/profile/editProfile" class="btn btn-primary btn-sm"
-          >Edit Account</a
-        >
-        <% } else if (adminEdit == true) { %>
-        <a
-          href="/database/account/<%= user.userId%>/editProfile"
-          class="btn btn-primary btn-sm"
-          >Edit Account</a
-        >
-        <% } %>
+      <div class="row" style="margin-top: 10px">
+        <div class="col-lg-4">
+          <% if (adminEdit == false){%>
+          <a href="/profile/editProfile" class="btn btn-primary btn-sm"
+            >Edit Account</a
+          >
+          <% } else if (adminEdit == true) { %>
+          <a
+            href="/database/account/<%= user.userId%>/editProfile"
+            class="btn btn-primary btn-sm"
+            >Edit Account</a
+          >
+          <% } %>
+          <button onclick="alertUser()" class="btn btn-danger btn-sm">
+            Delete Account
+          </button>
+          <a
+            href="/profile/deleteProfile"
+            class="btn btn-danger btn-sm"
+            id="deleteUserBtn"
+            style="display: none"
+          >
+            Delete Account
+          </a>
+        </div>
       </div>
     </div>
   </body>
 </html>
+<<<<<<< HEAD
+=======
+
+<script>
+  function alertUser() {
+    if (confirm('Deleting your account...')) {
+      document.getElementById('deleteUserBtn').click();
+    }
+  }
+</script>
+>>>>>>> 8885553b104a3ace57804cb8f216c65380dfda7e
