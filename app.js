@@ -7,6 +7,7 @@ const ejsMate = require('ejs-mate');
 const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
+const MongoDBStore = require('connect-mongo')(session);
 const methodOverride = require('method-override');
 
 const menuRouter = require('./routes/menu');
@@ -41,13 +42,27 @@ mongoose.set('useFindAndModify', false);
 
 //Flash & Session
 app.use(flash());
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
+
+const store = new MongoDBStore({
+  url: process.env.DB_Connection,
+  secret: process.env.SESSION_SECRET,
+  touchAfter: 60* 60* 3,
+})
+
+const sessionConfig = {
+  store,
+  name: 'session',
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 3,
+    maxAge: 1000 * 60 * 60 * 24 * 3,
+  }
+}
+
+app.use(session(sessionConfig));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
