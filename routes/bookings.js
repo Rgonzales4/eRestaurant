@@ -4,6 +4,7 @@ const MenuItem = require('../models/menu_item');
 const router = express.Router();
 const crypto = require('crypto');
 const { isUndefined } = require('util');
+const { findById } = require('../models/booking');
 
 router.get('/', checkAuthenticated, async (req, res) => {
   const booking = await Booking.find({ bookingUserEmail: req.user.email });
@@ -197,15 +198,10 @@ router.put('/edit/addItem/:bookingID', async (req, res) => {
 });
 
 router.put('/edit/removeItem/:bookingID', async (req, res) => {
-  //removing an item from menu from edit booking
-  //WORK IN PROGRESS
-  let booking = await Booking.findOne({ bookingID: req.params.bookingID });
-  let menuItemId = req.body.menuItemId;
-  // booking.menuItems.updateOne({ $pull: {menuItems: {menuItemId}}});
-  // let index = booking.menuItems.indexOf(menuItemId)
-  // console.log(index)
-  // booking.menuItems.index.splice(index, 1);
-  await booking.save();
+  const id = req.params.bookingID
+  const {menuItemId} = req.body
+  const booking = await Booking.findOne({bookingID: id})
+  await booking.updateOne({ $pull: {menuItems: {_id: menuItemId} }})
   res.redirect('back');
 });
 
