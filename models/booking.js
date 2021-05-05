@@ -3,6 +3,12 @@ const users = require('./users');
 const Schema = mongoose.Schema;
 const crypto = require('crypto');
 
+const MenuItemSchema = new Schema({
+  menuItemId: String,
+  menuItemName: String,
+  quantity: Number,
+});
+
 const BookingSchema = new Schema({
   bookingID: {
     type: String,
@@ -45,6 +51,9 @@ const BookingSchema = new Schema({
     type: Boolean,
     required: true,
   },
+
+  menuItems: [MenuItemSchema],
+
 });
 
 module.exports = mongoose.model('Booking', BookingSchema);

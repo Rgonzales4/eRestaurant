@@ -1,5 +1,6 @@
 const express = require('express');
 const Booking = require('../models/booking');
+const MenuItem = require('../models/menu_item');
 const router = express.Router();
 const crypto = require('crypto');
 const { isUndefined } = require('util');
@@ -9,24 +10,29 @@ router.get('/', checkAuthenticated, async (req, res) => {
   res.render('booking', { failMessage: '', req: req, booking: booking });
 });
 
-router.get('/createBooking', checkAuthenticated, (req, res) => {
+router.get('/createBooking', checkAuthenticated, async (req, res) => {
+  const menu = await MenuItem.find({});
+
   console.log('create booking opened');
   res.render('createBooking', {
     successMessage: '',
     failMessage: '',
     req: req,
     booking: new Booking(),
+    menu: menu,
   });
 });
 
 router.get('/edit/:bookingID', checkAuthenticated, async (req, res) => {
   // Not yet finished
   const booking = await Booking.findOne({ bookingID: req.params.bookingID });
+  const menu = await MenuItem.find({});
   res.render('editBooking', {
     req: req,
     successMessage: '',
     failMessage: '',
     booking: booking,
+    menu: menu,
   });
 });
 
@@ -149,6 +155,58 @@ router.post('/', checkAuthenticated, async (req, res) => {
       });
     }
   }
+});
+
+router.put('/:bookingID', async (req, res) => {
+  //NEED TO ADD CLAUSES IN
+  const filter = { bookingID: req.params.bookingID };
+  const update = {
+    bookingDate: req.body.bookingDate,
+    bookingNumber: req.body.bookingNumber,
+    allergyDescription: req.body.allergyDescription,
+    bookingUserEmail: req.user.email,
+    bookingUserFirstName: req.user.firstName,
+    bookingUserLastName: req.user.lastName,
+    isActive: true,
+    bookingMealTime: req.body.bookingMealTime,
+  };
+  console.log(update);
+  await Booking.findOneAndUpdate(filter, update);
+  res.redirect('/bookings');
+});
+
+router.put('/edit/addItem/:bookingID', async (req, res) => {
+  //updating an item from menu from edit booking
+  //WORK IN PROGRESS
+  let booking = await Booking.findOne({ bookingID: req.params.bookingID });
+  // for (item of booking.menuItems) {
+  //   if (item.menuItemId === req.body.menuItemId) {
+  //     item._doc[quantity]++;
+  //   }
+  //   else {
+  let menuItem = {
+    menuItemId: req.body.menuItemId,
+    menuItemName: req.body.menuItemName,
+    quantity: 1,
+  };
+  booking.menuItems.push(menuItem);
+  await booking.save();
+  res.redirect('back');
+  //   }
+  // }
+});
+
+router.put('/edit/removeItem/:bookingID', async (req, res) => {
+  //removing an item from menu from edit booking
+  //WORK IN PROGRESS
+  let booking = await Booking.findOne({ bookingID: req.params.bookingID });
+  let menuItemId = req.body.menuItemId;
+  // booking.menuItems.updateOne({ $pull: {menuItems: {menuItemId}}});
+  // let index = booking.menuItems.indexOf(menuItemId)
+  // console.log(index)
+  // booking.menuItems.index.splice(index, 1);
+  await booking.save();
+  res.redirect('back');
 });
 
 router.post('/:bookingID', checkAuthenticated, async (req, res) => {
