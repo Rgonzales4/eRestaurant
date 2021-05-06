@@ -180,28 +180,28 @@ router.put('/edit/addItem/:bookingID', async (req, res) => {
   //updating an item from menu from edit booking
   //WORK IN PROGRESS
   let booking = await Booking.findOne({ bookingID: req.params.bookingID });
-  // for (item of booking.menuItems) {
-  //   if (item.menuItemId === req.body.menuItemId) {
-  //     item._doc[quantity]++;
-  //   }
-  //   else {
   let menuItem = {
     menuItemId: req.body.menuItemId,
     menuItemName: req.body.menuItemName,
     quantity: 1,
+    price: req.body.price
   };
+  let currentPrice
+  booking.totalPrice ? currentPrice = booking.totalPrice : currentPrice = 0;
+  const newPrice = req.body.price 
+  const totalPrice = currentPrice + parseInt(newPrice)
+  booking.totalPrice = totalPrice;
   booking.menuItems.push(menuItem);
   await booking.save();
   res.redirect('back');
-  //   }
-  // }
 });
 
 router.put('/edit/removeItem/:bookingID', async (req, res) => {
-  const id = req.params.bookingID
   const {menuItemId} = req.body
-  const booking = await Booking.findOne({bookingID: id})
+  const booking = await Booking.findOne({bookingID: req.params.bookingID})
   await booking.updateOne({ $pull: {menuItems: {_id: menuItemId} }})
+  // const itemPrice = req.body.price
+  // booking.totalPrice = booking.totalPrice - itemPrice
   res.redirect('back');
 });
 

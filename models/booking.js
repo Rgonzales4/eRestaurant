@@ -7,6 +7,7 @@ const MenuItemSchema = new Schema({
   menuItemId: String,
   menuItemName: String,
   quantity: Number,
+  price: Number
 });
 
 const BookingSchema = new Schema({
@@ -50,6 +51,10 @@ const BookingSchema = new Schema({
   isActive: {
     type: Boolean,
     required: true,
+  },
+
+  totalPrice: {
+    type: Number,
   },
 
   menuItems: [MenuItemSchema],

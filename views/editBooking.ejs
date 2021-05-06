@@ -63,6 +63,7 @@
                 value="<%= item.itemName %>"
                 hidden
               />
+              <input class="form-control" type="text" name="price" value="<%= item.itemPrice %>" hidden >
               <button class="btn btn-success" type="submit">Add</button>
             </form>
           </div>
@@ -90,10 +91,19 @@
                   value="<%= item.id %>"
                   hidden
                 />
+                <!-- <input class="form-control" type="text" name="price" value="<%= item.itemPrice %>" hidden > -->
                 <button class="btn btn-danger" type="submit">Remove</button>
               </form>
             </div>
           <% }) %>
+          <div>
+          <% if(booking.totalPrice) {%>
+            <br>  
+            Your Total Price: $<%= booking.totalPrice %>
+          <% } else { %>
+          Your Total Price: $0
+          <% } %>
+          </div>
         </div>
       </div>
     </div>
