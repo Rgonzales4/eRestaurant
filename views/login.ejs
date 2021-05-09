@@ -60,14 +60,22 @@
       </p>
     </div>
 
-    <form class="fill" action="/login" method="post" style="width: 40%; margin-left: 30%; background-color:rgb(255, 245, 235); height: 400px;">
-     
-      <div>
-
-        <div class="col-3">
+    <form
+      class="fill"
+      action="/login"
+      method="post"
+      style="
+        width: 40%;
+        margin-left: 30%;
+        background-color: rgb(255, 245, 235);
+        height: 400px;
+      "
+    >
+      <div style="padding: 10pxgit push --set-upstream origin katbranch">
+        <div class="col">
           <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-  
-          <div class="col-sm-10">
+
+          <div class="col">
             <input
               type="email"
               class="form-control"
@@ -76,55 +84,44 @@
               required
             />
           </div>
-  
-  
         </div>
-  
-        <div class="col-3">
-          <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+
+        <div class="col">
+          <label for="inputPassword" class="col-sm-2 col-form-label"
+            >Password</label
+          >
         </div>
-          
-          <div class="col-sm-10" style="width: 100%;">
-            <input
-              type="password"
-              class="form-control"
-              id="inputPassword"
-              name="password"
-              required
-  
-              />
-          </div>
 
-
+        <div class="col">
+          <input
+            type="password"
+            class="form-control"
+            id="inputPassword"
+            name="password"
+            required
+          />
+        </div>
       </div>
 
+      <div id="validationServerUsernameFeedback" class="invalid-feedback">
+        Please enter password
+      </div>
 
-          <div id="validationServerUsernameFeedback" class="invalid-feedback">
-            Please enter password
-          </div>
+      <div style="padding-top: 20px">
+        <button class="btn btn-outline-success me-2" type="submit">
+          Login
+        </button>
+      </div>
 
+      <span style="color: red">
+        <% if (messages.error) { %> <%= messages.error%> <% } %>
+      </span>
 
-        
-        <div style="padding-top: 20px">
-          <button class="btn btn-outline-success me-2" type="submit">
-            Login
-          </button>
-        </div>
-
-
-        <span style="color: red">
-          <% if (messages.error) { %> <%= messages.error%> <% } %>
-        </span>
-
-        <div class="signup">
-          <p>Don't have an account? <a href="/registration">Sign up now</a></p>
-        </div>
-
+      <div class="signup">
+        <p>Don't have an account? <a href="/registration">Sign up now</a></p>
+      </div>
     </form>
-  
-      <div class="foot">Le Bistrot D'Andre</div>
 
+    <div class="foot">Le Bistrot D'Andre</div>
   </body>
-  
-  
 </html>
