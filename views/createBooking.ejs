@@ -10,7 +10,9 @@
 
   <body>
     <div class="container">
-      <h1 style="padding: 20px">Create Booking</h1>
+      <div class="row">
+        <div class="col-3">
+         <h1 class="mb-2">Create Booking</h1>
       <!-- <% if(req.user){%>
     <div>
       <label
@@ -25,9 +27,31 @@
         <span style="color: red"><%= failMessage %></span>
       </div>
 
-      <form action="/bookings" method="POST" style="margin: 20px" class="col-3">
+      <form action="/bookings" method="POST" style="margin: 20px">
         <%- include('partials/_booking_form_fields') %>
       </form>
+    </div>
+
+    <div class="col-4">
+      <h1>Menu</h1>
+      <% Array.from(menu).forEach(item => {%>
+        <div class="input-group mb-1">
+          <input
+            disabled="true "
+            type="text"
+            class="form-control"
+            value="<%= item.itemName %>"
+          />
+        </div>
+        <% })%>
+    </div>
+
+    <div class="col-sm">
+      <h1>Cart</h1>
+      <p style="border:3px; border-style:solid; border-color:#b9b9b9; padding: 1em;">Please <strong>EDIT</strong> Your Booking After <strong>SAVING</strong> To<br><strong>ADD MENU ITEMS</strong> To Your Cart.</p>
+      <h2></h2>
+    </div>
+
     </div>
   </body>
 </html>

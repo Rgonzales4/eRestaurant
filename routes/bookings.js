@@ -82,12 +82,15 @@ router.post('/', checkAuthenticated, async (req, res) => {
 
   console.log(remainCapacity);
 
+  const menu = await MenuItem.find({});
+
   if (confirmBookingID) {
     res.render('createBooking', {
       successMessage: '',
       failMessage: 'This booking already exists',
       req: req,
       booking: booking,
+      menu: menu,
     });
     console.log('This booking already exists');
   } else if (checkForBookingsMade == true) {
@@ -96,6 +99,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
       failMessage: 'You already have a booking for this date and time!',
       req: req,
       booking: booking,
+      menu: menu,
     });
   } else if (remainCapacity < 0) {
     res.render('createBooking', {
@@ -106,6 +110,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
         ' people',
       req: req,
       booking: booking,
+      menu: menu,
     });
   } else if (bookingDateFormatted < todayDate) {
     res.render('createBooking', {
@@ -113,6 +118,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
       failMessage: 'Please book for a future date',
       req: req,
       booking: booking,
+      menu: menu,
     });
   } else if (bookingDateFormatted > todayDate1000) {
     res.render('createBooking', {
@@ -120,6 +126,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
       failMessage: 'Come on, 1000 years, REALLY?!!',
       req: req,
       booking: booking,
+      menu: menu,
     });
   } else if (bookingDateFormatted > todayDate100) {
     res.render('createBooking', {
@@ -127,6 +134,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
       failMessage: 'Check back with us at the end of the century',
       req: req,
       booking: booking,
+      menu: menu,
     });
   } else if (req.body.bookingNumber < 0) {
     res.render('createBooking', {
@@ -134,6 +142,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
       failMessage: 'Please enter a valid number',
       req: req,
       booking: booking,
+      menu: menu,
     });
     console.log('too many people');
   } else {
@@ -145,6 +154,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
         failMessage: '',
         req: req,
         booking: booking,
+        menu: menu,
       });
     } catch (e) {
       console.log(e);
@@ -153,6 +163,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
         successMessage: '',
         failMessage: 'Please select a time',
         booking: booking,
+        menu: menu,
       });
     }
   }
