@@ -183,8 +183,107 @@ router.put('/:bookingID', async (req, res) => {
     bookingMealTime: req.body.bookingMealTime,
   };
   console.log(update);
-  await Booking.findOneAndUpdate(filter, update);
-  res.redirect('/bookings');
+  const booking = await Booking.findOne({ bookingID: req.params.bookingID });
+  
+  const menu = await MenuItem.find({});
+  
+  let remainCapacity = 150;
+  let thisYear = new Date().getFullYear();
+  let thisMonth = new Date().getMonth();
+  let thisDay = new Date().getDay();
+  let todayDate = new Date();
+  let todayDate100 = new Date(thisYear + 100, thisMonth, thisDay);
+  let todayDate1000 = new Date(thisYear + 1000, thisMonth, thisDay);
+  let bookingDateFormatted = new Date(req.body.bookingDate);
+
+  console.log(todayDate);
+  console.log(req.body.bookingMealTime);
+
+  let confirmBookingID = await Booking.findOne({
+    bookingID: req.body.bookingID,
+  });
+
+  var bookingByDay = await Booking.find({
+    bookingDate: req.body.bookingDate,
+    isActive: true,
+  });
+  bookingByDay.forEach((bookingDay) => {
+    if (bookingDay.bookingMealTime == req.body.bookingMealTime) {
+      remainCapacity = remainCapacity - bookingDay.bookingNumber;
+    }
+  });
+
+  remainCapacity = remainCapacity - req.body.bookingNumber;
+  otherCapacity = req.body.bookingNumber - -remainCapacity;
+
+  console.log(remainCapacity);
+
+  if (confirmBookingID) {
+    res.render('editBooking', {
+      successMessage: '',
+      failMessage: 'This booking already exists',
+      req: req,
+      booking: booking,
+      menu: menu,
+    });
+    console.log('This booking already exists');
+  } else if (checkForBookingsMade == true) {
+    res.render('editBooking', {
+      successMessage: '',
+      failMessage: 'You already have a booking for this date and time!',
+      req: req,
+      booking: booking,
+      menu: menu,
+    });
+  } else if (remainCapacity < 0) {
+    res.render('editBooking', {
+      successMessage: '',
+      failMessage:
+        'No spots available, please book for less than ' +
+        otherCapacity +
+        ' people',
+      req: req,
+      booking: booking,
+      menu: menu,
+    });
+  } else if (bookingDateFormatted < todayDate) {
+    res.render('editBooking', {
+      successMessage: '',
+      failMessage: 'Please book for a future date',
+      req: req,
+      booking: booking,
+      menu: menu,
+    });
+  } else if (bookingDateFormatted > todayDate1000) {
+    res.render('editBooking', {
+      successMessage: '',
+      failMessage: 'Come on, 1000 years, REALLY?!!',
+      req: req,
+      booking: booking,
+      menu: menu,
+    });
+  } else if (bookingDateFormatted > todayDate100) {
+    res.render('editBooking', {
+      successMessage: '',
+      failMessage: 'Check back with us at the end of the century',
+      req: req,
+      booking: booking,
+      menu: menu,
+    });
+  } else if (req.body.bookingNumber < 0) {
+    res.render('editBooking', {
+      successMessage: '',
+      failMessage: 'Please enter a valid number',
+      req: req,
+      booking: booking,
+      menu: menu,
+    });
+    console.log('too many people');
+  } else {      
+    await Booking.findOneAndUpdate(filter, update);
+    res.redirect('/bookings')
+  }
+
 });
 
 router.put('/edit/addItem/:bookingID', async (req, res) => {
