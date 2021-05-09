@@ -169,7 +169,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
   }
 });
 
-router.put('/:bookingID', async (req, res) => {
+router.put('/:bookingID', checkAuthenticated, async (req, res) => {
   //NEED TO ADD CLAUSES IN
   const filter = { bookingID: req.params.bookingID };
   const update = {
@@ -279,9 +279,17 @@ router.put('/:bookingID', async (req, res) => {
       menu: menu,
     });
     console.log('too many people');
-  } else {      
-    await Booking.findOneAndUpdate(filter, update);
-    res.redirect('/bookings')
+  } else if (!req.body.bookingMealTime) {
+    res.render('editBooking', {
+      req: req,
+      successMessage: '',
+      failMessage: 'Please select a time',
+      booking: booking,
+      menu: menu,
+    });
+  } else {
+      await Booking.findOneAndUpdate(filter, update);
+      res.redirect('/bookings');
   }
 
 });
