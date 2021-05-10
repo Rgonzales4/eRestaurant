@@ -28,12 +28,15 @@ router.get('/edit/:bookingID', checkAuthenticated, async (req, res) => {
   // Not yet finished
   const booking = await Booking.findOne({ bookingID: req.params.bookingID });
   const menu = await MenuItem.find({});
+  let date = booking.bookingDate.toISOString().split('T')[0]
+  console.log(date)
   res.render('editBooking', {
     req: req,
     successMessage: '',
     failMessage: '',
     booking: booking,
     menu: menu,
+    date
   });
 });
 
@@ -187,6 +190,8 @@ router.put('/:bookingID', checkAuthenticated, async (req, res) => {
   
   const menu = await MenuItem.find({});
   
+  let date = booking.bookingDate.toISOString().split('T')[0];
+
   let remainCapacity = 150;
   let thisYear = new Date().getFullYear();
   let thisMonth = new Date().getMonth();
@@ -225,6 +230,7 @@ router.put('/:bookingID', checkAuthenticated, async (req, res) => {
       req: req,
       booking: booking,
       menu: menu,
+      date
     });
     console.log('This booking already exists');
   } else if (checkForBookingsMade == true) {
@@ -234,6 +240,7 @@ router.put('/:bookingID', checkAuthenticated, async (req, res) => {
       req: req,
       booking: booking,
       menu: menu,
+      date
     });
   } else if (remainCapacity < 0) {
     res.render('editBooking', {
@@ -245,6 +252,7 @@ router.put('/:bookingID', checkAuthenticated, async (req, res) => {
       req: req,
       booking: booking,
       menu: menu,
+      date
     });
   } else if (bookingDateFormatted < todayDate) {
     res.render('editBooking', {
@@ -253,6 +261,7 @@ router.put('/:bookingID', checkAuthenticated, async (req, res) => {
       req: req,
       booking: booking,
       menu: menu,
+      date
     });
   } else if (bookingDateFormatted > todayDate1000) {
     res.render('editBooking', {
@@ -261,6 +270,7 @@ router.put('/:bookingID', checkAuthenticated, async (req, res) => {
       req: req,
       booking: booking,
       menu: menu,
+      date
     });
   } else if (bookingDateFormatted > todayDate100) {
     res.render('editBooking', {
@@ -269,6 +279,7 @@ router.put('/:bookingID', checkAuthenticated, async (req, res) => {
       req: req,
       booking: booking,
       menu: menu,
+      date
     });
   } else if (req.body.bookingNumber < 0) {
     res.render('editBooking', {
@@ -277,6 +288,7 @@ router.put('/:bookingID', checkAuthenticated, async (req, res) => {
       req: req,
       booking: booking,
       menu: menu,
+      date
     });
     console.log('too many people');
   } else if (!req.body.bookingMealTime) {
@@ -286,6 +298,7 @@ router.put('/:bookingID', checkAuthenticated, async (req, res) => {
       failMessage: 'Please select a time',
       booking: booking,
       menu: menu,
+      date
     });
   } else {
       await Booking.findOneAndUpdate(filter, update);
@@ -306,7 +319,7 @@ router.put('/edit/addItem/:bookingID', async (req, res) => {
   };
   let currentPrice
   booking.totalPrice ? currentPrice = booking.totalPrice : currentPrice = 0;
-  const newPrice = parseInt(req.body.price)
+  const newPrice = parseFloat(req.body.price)
   const totalPrice = currentPrice + newPrice
   booking.totalPrice = totalPrice;
   booking.menuItems.push(menuItem);
@@ -318,7 +331,7 @@ router.put('/edit/removeItem/:bookingID', async (req, res) => {
   const {menuItemId} = req.body
   const booking = await Booking.findOne({bookingID: req.params.bookingID})
   await booking.updateOne({ $pull: {menuItems: {_id: menuItemId} }})
-  const itemPrice = parseInt(req.body.price)
+  const itemPrice = parseFloat(req.body.price)
   booking.totalPrice = booking.totalPrice - itemPrice
   await booking.save();
   res.redirect('back');

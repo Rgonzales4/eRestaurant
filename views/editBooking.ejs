@@ -99,7 +99,7 @@
           <div>
           <% if(booking.totalPrice) {%>
             <br>  
-            Your Total Price: $<%= booking.totalPrice %>
+            Your Total Price: $<%= booking.totalPrice.toFixed(2) %>
           <% } else { %>
           Your Total Price: $0
           <% } %>
