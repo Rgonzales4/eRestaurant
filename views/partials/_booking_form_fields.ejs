@@ -5,8 +5,7 @@
       type="Date"
       class="form-control"
       name="bookingDate"
-      <% console.log(date) %> 
-      value="<%= date %>"
+      value = <%= date ? date : "" %>
       required
     />
   </div>

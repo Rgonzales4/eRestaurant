@@ -13,7 +13,9 @@ router.get('/', checkAuthenticated, async (req, res) => {
 
 router.get('/createBooking', checkAuthenticated, async (req, res) => {
   const menu = await MenuItem.find({});
-
+  
+  //let date = booking.bookingDate.toISOString().split('T')[0]
+  
   console.log('create booking opened');
   res.render('createBooking', {
     successMessage: '',
@@ -21,6 +23,7 @@ router.get('/createBooking', checkAuthenticated, async (req, res) => {
     req: req,
     booking: new Booking(),
     menu: menu,
+    date : ""
   });
 });
 
@@ -87,6 +90,8 @@ router.post('/', checkAuthenticated, async (req, res) => {
 
   const menu = await MenuItem.find({});
 
+  let date = booking.bookingDate.toISOString().split('T')[0];
+
   if (confirmBookingID) {
     res.render('createBooking', {
       successMessage: '',
@@ -94,6 +99,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
       req: req,
       booking: booking,
       menu: menu,
+      date
     });
     console.log('This booking already exists');
   } else if (checkForBookingsMade == true) {
@@ -103,6 +109,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
       req: req,
       booking: booking,
       menu: menu,
+      date
     });
   } else if (remainCapacity < 0) {
     res.render('createBooking', {
@@ -114,6 +121,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
       req: req,
       booking: booking,
       menu: menu,
+      date
     });
   } else if (bookingDateFormatted < todayDate) {
     res.render('createBooking', {
@@ -122,6 +130,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
       req: req,
       booking: booking,
       menu: menu,
+      date
     });
   } else if (bookingDateFormatted > todayDate1000) {
     res.render('createBooking', {
@@ -130,6 +139,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
       req: req,
       booking: booking,
       menu: menu,
+      date
     });
   } else if (bookingDateFormatted > todayDate100) {
     res.render('createBooking', {
@@ -138,6 +148,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
       req: req,
       booking: booking,
       menu: menu,
+      date
     });
   } else if (req.body.bookingNumber < 0) {
     res.render('createBooking', {
@@ -146,6 +157,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
       req: req,
       booking: booking,
       menu: menu,
+      date
     });
     console.log('too many people');
   } else {
@@ -158,6 +170,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
         req: req,
         booking: booking,
         menu: menu,
+        date
       });
     } catch (e) {
       console.log(e);
@@ -167,6 +180,7 @@ router.post('/', checkAuthenticated, async (req, res) => {
         failMessage: 'Please select a time',
         booking: booking,
         menu: menu,
+        date
       });
     }
   }
