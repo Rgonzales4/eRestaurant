@@ -7,6 +7,7 @@ const ejsMate = require('ejs-mate');
 const passport = require('passport');
 const flash = require('express-flash');
 const session = require('express-session');
+const MongoDBStore = require('connect-mongo')(session);
 const methodOverride = require('method-override');
 
 const menuRouter = require('./routes/menu');
@@ -17,15 +18,17 @@ const bookingRouter = require('./routes/bookings');
 const databaseRouter = require('./routes/database');
 const profileRouter = require('./routes/profile');
 
-const Booking = require('./models/booking');
-
 //EXPRESS setup
 const app = express();
 app.use(express.urlencoded({ extended: false }));
 
+// EJS Setup
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+app.use(express.static('uploads'));
+app.use(express.static('views'));
 
 //Connect to Database
 mongoose.connect(process.env.DB_Connection, {
@@ -39,13 +42,27 @@ mongoose.set('useFindAndModify', false);
 
 //Flash & Session
 app.use(flash());
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
+
+const store = new MongoDBStore({
+  url: process.env.DB_Connection,
+  secret: process.env.SESSION_SECRET,
+  touchAfter: 60* 60* 3,
+})
+
+const sessionConfig = {
+  store,
+  name: 'session',
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 3,
+    maxAge: 1000 * 60 * 60 * 24 * 3,
+  }
+}
+
+app.use(session(sessionConfig));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
@@ -71,7 +88,7 @@ app.delete('/logout', (req, res) => {
 });
 
 //Import routes
-app.use(express.static(__dirname + '/css'));
+app.use(express.static('css'));
 app.use('/menu', menuRouter);
 app.use('/about', aboutRouter);
 app.use('/login', loginRouter);

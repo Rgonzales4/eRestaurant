@@ -20,7 +20,6 @@ router.get('/editProfile', checkAuthenticated, async (req, res) => {
   res.render('editProfile', { req: req, user: userAccount, adminEdit: false });
 });
 
-
 //UPDATING THE PROFILE FUNCTION
 router.post('/editProfile', checkAuthenticated, async (req, res) => {
   const filter = { email: req.user.email };
@@ -28,6 +27,15 @@ router.post('/editProfile', checkAuthenticated, async (req, res) => {
   console.log(update);
   await User.findOneAndUpdate(filter, update);
   res.redirect('/profile');
+});
+
+//DELETING THE USER ACCOUNT
+router.get('/deleteProfile', checkAuthenticated, async (req, res) => {
+  console.log(`Deleting user ${req.user.firstName} from the database`);
+  const userToDelete = req.user.email;
+  await User.findOneAndDelete({ email: userToDelete });
+  req.logout();
+  res.redirect('/');
 });
 
 function checkAuthenticated(req, res, next) {

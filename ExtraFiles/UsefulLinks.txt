@@ -7,3 +7,6 @@ testing
 
 CSS:
 --> https://www.youtube.com/watch?v=EkQc-8uzxIA (used this exact vid as a reference but, despite following exactly, css not linking) -Kat
+
+Menu page (incorporating filters):
+--> https://www.youtube.com/watch?v=0kfpGRtr3Hk&t=228s
