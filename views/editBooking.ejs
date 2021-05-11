@@ -9,10 +9,11 @@
   </head>
 
   <body>
+    <h1 style="padding: 20px">Editing Booking</h1>
+
     <div class="container">
       <div class="row">
         <div class="col-3">
-          <h1 class="mb-2">Edit Booking</h1>
           <div>
             <span style="color: green"><%= successMessage %></span>
             <span style="color: red"><%= failMessage %></span>
@@ -24,6 +25,24 @@
             style="margin: 20px"
           >
             <%- include('partials/_booking_form_fields') %>
+          </form>
+          <form
+            action="/bookings/edit/addDiscountCode/<%= booking.bookingID %>"
+            method="POST"
+            style="margin: 20px"
+          >
+            <br />
+            <p><b>Add a Discount Code:</b></p>
+            <input
+              type="String"
+              class="form-control"
+              id="codeValue"
+              name="codeValue"
+              placeholder="Enter new discount code"
+            />
+            <button class="btn btn-success btn-sm" type="submit">
+              Add code
+            </button>
           </form>
         </div>
 
@@ -37,6 +56,9 @@
               class="form-control"
               value="<%= item.itemName %>"
             />
+            <a href="/menu/<%= item.itemID%>" class="btn btn-primary btn-sm"
+              >View menu item</a
+            >
             <form
               action="/bookings/edit/addItem/<%= booking.bookingID %>?_method=PUT"
               method="POST"
@@ -53,7 +75,13 @@
                 value="<%= item.itemName %>"
                 hidden
               />
-              <input class="form-control" type="text" name="price" value="<%= item.itemPrice %>" hidden >
+              <input
+                class="form-control"
+                type="text"
+                name="price"
+                value="<%= item.itemPrice %>"
+                hidden
+              />
               <button class="btn btn-success" type="submit">Add</button>
             </form>
           </div>
@@ -62,37 +90,41 @@
 
         <div class="col-sm">
           <h1>Cart</h1>
-          <% Array.from(booking.menuItems).forEach(item => { %> 
-            <div class="input-group mb-1">
+          <% Array.from(booking.menuItems).forEach(item => { %>
+          <div class="input-group mb-1">
+            <input
+              disabled="true "
+              type="text"
+              class="form-control"
+              value="<%=item.menuItemName %>"
+            />
+
+            <form
+              action="/bookings/edit/removeItem/<%= booking.bookingID %>?_method=PUT"
+              method="POST"
+            >
               <input
-                disabled="true "
                 type="text"
-                class="form-control"
-                value="<%=item.menuItemName %>"
+                name="menuItemId"
+                value="<%= item.id %>"
+                hidden
               />
-               
-              <form
-                action="/bookings/edit/removeItem/<%= booking.bookingID %>?_method=PUT"
-                method="POST"
-              >
-                <input
-                  type="text"
-                  name="menuItemId"
-                  value="<%= item.id %>"
-                  hidden
-                />
-                <input class="form-control" type="text" name="price" value="<%= item.price %>" hidden>
-                <button class="btn btn-danger" type="submit">Remove</button>
-              </form>
-            </div>
+              <input
+                class="form-control"
+                type="text"
+                name="price"
+                value="<%= item.price %>"
+                hidden
+              />
+              <button class="btn btn-danger" type="submit">Remove</button>
+            </form>
+          </div>
           <% }) %>
           <div>
-          <% if(booking.totalPrice) {%>
-            <br>  
-            Your Total Price: $<%= booking.totalPrice.toFixed(2) %>
-          <% } else { %>
-          Your Total Price: $0
-          <% } %>
+            <% if(booking.totalPrice) {%>
+            <br />
+            Your Total Price: $<%= booking.totalPrice.toFixed(2) %> <% } else {
+            %> Your Total Price: $0 <% } %>
           </div>
         </div>
       </div>

@@ -4,10 +4,12 @@ const router = express.Router();
 const User = require('../models/users');
 const Booking = require('../models/booking');
 const MenuItem = require('../models/menu_item');
-const { Model, Mongoose } = require('mongoose');
+const discountCode = require('../models/discount_code');
 
 const menuRouter = require('./menu');
+const bookingRouter = require('./bookings');
 router.use('/menu', menuRouter);
+router.use('/bookings', bookingRouter);
 
 router.get('/', checkAdmin, async (req, res) => {
   console.log('Database page opened');
@@ -115,6 +117,24 @@ router.delete('/:userId', checkAdmin, async (req, res) => {
     Bookings: Bookings,
     MenuItems: MenuItems,
   });
+});
+
+//CREATE A DISCOUNT CODE
+router.post('/createDiscountCode', checkAdmin, async (req, res) => {
+  const codes = await discountCode.find({});
+  for (let i = 0; i < codes.length; i++) {
+    if (codes[i].codeValue == req.body.codeValue) {
+      console.log('Discount Code already exists');
+      res.redirect('/database');
+      return;
+    }
+  }
+  const newCode = new discountCode({
+    codeValue: req.body.codeValue,
+  });
+  console.log(`New code added: ${newCode.codeValue}`);
+  newCode.save();
+  res.redirect('/database');
 });
 
 function checkAdmin(req, res, next) {

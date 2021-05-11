@@ -1,8 +1,10 @@
 const express = require('express');
 const Booking = require('../models/booking');
 const MenuItem = require('../models/menu_item');
+const discountCodes = require('../models/discount_code');
 const router = express.Router();
 const crypto = require('crypto');
+const url = require('url');
 const { isUndefined } = require('util');
 const { findById } = require('../models/booking');
 
@@ -29,14 +31,22 @@ router.get('/createBooking', checkAuthenticated, async (req, res) => {
 
 router.get('/edit/:bookingID', checkAuthenticated, async (req, res) => {
   // Not yet finished
-  const booking = await Booking.findOne({ bookingID: req.params.bookingID });
+  var booking;
+  if (
+    req.params.bookingID == ':bookingID' ||
+    req.params.bookingID == 'booking.bookingID'
+  ) {
+    booking = await Booking.findOne({ bookingID: req.query.bookingID });
+  } else {
+    booking = await Booking.findOne({ bookingID: req.params.bookingID });
+  }
   const menu = await MenuItem.find({});
   let date = booking.bookingDate.toISOString().split('T')[0];
   console.log(date);
   res.render('editBooking', {
     req: req,
-    successMessage: '',
-    failMessage: '',
+    successMessage: req.query.successMessage,
+    failMessage: req.query.failMessage,
     booking: booking,
     menu: menu,
     date,
@@ -320,7 +330,68 @@ router.put('/:bookingID', checkAuthenticated, async (req, res) => {
   }
 });
 
-router.put('/edit/addItem/:bookingID', async (req, res) => {
+router.post(
+  '/edit/addDiscountCode/:bookingID',
+  checkAuthenticated,
+  async (req, res) => {
+    console.log('Entered discount function');
+    const code = await discountCodes.findOne({ codeValue: req.body.codeValue });
+    let booking = await Booking.findOne({ bookingID: req.params.bookingID });
+    let date = booking.bookingDate.toISOString().split('T')[0];
+    console.log(`Code entered: ${req.body.codeValue}`);
+    if (code != null) {
+      console.log(code.codeValue);
+    }
+    if (
+      code != null &&
+      code.codeValue == req.body.codeValue &&
+      !booking.discountCodeUsed
+    ) {
+      let currentPrice;
+      booking.totalPrice
+        ? (currentPrice = booking.totalPrice)
+        : (currentPrice = 0);
+      const totalPrice = currentPrice * 0.9;
+      if (totalPrice < 0) {
+        totalPrice = 0;
+      }
+      booking.totalPrice = totalPrice;
+      booking.discountCodeUsed = true;
+      await booking.save();
+      res.redirect(
+        url.format({
+          pathname: '/bookings/edit/booking.bookingID',
+          query: {
+            successMessage: 'Discount applied',
+            bookingID: req.params.bookingID,
+          },
+        })
+      );
+    } else if (code != null) {
+      res.redirect(
+        url.format({
+          pathname: '/bookings/edit/booking.bookingID',
+          query: {
+            failMessage: 'Discount has already been applied',
+            bookingID: req.params.bookingID,
+          },
+        })
+      );
+    } else {
+      res.redirect(
+        url.format({
+          pathname: '/bookings/edit/booking.bookingID',
+          query: {
+            failMessage: 'Invalid discount code',
+            bookingID: req.params.bookingID,
+          },
+        })
+      );
+    }
+  }
+);
+
+router.put('/edit/addItem/:bookingID', checkAuthenticated, async (req, res) => {
   //updating an item from menu from edit booking
   //WORK IN PROGRESS
   let booking = await Booking.findOne({ bookingID: req.params.bookingID });
@@ -331,11 +402,32 @@ router.put('/edit/addItem/:bookingID', async (req, res) => {
     price: req.body.price,
   };
   let currentPrice;
-  booking.totalPrice ? (currentPrice = booking.totalPrice) : (currentPrice = 0);
+  var totalPrice;
+  booking.totalPrice ? (currentPrice = 1) : (currentPrice = 0);
   const newPrice = parseFloat(req.body.price);
-  const totalPrice = currentPrice + newPrice;
-  booking.totalPrice = totalPrice;
+  if (booking.totalPrice > 0) {
+    var rawTotalPrice = 0;
+    console.log(' ');
+    for (let i = 0; i < booking.menuItems.length; i++) {
+      console.log(`Price about to be added: ${booking.menuItems[i].price}`);
+      rawTotalPrice += booking.menuItems[i].price;
+      console.log('Raw Total Price: ', rawTotalPrice);
+    }
+    if (booking.discountCodeUsed) {
+      totalPrice = parseFloat((rawTotalPrice + newPrice) * 0.9);
+      console.log(`(${rawTotalPrice} + ${newPrice}) x 0.9 = ${totalPrice}`);
+    } else {
+      totalPrice = parseFloat(rawTotalPrice + newPrice);
+    }
+  } else if (booking.discountCodeUsed) {
+    totalPrice = (currentPrice + newPrice) * 0.9;
+    console.log(`(${currentPrice} + ${newPrice}) x 0.9 = ${totalPrice}`);
+  } else {
+    totalPrice = currentPrice + newPrice;
+    console.log(`${currentPrice} + ${newPrice} = ${totalPrice}`);
+  }
   booking.menuItems.push(menuItem);
+  booking.totalPrice = totalPrice;
   await booking.save();
   res.redirect('back');
 });
@@ -343,20 +435,52 @@ router.put('/edit/addItem/:bookingID', async (req, res) => {
 router.put('/edit/removeItem/:bookingID', async (req, res) => {
   const { menuItemId } = req.body;
   const booking = await Booking.findOne({ bookingID: req.params.bookingID });
-  await booking.updateOne({ $pull: { menuItems: { _id: menuItemId } } });
   const itemPrice = parseFloat(req.body.price);
-  booking.totalPrice = booking.totalPrice - itemPrice;
+  var rawTotalPrice = 0;
+  for (let i = 0; i < booking.menuItems.length; i++) {
+    console.log(`Price about to be added: ${booking.menuItems[i].price}`);
+    rawTotalPrice += booking.menuItems[i].price;
+    console.log('Raw Total Price: ', rawTotalPrice);
+  }
+  var totalPrice;
+  if (booking.discountCodeUsed) {
+    totalPrice = parseFloat((rawTotalPrice - itemPrice) * 0.9);
+    console.log(`${rawTotalPrice} - ${itemPrice} x 0.9 = ${totalPrice}`);
+  } else {
+    totalPrice = parseFloat(rawTotalPrice - itemPrice);
+  }
+  await booking.updateOne({ $pull: { menuItems: { _id: menuItemId } } });
+  booking.totalPrice = totalPrice;
   await booking.save();
   res.redirect('back');
 });
 
 router.post('/:bookingID', checkAuthenticated, async (req, res) => {
-  const cancelBooking = req.params.bookingID;
-  console.log('Booking ' + cancelBooking + ' has been cancelled');
-  const filter = { bookingID: cancelBooking };
-  const update = { isActive: false };
-  await Booking.findOneAndUpdate(filter, update);
-  res.redirect('/bookings');
+  let thisBooking = await Booking.findOne({ bookingID: req.params.bookingID });
+  let thisBookingDate = thisBooking.bookingDate;
+  let thisBookingDateFormatted = new Date(thisBookingDate);
+  let thisBookingYear = thisBookingDateFormatted.getFullYear();
+  let thisBookingMonth = thisBookingDateFormatted.getMonth();
+  let thisBookingDay = thisBookingDateFormatted.getDay();
+  let yesterDate = new Date(
+    thisBookingYear,
+    thisBookingMonth,
+    thisBookingDay - 1
+  );
+  let todayDate = new Date();
+  const booking = await Booking.find({ bookingUserEmail: req.user.email });
+  if (todayDate > yesterDate) {
+    res.redirect('/bookings');
+    // res.render('booking', { failMessage: 'Must cancel Bookings at least a day before commencement', req: req, booking: booking });
+    console.log('too close');
+  } else {
+    const cancelBooking = req.params.bookingID;
+    console.log('Booking ' + cancelBooking + ' has been cancelled');
+    const filter = { bookingID: cancelBooking };
+    const update = { isActive: false };
+    await Booking.findOneAndUpdate(filter, update);
+    res.redirect('/bookings');
+  }
 });
 
 function checkAuthenticated(req, res, next) {
@@ -365,6 +489,7 @@ function checkAuthenticated(req, res, next) {
   }
   res.redirect('/login');
 }
+
 async function checkForBookingsMade(req) {
   let CFBM = await Booking.findOne({
     bookingUserEmail: req.body.bookingUserEmail,

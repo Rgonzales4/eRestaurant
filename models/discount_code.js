@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const discountSchema = new Schema({
-  code: {
+  codeValue: {
     type: String,
     required: true,
   },
 });
 
-module.exports = mongoose.model('discountCode', discountSchema);
+module.exports = mongoose.model('Discount Code', discountSchema);

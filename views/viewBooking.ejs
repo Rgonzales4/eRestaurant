@@ -71,9 +71,40 @@
 
         <div class="col"></div>
       </div>
+      <br />
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <h2>Cart</h2>
+            <% Array.from(booking.menuItems).forEach(item => { %>
+            <div class="input-group mb-1">
+              <input
+                disabled="true "
+                type="text"
+                class="form-control"
+                value="<%=item.menuItemName %>"
+              />
+            </div>
+            <% }) %>
+            <div>
+              <% if(booking.totalPrice) {%>
+              <br />
+              Your Total Price: $<%= booking.totalPrice.toFixed(2) %> <% } else
+              { %> Your Total Price: $0 <% } %>
+            </div>
+          </div>
+          <div class="col-sm"><br /></div>
+        </div>
+      </div>
+
       <div style="padding-top: 10px">
-        <a href="#" class="btn btn-primary btn-sm">Edit Booking Details</a>
         <% if (booking.isActive) { %>
+        <a
+          href="/database/bookings/edit/<%= booking.bookingID %>"
+          class="btn btn-primary btn-sm"
+          >Edit Booking Details</a
+        >
         <form
           action="/database/booking/<%= booking.bookingID %>/update"
           method="POST"

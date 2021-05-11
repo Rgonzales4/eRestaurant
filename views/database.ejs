@@ -4,7 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%- include('partials/navbar') %>
+    <%- include('partials/navbar') %> <%- include('partials/style') %>
+
     <title>Database</title>
   </head>
   <body>
@@ -65,6 +66,15 @@
                     <%= Bookings.bookingUserFirstName %> <%=
                     Bookings.bookingUserLastName %>
                   </h6>
+                  <% if (Bookings.isActive == false) {%>
+                  <h6 class="card-subtitle mb-2" style="color: red">
+                    not Active
+                  </h6>
+                  <% } else { %>
+                  <h6 class="card-subtitle mb-2" style="color: green">
+                    Active
+                  </h6>
+                  <% } %>
                   <h6 class="card-subtitle mb-2 text-muted">
                     <%= Bookings.bookingID %>
                   </h6>
@@ -95,7 +105,11 @@
                 <h6 class="card-subtitle mb-2 text-muted">
                   <%= Item.itemID %>
                 </h6>
-                <a href="database/menu/<%= Item.itemID%>" class="btn btn-primary btn-sm">View Menu Item</a>
+                <a
+                  href="database/menu/<%= Item.itemID%>"
+                  class="btn btn-primary btn-sm"
+                  >View Menu Item</a
+                >
               </div>
             </div>
           </div>
@@ -103,5 +117,29 @@
         <%})%> <%}%>
       </div>
     </div>
+
+    <div class="container" style="padding-bottom: 50px">
+      <div class="row">
+        <h2 style="padding: 10px">Create a Discount Code:</h2>
+        <form action="/database/createDiscountCode" method="POST">
+          <div class="col-3">
+            <input
+              type="String"
+              class="form-control"
+              id="code"
+              name="codeValue"
+              placeholder="Enter new discount code"
+            />
+          </div>
+          <div style="padding-top: 10px; padding-bottom: 10px">
+            <button class="btn btn-success me-2" type="submit">
+              Create code
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer">Le Bistrot D'Andre</div>
   </body>
 </html>

@@ -7,7 +7,7 @@ const MenuItemSchema = new Schema({
   menuItemId: String,
   menuItemName: String,
   quantity: Number,
-  price: Number
+  price: Number,
 });
 
 const BookingSchema = new Schema({
@@ -59,6 +59,10 @@ const BookingSchema = new Schema({
 
   menuItems: [MenuItemSchema],
 
+  discountCodeUsed: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model('Booking', BookingSchema);
