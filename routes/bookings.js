@@ -148,27 +148,14 @@ router.post('/', checkAuthenticated, async (req, res) => {
 }});
 
 router.post('/:bookingID', checkAuthenticated, async (req, res) => {
-  let thisBooking = await Booking.findOne({bookingID: req.params.bookingID})
-  let thisBookingDate = thisBooking.bookingDate
-  let thisBookingDateFormatted = new Date(thisBookingDate)
-  let thisBookingYear = thisBookingDateFormatted.getFullYear();
-  let thisBookingMonth = thisBookingDateFormatted.getMonth();
-  let thisBookingDay = thisBookingDateFormatted.getDay();
-  let yesterDate = new Date(thisBookingYear, thisBookingMonth, thisBookingDay - 1);
-  let todayDate = new Date();
   const booking = await Booking.find({ bookingUserEmail: req.user.email });
-  if (todayDate > yesterDate){
-    res.redirect('/bookings')
-    // res.render('booking', { failMessage: 'Must cancel Bookings at least a day before commencement', req: req, booking: booking });
-    console.log('too close');
-  } else {
   const cancelBooking = req.params.bookingID;
   console.log('Booking ' + cancelBooking + ' has been cancelled');
   const filter = { bookingID: cancelBooking };
   const update = { isActive: false };
   await Booking.findOneAndUpdate(filter, update);
   res.redirect('/bookings');
-}});
+});
 
 function checkAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
