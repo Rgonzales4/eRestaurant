@@ -6,6 +6,24 @@ const { isUndefined } = require('util');
 
 router.get('/', checkAuthenticated, async (req, res) => {
   const booking = await Booking.find({ bookingUserEmail: req.user.email });
+  let todayDate = new Date();
+  
+  var bookingByDay = await Booking.find({
+    bookingDate: req.body.bookingDate,
+    isActive: true,
+  });
+
+  let bookingDateRaw = bookingByDay.bookingDate
+  let bookingDateFormatted = new Date(bookingDateRaw)
+
+  bookingByDay.forEach(bookingDay =>{
+  if (bookingDateFormatted < todayDate){
+    bookingDay.isActive = false
+  }
+  })
+  
+  
+
   res.render('booking', { failMessage: '', req: req, booking: booking });
 });
 
