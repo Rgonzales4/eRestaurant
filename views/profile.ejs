@@ -5,10 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>User Profile</title>
-    <%- include('partials/navbar') %>
+    <%- include('partials/navbar')%> <%- include('partials/style') %>
   </head>
-  <body>
-    <div class="container-sm" style="padding: 50px">
+  <body
+    style="
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    "
+  >
+    <div class="container" style="padding: 50px">
       <h2>User Profile</h2>
       <% if (user.isAdmin == true){%>
       <label style="color: green; padding: 10px">Admin Account</label>
@@ -72,6 +80,11 @@
           </a>
         </div>
       </div>
+    </div>
+    <div class="footer" style="position: absolute">
+      Le Bistrot D'Andre <br /><br /><span style="color: grey"
+        >2021 SES 1A, Group 8</span
+      >
     </div>
   </body>
 </html>

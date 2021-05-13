@@ -4,16 +4,24 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <%- include('partials/navbar') %>
+    <%- include('partials/navbar') %> <%- include('partials/style')%>
     <title>Menu</title>
   </head>
-  <body style="margin-bottom: 20px">
-    <div class="container">
+  <body
+    style="
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    "
+  >
+    <div class="container" style="flex-grow: 1">
       <h1 style="padding: 20px"><%= menuItem.itemName%></h1>
 
       <% if(menuItem.itemImg) { %>
       <div class="container">
-        <img src="/uploads/<%= menuItem.itemImg%>" width="30%" />
+        <img src="/uploads/<%= menuItem.itemImg%>" width="45%" />
       </div>
       <% } %>
 
@@ -33,7 +41,7 @@
     </div>
 
     <% if (req.user && req.user.isAdmin == true) {%>
-    <div class="container">
+    <div class="container" style="padding-bottom: 30px">
       <a
         href="/menu/editMenuItem/<%= menuItem.itemID%>"
         class="btn btn-primary btn-sm"
@@ -48,5 +56,11 @@
       </form>
     </div>
     <% } %>
+    
+    <div class="footer">
+      Le Bistrot D'Andre <br /><br /><span style="color: grey"
+        >2021 SES 1A, Group 8</span
+      >
+    </div>
   </body>
 </html>
