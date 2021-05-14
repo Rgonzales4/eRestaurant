@@ -26,7 +26,7 @@
           style="
             float: left;
             width: 30%;
-            background-color: rgba(128, 128, 128, 0.616);
+            background-color: #49814463;;
             padding: 1%;
             align-content: center;
             border-radius: 25px;
@@ -118,7 +118,7 @@
             </div>
 
             <div class="container" style="padding-top: 30px; width: 100%">
-              <button type="submit" class="btn btn-success">Search</button>
+              <button type="submit" class="btn btn-light">Search</button>
               <button class="btn btn-outline-success me-2" type="reset">
                 Clear All
               </button>
@@ -151,10 +151,10 @@
             <% if(menu_item) {%> <% Array.from(menu_item).forEach(m => { %>
             <div class="col-lg-4" style="float: left">
               <div class="card mt-2" style="margin-bottom: 10%">
-                <div class="card-body">
+                <div class="card-body" style="background-color: #79a77563;">
                   <h4 class="card-title"><%= m.itemName %></h4>
                   <div class="card-title"><%= m.itemDescription %></div>
-                  <a href="/menu/<%= m.itemID%>" class="btn btn-info"
+                  <a href="/menu/<%= m.itemID%>" class="btn btn-success"
                     >Read More</a
                   >
                 </div>
