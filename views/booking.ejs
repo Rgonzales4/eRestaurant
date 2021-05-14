@@ -18,15 +18,15 @@
       >
     </div> -->
 
-<body style="background-color: rgba(255, 245, 235, 0.548);">
+<body style="background-color: rgba(253, 245, 235, 0.584);">
     <div style="height: 350px; color: #0c2a0a;">
-      <h1 style="padding: 20px; text-align: center; padding-top: 120px; font-size: 70px;">Welcome To The Booking Page</h1>
+      <h1 style="margin: 20px; text-align: center; padding-top: 120px; font-size: 70px;">Welcome To The Booking Page</h1>
       <p style="text-align: center; margin-left: 80px; margin-right: 80px; font-size: 20px;">View all current and previous bookings submitted by registered patrons of the restaurant. Selecting a reservation will allow you to view booking information, patron information, and use administrative powers to edit and remove bookings at your discretion.</p>
     </div>
 
     <div class="container">
       <div class="row">
-        <div class="col" style="padding: 20px;">
+        <div class="col" style="margin: 20px;">
           <h2>Current bookings:</h2>
           <span style="color: red"><%= failMessage %></span>
           <% Array.from(booking).forEach(b => { %> <% if(b.isActive == true) {%>
