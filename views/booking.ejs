@@ -21,7 +21,7 @@
 <body style="background-color: rgba(253, 245, 235, 0.584);">
     <div style="height: 350px; color: #0c2a0a;">
       <h1 style="margin: 20px; text-align: center; padding-top: 120px; font-size: 70px;">Welcome To The Booking Page</h1>
-      <p style="text-align: center; margin-left: 80px; margin-right: 80px; font-size: 20px;">View all current and previous bookings submitted by registered patrons of the restaurant. Selecting a reservation will allow you to view booking information, patron information, and use administrative powers to edit and remove bookings at your discretion.</p>
+      <p style="text-align: center; margin-left: 80px; margin-right: 80px; font-size: 20px;">View your booking details. See something you don't like? No problem! Select a reservation to modify or delete it yourself here! Please note that as per the 'Terms and Conditions' all reservation cancellations must be made at least 24 Hours prior to the time of the reservation.</p>
     </div>
 
     <div class="container">
@@ -30,7 +30,7 @@
           <h2>Current bookings:</h2>
           <span style="color: red"><%= failMessage %></span>
           <% Array.from(booking).forEach(b => { %> <% if(b.isActive == true) {%>
-          <div class="card mt-2" style="background-color: #49814463; margin-bottom: 30px;">
+          <div class="card mt-2" style="background-color: #49814433; margin-bottom: 30px;">
             <div class="card-body">
               <h4 class="card-title"><%= b.bookingDate.toDateString() %></h4>
               <p class="card-title text-muted">
@@ -49,7 +49,7 @@
                 method="POST"
                 class="d-inline"
               >
-                <button type="submit" class="btn btn-danger">
+                <button type="submit" class="btn btn-danger" style="margin-left: 20px;">
                   Remove Booking
                 </button>
               </form>
@@ -57,12 +57,12 @@
           </div>
           <% } %> <% }) %>
         </div>
-        <div class="col" style="padding: 20px">
+        <div class="col" style="padding: 20px; ">
           <h2 class="mb-2">Previous bookings:</h2>
           <% Array.from(booking).forEach(b => { %> <% if(b.isActive == false)
           {%>
-          <div class="card mt-2">
-            <div class="card-body">
+          <div class="card mt-2" style="background-color: #49814463;;">
+            <div class="card-body" >
               <h4 class="card-title"><%= b.bookingDate.toDateString() %></h4>
               <div class="card-title">Reference ID: <%= b.bookingID %></div>
               <div class="card-title"><%= b.bookingUserEmail %></div>

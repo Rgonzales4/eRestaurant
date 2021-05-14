@@ -7,15 +7,26 @@
     <title>Edit Menu Item</title>
     <%- include('partials/navbar')%>
   </head>
-  <body>
-    <div class="container" style="padding: 20px">
-      <h1>Edit a Menu Item</h1>
+  <body style="background-color: rgba(253, 245, 235, 0.584);">
+    
+    <div style="height: 350px; color: #0c2a0a;">
+      <h1 style="margin: 20px; text-align: center; padding-top: 120px; font-size: 70px;">Modify a Menu Item</h1>
+      <p style="text-align: center; margin-left: 80px; margin-right: 80px; font-size: 20px;">Edit a published menu item</p>
+    </div>
+
+
+    <div class="container" style="margin-bottom: 100px;">
+      <!-- <h1>Edit a Menu Item</h1> -->
       <span style="color: red"><%= errorMessage%></span>
 
       <form
         action="/menu/editMenuItem/<%= menuItem.itemID%>"
         method="POST"
         enctype="multipart/form-data"
+        style="background-color: #49814463;
+        align-content: center;
+        border-radius: 25px;
+        "
       >
         <%- include('partials/menu_items_fields') %>
 
