@@ -70,33 +70,55 @@ router.get('/processing', async (req, res) => {
       to: req.query.email,
       subject: 'Please confirm your Email account',
       html:
-        '<body>' +
-        '<div style="margin: 0; width: 100%; height: 50px; background-color: #0c2a0a"></div>' +
-        '<div style="text-align: center; width: 100%; color: #0c2a0a; font-size:80px; background-color: rgb(255, 245, 235);">' +
-        'Le Bistrot d<span>&#8217;</span>Andre' +
-        '</div>' +
-        '<div style="background-color: rgb(255, 245, 235); padding: 70px;">' +
-        '<div style="color: black; font-size:18px;">' +
-        'Hello ' +
-        '<strong> ' +
-        req.query.firstName +
-        ' ' +
-        req.query.lastName +
-        '</strong>' +
-        ',<br> Your registration is nearly complete! Please Click on the link to activate your account.<br>' +
-        '<a href=' +
-        link +
-        '>Click here to activate</a><br><br>' +
-        '</div>' +
-        '<div style="color: grey; font-size: 16px;">' +
-        'LBA Online support<br><br><br>' +
-        '</div>' +
-        '<div style="color: black; font-size: 10px;">' +
-        'SES 1A, Group 8' +
-        '</div>' +
-        '</div>' +
-        '<div style="margin: 0; width: 100%; height: 50px; background-color: #0c2a0a"></div>' +
-        '</body>',
+        
+      '<body>' +
+
+      '<div style="width: 100%; height: 170px; background-color: #0c2a0a">'+
+      
+      '<div style="width: 100%;"> <p style="text-align: center; padding-top: 20px; font-size:90px; color: rgb(255, 245, 235);">  Welcome  </p> </div>'+
+      //'<p style="color: rgb(255, 245, 235); font-size:60px; padding-top: 3px; padding-left: 8px; float:left;"> Le Bistrot <span>&#8217;</span>Andre </p>' +
+
+      //'<div style=""> test</div>' +
+
+      '</div>' +
+        
+
+      //'<div style="text-align: center; width: 100%; color: #0c2a0a; font-size:80px; background-color: rgb(255, 245, 235);">' +
+      //'Le Bistrot d<span>&#8217;</span>Andre' +
+      //'</div>' +
+      '<div style="background-color: rgb(255, 245, 235); padding: 20px; text-align:center;">' +
+      '<div style="color: black; font-size: 30px; padding-top: 40px;">' +
+      
+      'Hello, ' +
+      
+      '<strong> ' +
+      req.query.firstName +
+      //' ' +
+      //req.query.lastName +
+      '</strong>' +
+
+      //', You one step away!'+
+      ',<br> To activate your account, please select the link below <br>' +
+      
+      '<div style="padding-top: 20px; padding-bottom: 80px;"> <a href=' + link + '>Click Here </a>   </div>'+
+      
+      //'<a href=' +
+      //link +
+      //'>Click Here</a>' +
+     // '</div>' +
+
+
+      '<div style="width: 100%; font-size: 11px;">Once registered, you will be able to access all the perks that come with being part of the Bistro Famille, including table reservation. As outlined in the terms and conditions, tables must be reserved at least one week in advance. If you wish to cancel a booking, please do so a minimum of 24 hours prior to the time of the reservation. Failure to comply with these agreements may result in account suspension or termination. We kindly thank you for your patronage and look forward to seeing you in person.</div>' +
+
+      '<div style="color: grey; font-size: 16px;">' +
+      'LBA Online support<br><br><br>' +
+      '</div>' +
+      '<div style="color: black; font-size: 10px;">' +
+      'SES 1A, Group 8' +
+      '</div>' +
+      '</div>' +
+      '<div style="margin: 0; width: 100%; height: 50px; background-color: #0c2a0a"></div>' +
+      '</body>',
       userId: Date.now().toString(),
       email: req.query.email,
       password: hashedPassword,
