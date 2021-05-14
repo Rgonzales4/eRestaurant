@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Edit Profile</title>
-    <%- include('partials/navbar') %>
+    <%- include('partials/navbar') %> <%- include('partials/style')%>
   </head>
   <body>
     <% if (adminEdit == false){%> 
@@ -80,5 +80,10 @@
         </div>
       </div>
     </form>
+    <div class="footer" style="position: absolute">
+      Le Bistrot D'Andre <br /><br /><span style="color: grey"
+        >2021 SES 1A, Group 8</span
+      >
+    </div>
   </body>
 </html>

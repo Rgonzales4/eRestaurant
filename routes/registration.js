@@ -83,7 +83,8 @@ router.get('/processing', async (req, res) => {
         ' ' +
         req.query.lastName +
         '</strong>' +
-        ',<br> Your registration is nearly complete! Please Click on the link to activate your account.<br><a href=' +
+        ',<br> Your registration is nearly complete! Please Click on the link to activate your account.<br>' +
+        '<a href=' +
         link +
         '>Click here to activate</a><br><br>' +
         '</div>' +
