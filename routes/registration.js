@@ -70,33 +70,44 @@ router.get('/processing', async (req, res) => {
       to: req.query.email,
       subject: 'Please confirm your Email account',
       html:
-        '<body>' +
-        '<div style="margin: 0; width: 100%; height: 50px; background-color: #0c2a0a"></div>' +
-        '<div style="text-align: center; width: 100%; color: #0c2a0a; font-size:80px; background-color: rgb(255, 245, 235);">' +
-        'Le Bistrot d<span>&#8217;</span>Andre' +
-        '</div>' +
-        '<div style="background-color: rgb(255, 245, 235); padding: 70px;">' +
-        '<div style="color: black; font-size:18px;">' +
-        'Hello ' +
-        '<strong> ' +
-        req.query.firstName +
-        ' ' +
-        req.query.lastName +
-        '</strong>' +
-        ',<br> Your registration is nearly complete! Please Click on the link to activate your account.<br>' +
-        '<a href=' +
-        link +
-        '>Click here to activate</a><br><br>' +
-        '</div>' +
-        '<div style="color: grey; font-size: 16px;">' +
-        'LBA Online support<br><br><br>' +
-        '</div>' +
-        '<div style="color: black; font-size: 10px;">' +
-        'SES 1A, Group 8' +
-        '</div>' +
-        '</div>' +
-        '<div style="margin: 0; width: 100%; height: 50px; background-color: #0c2a0a"></div>' +
-        '</body>',
+        
+      '<body>' +
+
+      '<div style="width: 100%; height: 130px; background-color: #0c2a0a">'+
+      
+      '<div style="width: 80%;"> <p style="font-size:60px; color: rgb(255, 245, 235);">  Le Bistrot d<span>&#8217;</span>Andre  </p> </div>'+
+      //'<p style="color: rgb(255, 245, 235); font-size:60px; padding-top: 3px; padding-left: 8px; float:left;"> Le Bistrot d<span>&#8217;</span>Andre </p>' +
+
+      //'<div style="float: right;"> test</div>' +
+
+      '</div>' +
+        
+
+      '<div style="text-align: center; width: 100%; color: #0c2a0a; font-size:80px; background-color: rgb(255, 245, 235);">' +
+      'Le Bistrot d<span>&#8217;</span>Andre' +
+      '</div>' +
+      '<div style="background-color: rgb(255, 245, 235); padding: 70px;">' +
+      '<div style="color: black; font-size:18px;">' +
+      'Hello ' +
+      '<strong> ' +
+      req.query.firstName +
+      ' ' +
+      req.query.lastName +
+      '</strong>' +
+      ',<br> Your registration is nearly complete! Please Click on the link to activate your account.<br>' +
+      '<a href=' +
+      link +
+      '>Click here to activate</a><br><br>' +
+      '</div>' +
+      '<div style="color: grey; font-size: 16px;">' +
+      'LBA Online support<br><br><br>' +
+      '</div>' +
+      '<div style="color: black; font-size: 10px;">' +
+      'SES 1A, Group 8' +
+      '</div>' +
+      '</div>' +
+      '<div style="margin: 0; width: 100%; height: 50px; background-color: #0c2a0a"></div>' +
+      '</body>',
       userId: Date.now().toString(),
       email: req.query.email,
       password: hashedPassword,
