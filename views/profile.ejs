@@ -14,9 +14,16 @@
       padding: 0;
       display: flex;
       flex-direction: column;
+      background-color: rgba(255, 245, 235, 0.548);
     "
   >
-    <div class="container" style="padding: 50px">
+    
+  <div style="height: 350px; color: #0c2a0a;">
+    <h1 style="margin: 20px; text-align: center; padding-top: 120px; font-size: 70px;">View Your Accounts</h1>
+    <p style="text-align: center; margin-left: 80px; margin-right: 80px; font-size: 20px;">View Account Details | Modify Account | Delete Account</p>
+  </div>
+
+  <div class="container" style="padding: 50px; background-color: #49814463; align-content: center; border-radius: 25px;">
       <h2>User Profile</h2>
       <% if (user.isAdmin == true){%>
       <label style="color: green; padding: 10px">Admin Account</label>
@@ -57,7 +64,7 @@
       <div class="row" style="margin-top: 10px">
         <div class="col-lg-4">
           <% if (adminEdit == false){%>
-          <a href="/profile/editProfile" class="btn btn-primary btn-sm"
+          <a href="/profile/editProfile" class="btn btn-success"
             >Edit Account</a
           >
           <% } else if (adminEdit == true) { %>
@@ -67,7 +74,7 @@
             >Edit Account</a
           >
           <% } %>
-          <button onclick="alertUser()" class="btn btn-danger btn-sm">
+          <button onclick="alertUser()" class="btn btn-danger btn">
             Delete Account
           </button>
           <a
