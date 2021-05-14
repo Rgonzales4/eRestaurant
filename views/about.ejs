@@ -1,6 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+  <style type="text/css">
+    body {
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .banner {
+        margin: 0px;
+        padding: 0px;
+        height: 600px;
+        background-color: #0c2a0a;
+      }
+
+      .bannerimg {
+        padding: 0px;
+        margin: 0px;
+        opacity: 0%;
+        width: 100%;
+        max-height: 100%;
+      }
+
+      .bannertxt {
+        position: absolute;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 100%;
+        color: rgb(255, 245, 235);
+      }
+
+      .bannerhead {
+        font-size: 150px;
+        color: rgb(255, 245, 235);
+        padding: 0;
+      }
+
+      .bannerdesc {
+        font-size: 15px;
+        font-style: italic;
+        color: rgb(255, 245, 235);
+        padding-left: 30px;
+        padding-right: 30px;
+        width: 100%;
+      }
+
+      .philosophy {
+        height: 700px;
+        width: 100%;
+        background-color: rgb(255, 245, 235);
+        margin: 0px;
+        padding: 0px;
+      }
+
+      .about {
+        width: 60%;
+        height: 100%;
+        float: left;
+        padding-right: 20px;
+      }
+
+      .about h1 {
+        float: right;
+        text-align: right;
+        margin-top: 230px;
+        margin-right: 70px;
+        margin-left: 10px;
+        font-size: 90px;
+        font-style: italic;
+        color: #0c2a0a;
+      }
+
+      .about p {
+        float: right;
+        text-align: right;
+        margin-top: 30px;
+        margin-left: 80px;
+        margin-right: 80px;
+        color: #0c2a0a;
+      }
+
+      .award {
+        width: 40%;
+        height: 700px;
+        float: right;
+        background-color: #0c2a0a;
+      }
+
+      .award p {
+        text-align: center;
+      }
+
+      .awardpic {
+        height: 100%;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .service1 {
+        height: 33%;
+        background-color: rgb(255, 245, 235);
+        text-align: left;
+        font-size: 70px;
+        font-style: italic;
+        color: #0c2a0a;
+      }
+
+      .service2 {
+        height: 34%;
+        background-color: rgb(255, 245, 235);
+        text-align: left;
+        font-size: 70px;
+        font-style: italic;
+        color: #0c2a0a;
+      }
+
+      .service3 {
+        height: 33%;
+        background-color: rgb(255, 245, 235);
+        text-align: left;
+        font-size: 70px;
+        font-style: italic;
+        color: #0c2a0a;
+      }
+    
+  </style>  
+
+
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,8 +140,48 @@
   </head>
 
   <body>
-    <h1 style="padding: 20px">About Us</h1>
-    <div class="container">
+    
+    <div class="banner">
+      <img
+        class="bannerimg"
+        src="https://s3-ap-southeast-2.amazonaws.com/production.assets.merivale.com.au/wp-content/uploads/2019/08/28085906/little_felix_gallery7.jpg"
+        alt="Header Image"
+      />
+
+      <div class="bannertxt">
+        <div class="bannerhead">About Us</div>
+        <p class="bannerdesc">Headed by Gabrielle, Le Bistrot d'Andre is a fine French restaurant situated in the north of Sydney. We relish in sharing our love of fine food, fine wine excellent company with our customers. Since our modest beginnings in 2005 with a little space in the stylish heart of Sydney, Le Bistro D'Andre‘s development has been enlivened with the energy to cook and serve solid, french-roused takeout food. In contrast to other Indian eateries, ‘Organization Name’ was made with the explicit expectation to appear as something else. We realize numerous individuals love Indian sustenance, yet a large number of them loathe or are unconscious of the regularly unfortunate fixings that make run of the mill Indian nourishment taste so great. Our menu highlights things that utilization the sound and fragrant flavors, however forgets the stuffing ghee, spread, oil, and overwhelming cream.</p>
+      </div>
+    </div>
+
+    <div class="philosophy">
+      <div class="about">
+        <h1>Our Services</h1>
+        <p>
+          The best food in the city served in the best location makes Le Bistrot
+          D'Andre the perfect dining venue for all types of occasions and the
+          icing on the cake is our first-class front-of-house team. Friendly,
+          polite and always professional, our waiting staff are there to ensure
+          that the time you spend with us is enjoyable from start to finish and
+          that everything about your meal is absolutely perfect. Every member of
+          our waiting staff is fully trained and highly experienced, and shares
+          our determination to ensure that each customer we welcome to Catalina
+          has the dining experience of their life.
+        </p>
+      </div>
+      <div class="award">
+        <div class="service1"> <p style="padding-top: 50px; text-align: left;">Fine Dining</p>  </div>
+        <div class="service2"> <p style="padding-top: 50px; text-align: left;">Catering</p></div>
+        <div class="service3"> <p style="padding-top: 50px; text-align: left;">Event Hosting</p></div>
+      </div>
+    </div>
+
+
+
+
+
+    
+    <!-- <div class="container">
       <header>
         <b>Our vision </b>
         <p style="margin-left: 2.5em"></p>
@@ -60,11 +230,11 @@
           height="260"
         />
       </div>
-    </div>
+    </div>-->
     <div class="footer">
       Le Bistrot D'Andre <br /><br /><span style="color: grey"
         >2021 SES 1A, Group 8</span
-      >
+      > 
     </div>
   </body>
 </html>
