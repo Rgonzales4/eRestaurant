@@ -7,7 +7,7 @@
     <%- include('partials/navbar')%> <%- include('partials/style') %>
     <title>Booking</title>
   </head>
-  <body style="background-color: rgba(253, 245, 235, 0.584);;">
+  <!-- <body style="background-color: rgba(253, 245, 235, 0.584);;">
     <h1 style="padding: 20px">Welcome To The Booking Page</h1>
     <div class="container" style="padding: 20px">
       <a
@@ -16,15 +16,21 @@
         class="btn btn-outline-success me-2"
         >Create Booking</a
       >
+    </div> -->
+
+<body style="background-color: rgba(255, 245, 235, 0.548);">
+    <div style="height: 350px; color: #0c2a0a;">
+      <h1 style="padding: 20px; text-align: center; padding-top: 120px; font-size: 70px;">Welcome To The Booking Page</h1>
+      <p style="text-align: center; margin-left: 80px; margin-right: 80px; font-size: 20px;">View all current and previous bookings submitted by registered patrons of the restaurant. Selecting a reservation will allow you to view booking information, patron information, and use administrative powers to edit and remove bookings at your discretion.</p>
     </div>
 
     <div class="container">
       <div class="row">
-        <div class="col" style="padding: 20px">
+        <div class="col" style="padding: 20px;">
           <h2>Current bookings:</h2>
           <span style="color: red"><%= failMessage %></span>
           <% Array.from(booking).forEach(b => { %> <% if(b.isActive == true) {%>
-          <div class="card mt-2">
+          <div class="card mt-2" style="background-color: #49814463; margin-bottom: 30px;">
             <div class="card-body">
               <h4 class="card-title"><%= b.bookingDate.toDateString() %></h4>
               <p class="card-title text-muted">
@@ -35,7 +41,7 @@
               <div class="card-title">
                 Allergy Information: <%= b.allergyDescription %>
               </div>
-              <a href="bookings/edit/<%= b.bookingID %>" class="btn btn-info"
+              <a href="bookings/edit/<%= b.bookingID %>" class="btn btn-light"
                 >Edit Booking</a
               >
               <form
