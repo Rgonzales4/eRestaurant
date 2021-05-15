@@ -14,9 +14,12 @@
       padding: 0;
       display: flex;
       flex-direction: column;
+      background-color: rgba(253, 245, 235, 0.584);
     "
   >
-    <div class="container" style="flex-grow: 1">
+
+  <div> 
+    <div class="container" style="flex-grow: 1;">
       <h1 style="padding: 20px"><%= menuItem.itemName%></h1>
 
       <% if(menuItem.itemImg) { %>
@@ -26,6 +29,15 @@
       <% } %>
 
       <br />
+
+    </div>
+    
+      <div style="height: 800px;">
+
+      
+      <div style="background-color: #49814463; border-radius: 20%; width: 30%; float: right; height: auto; padding-top: 50px; padding-left: 60px; margin-right: 20%;"> 
+      
+      
       <h5 class="text-muted">Price: $<%= menuItem.itemPrice%></h5>
 
       <p class="text-muted">
@@ -43,8 +55,10 @@
       <br />
     </div>
 
+  </div>
+
     <% if (req.user && req.user.isAdmin == true) {%>
-    <div class="container" style="padding-bottom: 30px">
+    <div class="container" style="padding-bottom: 30px; float: right;">
       <a
         href="/menu/editMenuItem/<%= menuItem.itemID%>"
         class="btn btn-primary btn-sm"
@@ -59,6 +73,10 @@
       </form>
     </div>
     <% } %>
+
+
+  </div>
+
 
     <div class="footer">
       Le Bistrot D'Andre <br /><br /><span style="color: grey"
