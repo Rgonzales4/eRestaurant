@@ -14,18 +14,114 @@
       padding: 0;
       display: flex;
       flex-direction: column;
+      background-color: rgba(253, 245, 235, 0.584);
     "
   >
-    <div class="container" style="flex-grow: 1">
-      <h1 style="padding: 20px"><%= menuItem.itemName%></h1>
 
-      <% if(menuItem.itemImg) { %>
-      <div class="container">
-        <img src="/uploads/<%= menuItem.itemImg%>" width="45%" />
+  
+
+  <div style="height: 800px; width: 100%;">
+
+
+    <div class="productImage" style="width: 50%; float: left; height: 800px;">
+      <div class="container" style="flex-grow: 1; float: right;">
+        <h1 style="margin: 20px; float: right;"><%= menuItem.itemName%></h1>
+  
+        <% if(menuItem.itemImg) { %>
+        <div class="container" style="float: right;">
+          <img src="/uploads/<%= menuItem.itemImg%>" 
+          
+          style="float: right;"
+          width="45%" />
+        </div>
+        <% } %>
+  
+        <br />
+
+
+    </div>
+  </div>
+
+
+
+
+    <div class="productDetails" style="width: 50%; height: 800px; float: right; padding-top: 80px;"> 
+
+      <div style="background-color: #49814463; border-radius: 5%; height: auto; padding-left: 8%; padding-top: 40px; padding-bottom: 10%; margin-right: 20%;"> 
+      
+      
+        <h5 class="text-muted">Price: $<%= menuItem.itemPrice%></h5>
+  
+        <p class="text-muted">
+          <% if(menuItem.mealType == "LunchDinner") { %> Lunch & Dinner <% } else
+          { %> <%= menuItem.mealType%><% } %> menu item
+        </p>
+        <%- include('partials/menu_item_categories')%>
+        <br />
+  
+        <p><%= menuItem.itemDescription%></p>
+        <br />
+  
+        <h6>Ingredients:</h6>
+        <p><%= menuItem.itemIngredients%></p>
+        <br />
+  
+  
+        <% if (req.user && req.user.isAdmin == true) {%>
+        <div class="container" style="padding-bottom: 30px; float: right;">
+          <a
+            href="/menu/editMenuItem/<%= menuItem.itemID%>"
+            class="btn btn-primary btn-sm"
+            >Edit Menu Item</a
+          >
+          <form
+           action="/menu/<%= menuItem.itemID %>?_method=DELETE"
+           method="POST"
+            class="d-inline"
+          >
+            <button type="submit" class="btn btn-danger btn-sm">Delete Item</button>
+          </form>
+      
+        <% } %>
+
+        </div>
+
       </div>
-      <% } %>
 
-      <br />
+    </div>
+
+   <!-- end -->
+  </div>
+
+
+
+
+    
+      <!-- <div style="height: 800px; width: 100%;">
+
+
+        <div style="background-color: black; width: 50%; float: left;"> 
+
+
+          <div class="container" style="flex-grow: 1; float: right;">
+            <h1 style="margin: 20px"><%= menuItem.itemName%></h1>
+      
+            <% if(menuItem.itemImg) { %>
+            <div class="container" style="float: right;">
+              <img src="/uploads/<%= menuItem.itemImg%>" width="45%" />
+            </div>
+            <% } %>
+      
+            <br />
+      
+          </div>
+      
+          </div>
+
+      
+      <div style="background-color: #49814463; border-radius: 20%; height: auto; "> 
+      
+      
       <h5 class="text-muted">Price: $<%= menuItem.itemPrice%></h5>
 
       <p class="text-muted">
@@ -43,8 +139,10 @@
       <br />
     </div>
 
+  </div>
+
     <% if (req.user && req.user.isAdmin == true) {%>
-    <div class="container" style="padding-bottom: 30px">
+    <div class="container" style="padding-bottom: 30px; float: right;">
       <a
         href="/menu/editMenuItem/<%= menuItem.itemID%>"
         class="btn btn-primary btn-sm"
@@ -59,6 +157,10 @@
       </form>
     </div>
     <% } %>
+
+
+  </div> -->
+
 
     <div class="footer">
       Le Bistrot D'Andre <br /><br /><span style="color: grey"
