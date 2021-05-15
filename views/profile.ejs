@@ -17,13 +17,38 @@
       background-color: rgba(255, 245, 235, 0.548);
     "
   >
-    
-  <div style="height: 350px; color: #0c2a0a;">
-    <h1 style="margin: 20px; text-align: center; padding-top: 120px; font-size: 70px;">View Your Accounts</h1>
-    <p style="text-align: center; margin-left: 80px; margin-right: 80px; font-size: 20px;">View Account Details | Modify Account | Delete Account</p>
-  </div>
+    <div style="height: 350px; color: #0c2a0a">
+      <h1
+        style="
+          margin: 20px;
+          text-align: center;
+          padding-top: 120px;
+          font-size: 70px;
+        "
+      >
+        View Your Accounts
+      </h1>
+      <p
+        style="
+          text-align: center;
+          margin-left: 80px;
+          margin-right: 80px;
+          font-size: 20px;
+        "
+      >
+        View Account Details | Modify Account | Delete Account
+      </p>
+    </div>
 
-  <div class="container" style="padding: 50px; background-color: #49814463; align-content: center; border-radius: 25px;">
+    <div
+      class="container"
+      style="
+        padding: 50px;
+        background-color: #49814463;
+        align-content: center;
+        border-radius: 25px;
+      "
+    >
       <h2>User Profile</h2>
       <% if (user.isAdmin == true){%>
       <label style="color: green; padding: 10px">Admin Account</label>
@@ -70,7 +95,7 @@
           <% } else if (adminEdit == true) { %>
           <a
             href="/database/account/<%= user.userId%>/editProfile"
-            class="btn btn-primary btn-sm"
+            class="btn btn-primary"
             >Edit Account</a
           >
           <% } %>
@@ -88,7 +113,7 @@
         </div>
       </div>
     </div>
-    <div class="footer" style="position: absolute">
+    <div class="footer" style="flex-grow: 1">
       Le Bistrot D'Andre <br /><br /><span style="color: grey"
         >2021 SES 1A, Group 8</span
       >

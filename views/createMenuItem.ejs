@@ -7,15 +7,41 @@
     <title>Create Menu Item</title>
     <%- include('partials/navbar') %> <%- include('partials/style')%>
   </head>
-  <body>
+  <body style="background-color: rgba(253, 245, 235, 0.584)">
+    <div style="height: 350px; color: #0c2a0a">
+      <h1
+        style="
+          margin: 20px;
+          text-align: center;
+          padding-top: 120px;
+          font-size: 70px;
+        "
+      >
+        Create a Menu Item
+      </h1>
+      <p
+        style="
+          text-align: center;
+          margin-left: 80px;
+          margin-right: 80px;
+          font-size: 20px;
+        "
+      >
+        Add a new dish to the menu
+      </p>
+    </div>
     <div class="container" style="padding: 20px">
-      <h1>Create a Menu Item</h1>
       <span style="color: red"><%= errorMessage%></span>
 
       <form
         action="/menu/createMenuItem"
         method="POST"
         enctype="multipart/form-data"
+        style="
+          background-color: #49814463;
+          align-content: center;
+          border-radius: 25px;
+        "
       >
         <%- include('partials/menu_items_fields') %>
 

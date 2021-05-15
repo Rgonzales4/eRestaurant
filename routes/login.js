@@ -16,19 +16,6 @@ router.get('/', checkNotAuthenticated, async (req, res) => {
   res.render('login', { loginMessage: '', req: req });
 });
 
-// WORKING SOLUTION w/o Passport --> Need to import User model again for this to work
-// router.post('/', async (req, res) => {
-//   let user = await User.findOne({
-//     email: req.body.email,
-//     password: req.body.password,
-//   });
-//   if (user) {
-//     res.render('home');
-//   } else {
-//     res.render('login', { loginMessage: 'Username / Password is incorrect' });
-//   }
-// });
-
 router.post(
   '/',
   passport.authenticate('local', {

@@ -215,7 +215,6 @@ router.post('/', checkAuthenticated, async (req, res) => {
 });
 
 router.put('/:bookingID', checkAuthenticated, async (req, res) => {
-  //NEED TO ADD CLAUSES IN
   const filter = { bookingID: req.params.bookingID };
   const update = {
     bookingDate: req.body.bookingDate,
@@ -410,8 +409,6 @@ router.post(
 );
 
 router.put('/edit/addItem/:bookingID', checkAuthenticated, async (req, res) => {
-  //updating an item from menu from edit booking
-  //WORK IN PROGRESS
   let booking = await Booking.findOne({ bookingID: req.params.bookingID });
   let menuItem = {
     menuItemId: req.body.menuItemId,

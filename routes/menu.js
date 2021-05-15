@@ -23,7 +23,6 @@ const Storage = multer.diskStorage({
 
 const upload = multer({ storage: Storage }).single('image');
 
-
 //MENU FILTER
 router.get('/', async (req, res) => {
   console.log('Menu page opened');
@@ -31,87 +30,77 @@ router.get('/', async (req, res) => {
   res.render('menu', { req: req, menu_item: menuItem });
 });
 
-router.post('/searchFilter', async (req,res) => {
+router.post('/searchFilter', async (req, res) => {
   // var vegetarianItem;
   // var veganItem;
-  
-  var breakfastGroup = await MenuItem.find({nutFree: true});
-  var lunchDinnerGroup = await MenuItem.find({nutFree: true});
-  var drinkGroup = await MenuItem.find({nutFree: true});
+
+  var breakfastGroup = await MenuItem.find({ nutFree: true });
+  var lunchDinnerGroup = await MenuItem.find({ nutFree: true });
+  var drinkGroup = await MenuItem.find({ nutFree: true });
 
   var menuItem;
 
   //vegetarian food
-  if(req.body.vegetarian){    
-    if (menuItem == null){
-        menuItem = await MenuItem.find({vegetarian: true});
+  if (req.body.vegetarian) {
+    if (menuItem == null) {
+      menuItem = await MenuItem.find({ vegetarian: true });
     } else {
-      var vegetarianItem = await MenuItem.find({vegetarian: true});
+      var vegetarianItem = await MenuItem.find({ vegetarian: true });
       menuItem = menuItem.concat(vegetarianItem);
     }
   }
 
   //vegan food
-  if(req.body.vegan){
-    if (menuItem == null){
-      menuItem = await MenuItem.find({veganScum: true});
-  } else {
-    var veganItem = await MenuItem.find({veganScum: true});
-    menuItem = menuItem.concat(veganItem);
+  if (req.body.vegan) {
+    if (menuItem == null) {
+      menuItem = await MenuItem.find({ veganScum: true });
+    } else {
+      var veganItem = await MenuItem.find({ veganScum: true });
+      menuItem = menuItem.concat(veganItem);
+    }
   }
-  
-  }
-
 
   //gluten-free
-  if(req.body.glutenFree){
-    if (menuItem == null){
-      menuItem = await MenuItem.find({glutenFree: true});
-  } else {
-    var glutenFreeItem = await MenuItem.find({glutenFree: true});
-    menuItem = menuItem.concat(glutenFreeItem);
-  }
-  
-  }
-
-  //Dairy Free 
-  if(req.body.dairyFree){
-    if (menuItem == null){
-      menuItem = await MenuItem.find({dairyFree: true});
-  } else {
-    var dairyFreeItem = await MenuItem.find({dairyFree: true});
-    menuItem = menuItem.concat(dairyFreeItem);
-  }
-  
+  if (req.body.glutenFree) {
+    if (menuItem == null) {
+      menuItem = await MenuItem.find({ glutenFree: true });
+    } else {
+      var glutenFreeItem = await MenuItem.find({ glutenFree: true });
+      menuItem = menuItem.concat(glutenFreeItem);
+    }
   }
 
-  //Dairy Free 
-  if(req.body.nutFree){
-    if (menuItem == null){
-      menuItem = await MenuItem.find({nutFree: true});
-  } else {
-    var nutFreeItem = await MenuItem.find({nutFree: true});
-    menuItem = menuItem.concat(nutFreeItem);
+  //Dairy Free
+  if (req.body.dairyFree) {
+    if (menuItem == null) {
+      menuItem = await MenuItem.find({ dairyFree: true });
+    } else {
+      var dairyFreeItem = await MenuItem.find({ dairyFree: true });
+      menuItem = menuItem.concat(dairyFreeItem);
+    }
   }
-  
+
+  //Dairy Free
+  if (req.body.nutFree) {
+    if (menuItem == null) {
+      menuItem = await MenuItem.find({ nutFree: true });
+    } else {
+      var nutFreeItem = await MenuItem.find({ nutFree: true });
+      menuItem = menuItem.concat(nutFreeItem);
+    }
   }
-  
+
   //if(req.body.nutFree == null && req.body.dairyFree == null && req.body.glutenFree == null && req.body.vegan == null && req.body.vegetarian){
-    //console.log('clear them filters bby');
-    //menuItem = await MenuItem.find({});
+  //console.log('clear them filters bby');
+  //menuItem = await MenuItem.find({});
   //}
 
-
-  if(menuItem != null){
-    res.render('menu', {req:req, menu_item: menuItem});
-  }else{
+  if (menuItem != null) {
+    res.render('menu', { req: req, menu_item: menuItem });
+  } else {
     const menuItem = await MenuItem.find({});
-  res.render('menu', { req: req, menu_item: menuItem });
+    res.render('menu', { req: req, menu_item: menuItem });
   }
-  
-
-
-
 });
 
 //OPENING THE CREATE PAGE FOR MENU ITEM
@@ -172,7 +161,7 @@ router.post('/createMenuItem', checkAdmin, upload, async (req, res) => {
     res.render('createMenuItem', {
       req: req,
       errorMessage: 'Please make sure you filled in all the necessary sections',
-      menuItem: newMenu,
+      menuItem: newMenuItem,
     });
   }
 });
@@ -244,6 +233,5 @@ function checkAdmin(req, res, next) {
   }
   res.redirect('/');
 }
-
 
 module.exports = router;

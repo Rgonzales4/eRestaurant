@@ -15,9 +15,35 @@
       padding: 0;
       display: flex;
       flex-direction: column;
+      background-color: rgba(253, 245, 235, 0.584);
     "
   >
-    <h1 style="padding: 20px">Create Booking</h1>
+    <div style="height: 350px; color: #0c2a0a">
+      <h1
+        style="
+          margin: 20px;
+          text-align: center;
+          padding-top: 120px;
+          font-size: 70px;
+        "
+      >
+        Create your Booking
+      </h1>
+      <p
+        style="
+          text-align: center;
+          margin-left: 80px;
+          margin-right: 80px;
+          font-size: 20px;
+        "
+      >
+        Create your booking now to ensure you secure a table for the specific
+        date you want. Unfortunately bookings cannot be made within a day of
+        your desired date, so please make sure you book 2 days or more prior to
+        the date you want. Please include any allergies with your booking so our
+        staff can do their best to cater the dishes to your needs.
+      </p>
+    </div>
     <div class="container" style="flex-grow: 1">
       <div class="row">
         <div class="col-3">
@@ -30,8 +56,18 @@
             <%- include('partials/_booking_form_fields') %>
           </form>
         </div>
-        <div class="col-4">
-          <h1>Menu</h1>
+        <div
+          class="col-4"
+          style="
+            margin-left: 5%;
+            margin-right: 5%;
+            background-color: #49814463;
+            align-content: center;
+            border-radius: 25px;
+            padding: 10px;
+          "
+        >
+          <h1 style="padding: 10px">Menu</h1>
           <% Array.from(menu).forEach(item => {%>
           <div class="input-group mb-1">
             <input
@@ -43,13 +79,25 @@
           </div>
           <% })%>
         </div>
-        <div class="col-sm">
-          <h1>Cart</h1>
+        <div
+          class="col-sm"
+          style="
+            background-color: #49814491;
+            align-content: center;
+            border-radius: 25px;
+            padding: 10px;
+          "
+        >
+          <h1
+            style="padding-left: 10px; padding-top: 10px; padding-bottom: 10px"
+          >
+            Cart
+          </h1>
           <p
             style="
               border: 3px;
               border-style: solid;
-              border-color: #b9b9b9;
+              border-color: grey;
               padding: 1em;
             "
           >
@@ -60,6 +108,7 @@
         </div>
       </div>
     </div>
+    <br />
     <div class="footer">
       Le Bistrot D'Andre <br /><br /><span style="color: grey"
         >2021 SES 1A, Group 8</span
