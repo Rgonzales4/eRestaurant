@@ -8,10 +8,28 @@
 
     <title>Database</title>
   </head>
-  <body style="background-color: rgba(255, 245, 235, 0.548);">
-    <div style="height: 350px; color: #0c2a0a;">
-      <h1 style="padding: 20px; text-align: center; padding-top: 120px; font-size: 70px;">Welcome To The Database</h1>
-      <p style="text-align: center; margin-left: 80px; margin-right: 80px; font-size: 20px;"> View Bookings | Registered Users | Menu Items | Create Discount Codes</p>
+  <body style="background-color: rgba(255, 245, 235, 0.548)">
+    <div style="height: 350px; color: #0c2a0a">
+      <h1
+        style="
+          padding: 20px;
+          text-align: center;
+          padding-top: 120px;
+          font-size: 70px;
+        "
+      >
+        Welcome To The Database
+      </h1>
+      <p
+        style="
+          text-align: center;
+          margin-left: 80px;
+          margin-right: 80px;
+          font-size: 20px;
+        "
+      >
+        View Bookings | Registered Users | Menu Items | Create Discount Codes
+      </p>
     </div>
 
     <div class="container">
@@ -20,7 +38,7 @@
         <% Users.forEach(Users => { %> <% if(!Users.isAdmin) { %>
         <div class="col-lg-4" style="float: left">
           <div style="padding: 10px">
-            <div class="card" style="width: 18rem; background-color: #49814463;">
+            <div class="card" style="width: 18rem; background-color: #49814463">
               <div class="card-body">
                 <h5 class="card-title"><%= Users.firstName %></h5>
                 <h6 class="card-subtitle mb-2"><%= Users.lastName %></h6>
@@ -55,12 +73,15 @@
 
     <div class="container">
       <div class="row">
-        <h2 style="padding-top: 20px;">Bookings:</h2>
+        <h2 style="padding-top: 20px">Bookings:</h2>
         <% Bookings.forEach(Bookings => { %>
         <div class="col-lg-4">
           <div style="float: left">
             <div style="padding: 10px">
-              <div class="card" style="width: 18rem; background-color: #49814463;;">
+              <div
+                class="card"
+                style="width: 18rem; background-color: #49814463 ;"
+              >
                 <div class="card-body">
                   <h5 class="card-title">
                     <%= Bookings.bookingDate.toLocaleDateString() %>
@@ -102,15 +123,13 @@
         <% MenuItems.forEach(Item => { %>
         <div class="col-lg-4" style="float: left">
           <div style="padding: 10px">
-            <div class="card" style="width: 18rem; background-color: #49814463;">
+            <div class="card" style="width: 18rem; background-color: #49814463">
               <div class="card-body">
                 <h5 class="card-title"><%= Item.itemName %></h5>
                 <h6 class="card-subtitle mb-2 text-muted">
                   <%= Item.itemID %>
                 </h6>
-                <a
-                  href="database/menu/<%= Item.itemID%>"
-                  class="btn btn-light"
+                <a href="database/menu/<%= Item.itemID%>" class="btn btn-light"
                   >View Menu Item</a
                 >
               </div>
@@ -121,8 +140,7 @@
       </div>
     </div>
 
-    <div class="container" style="padding-bottom: 50px; width: 100%;">
-      
+    <div class="container" style="padding-bottom: 50px; width: 100%">
       <!-- <div style="width: 50%; background-color: black; height: 150px;"><h2 style="padding-top: 30px;">Create a Discount Code:</h2> </div>
       <form action="/database/createDiscountCode" method="POST">
         
@@ -137,8 +155,7 @@
         </div>
       </form>       -->
 
-      
-      <div class="row" style="padding-top: 30px;">
+      <div class="row" style="padding-top: 30px">
         <h2 style="padding: 10px">Create a Discount Code:</h2>
         <form action="/database/createDiscountCode" method="POST">
           <div class="col-3">
@@ -150,7 +167,7 @@
               placeholder="Enter new discount code"
             />
           </div>
-          <div style="padding-top: 10px;">
+          <div style="padding-top: 10px">
             <button class="btn btn-success me-2" type="submit">
               Create code
             </button>

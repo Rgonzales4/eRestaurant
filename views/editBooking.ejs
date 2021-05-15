@@ -8,16 +8,33 @@
     <title>Edit Booking</title>
   </head>
 
-  <body style="background-color: rgba(253, 245, 235, 0.584);">
-    <!-- <h1 style="padding: 20px">Editing Booking</h1> -->
-
-    <div style="height: 350px; color: #0c2a0a;">
-      <h1 style="margin: 20px; text-align: center; padding-top: 120px; font-size: 70px;">Modify your Booking</h1>
-      <p style="text-align: center; margin-left: 80px; margin-right: 80px; font-size: 20px;">Modify booking details to ensure that we're able to cater to your needs with the highest possible degree of accuracy.</p>
+  <body style="background-color: rgba(253, 245, 235, 0.584)">
+    <div style="height: 350px; color: #0c2a0a">
+      <h1
+        style="
+          margin: 20px;
+          text-align: center;
+          padding-top: 120px;
+          font-size: 70px;
+        "
+      >
+        Modify your Booking
+      </h1>
+      <p
+        style="
+          text-align: center;
+          margin-left: 80px;
+          margin-right: 80px;
+          font-size: 20px;
+        "
+      >
+        Modify booking details to ensure that we're able to cater to your needs
+        with the highest possible degree of accuracy.
+      </p>
     </div>
 
-    <div class="container" style="margin-bottom: 150px;" >
-      <div class="row" >
+    <div class="container" style="margin-bottom: 150px">
+      <div class="row">
         <div class="col-3">
           <div>
             <span style="color: green"><%= successMessage %></span>
@@ -55,8 +72,18 @@
           </form>
         </div>
 
-        <div class="col-4" style="margin-left: 5%; margin-right: 5%; background-color: #49814463;; align-content: center; border-radius: 25px; padding: 10px;">
-          <h1 style="padding: 10px;">Menu</h1>
+        <div
+          class="col-4"
+          style="
+            margin-left: 5%;
+            margin-right: 5%;
+            background-color: #49814463;
+            align-content: center;
+            border-radius: 25px;
+            padding: 10px;
+          "
+        >
+          <h1 style="padding: 10px">Menu</h1>
           <% Array.from(menu).forEach(item => {%>
           <div class="input-group mb-1">
             <input
@@ -71,7 +98,7 @@
             <form
               action="/bookings/edit/addItem/<%= booking.bookingID %>?_method=PUT"
               method="POST"
-              style="padding-right: 20px;"
+              style="padding-right: 20px"
             >
               <input
                 type="text"
@@ -98,10 +125,22 @@
           <% })%>
         </div>
 
-        <div class="col-sm" style="background-color: #49814491;; align-content: center; border-radius: 25px; padding: 10px;">
-          <h1 style="padding-left: 10px; padding-top: 10px; padding-bottom: 10px;">Cart</h1>
+        <div
+          class="col-sm"
+          style="
+            background-color: #49814491;
+            align-content: center;
+            border-radius: 25px;
+            padding: 10px;
+          "
+        >
+          <h1
+            style="padding-left: 10px; padding-top: 10px; padding-bottom: 10px"
+          >
+            Cart
+          </h1>
           <% Array.from(booking.menuItems).forEach(item => { %>
-          <div class="input-group mb-1" >
+          <div class="input-group mb-1">
             <input
               disabled="true "
               type="text"
@@ -131,10 +170,12 @@
           </div>
           <% }) %>
           <div>
-            <% if(booking.totalPrice) {%>
-            <br />
-            Your Total Price: $<%= booking.totalPrice.toFixed(2) %> <% } else {
-            %> Your Total Price: $0 <% } %>
+            <strong>
+              <% if(booking.totalPrice) {%>
+              <br />
+              Your Total Price: $<%= booking.totalPrice.toFixed(2) %> <% } else
+              { %> Your Total Price: $0 <% } %></strong
+            >
           </div>
         </div>
       </div>

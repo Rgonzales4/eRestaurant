@@ -28,7 +28,10 @@
       <br />
       <h5 class="text-muted">Price: $<%= menuItem.itemPrice%></h5>
 
-      <p class="text-muted"><%= menuItem.mealType%> menu item</p>
+      <p class="text-muted">
+        <% if(menuItem.mealType == "LunchDinner") { %> Lunch & Dinner <% } else
+        { %> <%= menuItem.mealType%><% } %> menu item
+      </p>
       <%- include('partials/menu_item_categories')%>
       <br />
 
@@ -56,7 +59,7 @@
       </form>
     </div>
     <% } %>
-    
+
     <div class="footer">
       Le Bistrot D'Andre <br /><br /><span style="color: grey"
         >2021 SES 1A, Group 8</span

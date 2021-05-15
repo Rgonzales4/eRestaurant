@@ -151,7 +151,13 @@
             <% if(menu_item) {%> <% Array.from(menu_item).forEach(m => { %>
             <div class="col-lg-4" style="float: left">
               <div class="card mt-2" style="margin-bottom: 10%">
-                <div class="card-body" style="background-color: #79a77563;">
+                <img
+                  src="/uploads/<%= m.itemImg%>"
+                  class="card-img-top"
+                  alt="<%= m.itemName %>"
+                  style="height: 200px"
+                />
+                <div class="card-body" style="background-color: #79a77563">
                   <h4 class="card-title"><%= m.itemName %></h4>
                   <div class="card-title"><%= m.itemDescription %></div>
                   <a href="/menu/<%= m.itemID%>" class="btn btn-light"
