@@ -37,6 +37,12 @@
         padding: 0;
       }
 
+      .bannerhead2 {
+        font-size: 150px;
+        color: #0c2a0a;;
+        padding: 0;
+      }
+
       .bannerdesc {
         font-size: 15px;
         font-style: italic;
@@ -47,7 +53,7 @@
       }
 
       .philosophy {
-        height: 700px;
+        height: 500px;
         width: 100%;
         background-color: rgb(255, 245, 235);
         margin: 0px;
@@ -64,7 +70,7 @@
       .about h1 {
         float: right;
         text-align: right;
-        margin-top: 230px;
+        margin-top: 130px;
         margin-right: 70px;
         margin-left: 10px;
         font-size: 90px;
@@ -83,21 +89,27 @@
 
       .award {
         width: 40%;
-        height: 700px;
+        height: 500px;
         float: right;
-        background-color: #0c2a0a;
+        background-color: rgb(255, 245, 235);
+
       }
 
       .award p {
         text-align: center;
+        background-color: rgb(255, 245, 235);
       }
 
       .awardpic {
         height: 100%;
+        width: 50%;
         background-attachment: fixed;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+        float: left;
+        background-color: rgb(255, 245, 235);
+
       }
 
       .service1 {
@@ -126,6 +138,63 @@
         font-style: italic;
         color: #0c2a0a;
       }
+
+      .awardpic {
+        height: 100%;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        border-radius: 50%;
+        max-height: 80%;
+        padding: 2%;
+        margin-top: 50px;
+      }
+
+      .pictureContainer{
+        height: 60%;
+        background-color: #0c2a0a;
+        
+      }
+
+      .eventImage{
+        width: 50%;
+        float: left;
+        max-width: 100%;
+        border-radius: 50%;
+        padding-left: 10%;
+      }
+
+      .services {
+        height: 700px;
+        position: relative;
+        text-align: center;
+        background-color: rgb(255, 245, 235);
+        width: 100%;
+        text-align: center;
+        padding: 80px;
+      }
+
+      .servicestxt {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #0c2a0a;
+        width: 100%;
+      }
+
+      .serviceshead {
+        font-size: 150px;
+      }
+
+      .servicedesc {
+        width: 100%;
+        padding-left: 80px;
+        padding-right: 80px;
+        padding-top: 20px;
+        color: #0c2a0a;
+      }
     
   </style>  
 
@@ -152,11 +221,14 @@
         <div class="bannerhead">About Us</div>
         <p class="bannerdesc">Headed by Gabrielle, Le Bistrot d'Andre is a fine French restaurant situated in the north of Sydney. We relish in sharing our love of fine food, fine wine excellent company with our customers. Since our modest beginnings in 2005 with a little space in the stylish heart of Sydney, Le Bistro D'Andre‘s development has been enlivened with the energy to cook and serve solid, french-roused takeout food. In contrast to other Indian eateries, ‘Organization Name’ was made with the explicit expectation to appear as something else. We realize numerous individuals love Indian sustenance, yet a large number of them loathe or are unconscious of the regularly unfortunate fixings that make run of the mill Indian nourishment taste so great. Our menu highlights things that utilization the sound and fragrant flavors, however forgets the stuffing ghee, spread, oil, and overwhelming cream.</p>
       </div>
+
     </div>
 
+
+    
     <div class="philosophy">
       <div class="about">
-        <h1>Our Services</h1>
+        <h1>Our Mission</h1>
         <p>
           The best food in the city served in the best location makes Le Bistrot
           D'Andre the perfect dining venue for all types of occasions and the
@@ -169,14 +241,69 @@
           has the dining experience of their life.
         </p>
       </div>
+      
       <div class="award">
-        <div class="service1"> <p style="padding-top: 50px; text-align: left;">Fine Dining</p>  </div>
-        <div class="service2"> <p style="padding-top: 50px; text-align: left;">Catering</p></div>
-        <div class="service3"> <p style="padding-top: 50px; text-align: left;">Event Hosting</p></div>
+        <img
+          class="awardpic"
+          src="https://s3-ap-southeast-2.amazonaws.com/production.assets.merivale.com.au/wp-content/uploads/2019/11/01094904/AB5I8605_NikkiTo_2.jpg"
+          
+        />
+        <img
+          class="awardpic"
+          src="https://s3-ap-southeast-2.amazonaws.com/production.assets.merivale.com.au/wp-content/uploads/2019/08/28085858/little_felix_gallery2.jpg"
+          
+        />
       </div>
     </div>
 
 
+    <div style="height: 500px; color: rgb(255, 245, 235); background-color: #0c2a0a; padding-top: 30px;">
+      
+
+      <img 
+            src="https://s3-ap-southeast-2.amazonaws.com/production.assets.merivale.com.au/wp-content/uploads/2019/11/01094907/AB5I8605_NikkiTo_5.jpg"
+            class="eventImage"
+          />
+
+      <div style="width: 50%; float: right;">
+        <h1 style="padding: 20px; text-align: center; padding-top: 120px; font-size: 70px;">Services</h1>
+        <p style="text-align: center; margin-left: 80px; margin-right: 80px; font-size: 20px;">Fine Dining   |   Event Catering   |   Function Hosting</p>
+    
+      </div>
+
+    </div>
+      
+     
+    <div class="services">
+      <div class="servicestxt">
+        <div class="bannerhead2">Come Dine With Us</div>
+        <p class="servicedesc">
+          The best food in the city served in the best location makes Le Bistrot
+          D'Andre the perfect dining venue for all types of occasions and the
+          icing on the cake is our first-class front-of-house team. Friendly,
+          polite and always professional, our waiting staff are there to ensure
+          that the time you spend with us is enjoyable from start to finish and
+          that everything about your meal is absolutely perfect. Every member of
+          our waiting staff is fully trained and highly experienced, and shares
+          our determination to ensure that each customer we welcome to Le
+          Bistrot D'Andre has the dining experience of their life.
+        </p>
+        <p class="servicedesc">
+          If you would like to experience the best fine dining in Sydney, login or sign up to begin reserving tables at Le Bistrot D'Andre. Join the Bistrot Famillie to receive exclusive promotions and offers on your favourite meals.
+        </p>
+
+        <p>
+          Terms and Conditions Apply.
+        </p>
+
+        <div class="container" style="padding-top: 30px; width: 100%">
+          <a href="/views/registration.ejs" class="btn btn-outline-success me-2"
+            >Sign Up</a
+          >
+        </div>
+      </div>
+    </div>
+    
 
 
 
@@ -231,6 +358,7 @@
         />
       </div>
     </div>-->
+
     <div class="footer">
       Le Bistrot D'Andre <br /><br /><span style="color: grey"
         >2021 SES 1A, Group 8</span
