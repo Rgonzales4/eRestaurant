@@ -41,6 +41,7 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "restful": "^0.4.5",
+    "simplesmtp": "^0.3.35",
     "xoauth2": "^1.2.0"
   }
 }
