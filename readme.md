@@ -34,3 +34,9 @@ EMAIL_ADDRESS_PASSWORD= {insert the password for the email}
 
 4. Before starting the application, make sure all the packages have been installed.
     - Go through the ```package.json``` file to view the packages neede for the website to function
+
+5. When running the website, make sure MongoDB is running
+
+
+That should be all the set-up steps required to run the web application, if there are any problems when setting up please contact: ```lebistrotdandre08@gmail.com```
+
