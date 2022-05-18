@@ -1,3 +1,5 @@
+## About eRestaurant
+
 Software Engineering Studio 1A
 
 Case Study: eRestaurant
