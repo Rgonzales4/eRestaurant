@@ -50,3 +50,7 @@ workflows:
       - another
       - testing-job
       - commit-job
+  workflow-test:
+    jobs:
+      - testing-job
+      - commit-job
