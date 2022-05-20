@@ -54,3 +54,7 @@ workflows:
     jobs:
       - testing-job
       - commit-job
+  test:
+    jobs:
+      - testing-job
+      - commit-job
