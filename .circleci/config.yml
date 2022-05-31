@@ -29,7 +29,7 @@ jobs:
       - run:
           name: "Echo hello"
           command: "echo World!"
-  different-hello:
+  test-name:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
@@ -39,8 +39,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "different hello"
-          command: "different World!"
+          name: "test name"
+          command: "test name!"
   test-hello:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
@@ -61,4 +61,4 @@ workflows:
       - say-hello
       - echo-hello
       - test-hello
-      - different-hello
+      - test-name
