@@ -60,5 +60,5 @@ workflows:
     jobs:
       - say-hello
       - echo-hello
-      - edit-hello
+      - different-hello
       - test-hello
